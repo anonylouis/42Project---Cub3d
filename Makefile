@@ -54,4 +54,4 @@ $(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(HDRS)
 			mkdir -p $(OBJS_DIR)
 			$(CC) $(FLAGS) -MMD -I $(HEADERS_DIR) -o $@ -c $<
 
-.PHONY : all re clean fclean
+.PHONY : all re clean fclean $(LIBFT) $(MINILIBX)
