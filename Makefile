@@ -5,14 +5,25 @@ FLAGS = -Wall -Wextra -Werror -g
 NAME = cub3D
 
 SRCS_DIR = ./srcs/
-SOURCES = main.c
+#remplir .c ici
+SOURCES =	main.c \
+		game.c \
+		graph.c \
+		play.c \
+		point.c \
+		get_next_line.c \
+		get_next_line_utils.c \
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}
 OBJS = $(addprefix $(OBJS_DIR), $(OBJECTS))
 
 HEADERS_DIR = ./includes/
-HEADER_FILES = cub3D.h
+#remplir .h ici
+HEADER_FILES =	cub3D.h \
+		get_next_line.h \
+
+
 HDRS = $(addprefix $(HEADERS_DIR), $(HEADER_FILES))
 
 DEPENDENCIES = ${OBJS:.o=.d}
@@ -54,4 +65,4 @@ $(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(HDRS)
 			mkdir -p $(OBJS_DIR)
 			$(CC) $(FLAGS) -MMD -I $(HEADERS_DIR) -o $@ -c $<
 
-.PHONY : all re clean fclean $(LIBFT) $(MINILIBX)
+.PHONY : all re clean fclean
