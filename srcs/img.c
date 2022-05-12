@@ -6,26 +6,28 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:00:27 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/12 15:32:21 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/12 17:18:45 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <stdio.h>
 
-void    init_img_addr(t_graph *graph, t_img *img, int n)
+void    init_img_addr(t_graph *graph, t_img *img, int w, int h)
 {
 	int	bits_per_pixel;
 	int	endian;
         
-        img->size_line = n;
-        img->img_ptr = mlx_new_image(graph->mlx_ptr, img->size_line, HEIGHT);
+        img->size_line = w;
+        img->number_line = h;
+        img->img_ptr = mlx_new_image(graph->mlx_ptr, img->size_line, h);
 	bits_per_pixel = 4 * (sizeof(char) * 8);
 	// 4 pour 4 char (3 couleurs + \0 )
 	// sizeof(char) pour la taille d un char, * 8 pour bpasser de octer a bit
 	endian = 0;
 	// endian = sens de lectures des bits ! (gauche a droite = normal = endian = 0), (droite a gauche, endian = 1)
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &bits_per_pixel, &(img->size_line), &endian);
+        ft_bzero(img->img_addr, w * h * 4);
 }
 
 void    add_pixel_img(t_img img, int x, int y, unsigned int color)
