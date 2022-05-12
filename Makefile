@@ -13,6 +13,8 @@ SOURCES =	main.c \
 		point.c \
 		get_next_line.c \
 		get_next_line_utils.c \
+		img.c \
+		hook.c \
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}
