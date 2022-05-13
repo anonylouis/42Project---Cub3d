@@ -15,6 +15,8 @@ SOURCES =	main.c \
 		get_next_line_utils.c \
 		img.c \
 		hook.c \
+		utils.c \
+		raycasting.c \
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}

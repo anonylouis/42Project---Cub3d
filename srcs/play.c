@@ -6,19 +6,37 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:22:59 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/12 18:15:58 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:22:01 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-# include <stdio.h>
+#include <stdio.h>
 
 void   print_game(t_graph *graph)
 {
         int     i;
-        int     j;
+        double  angle;
+        double fish_eye_correction;
+        double  d;
 
-        //wall_distance(graph);
+        i = -1;
+        while (++i < WIDTH)
+        {
+                angle = graph->game.angle_vision + ((double) i / (WIDTH - 1) - 0.5) * FOV;
+                if (angle < 0)
+                        angle +=360;
+                else if (angle > 360)
+                        angle -= 360;
+                printf("----------------- check angle %f  -----------------------\n", angle);
+                fish_eye_correction = ((double) i / (WIDTH - 1) - 0.5) * FOV;
+                //A VERIFIER avec un FOV > 90 !! 
+                while(fish_eye_correction >= 90)
+                        fish_eye_correction -= 90;
+                d = wall_distance(graph, angle) * cos(rad(fish_eye_correction));
+                draw_pixel_column(graph->img, i, d);
+        }
+        /*
         i = -1;
         while (++i < WIDTH)
         {
@@ -28,6 +46,7 @@ void   print_game(t_graph *graph)
                         add_pixel_img(graph->img, i, j, 0xFF0000);
                 }
         }
+        */
         mlx_put_image_to_window(graph->mlx_ptr, graph->win_ptr, graph->img.img_ptr,0, 0);
 }
 

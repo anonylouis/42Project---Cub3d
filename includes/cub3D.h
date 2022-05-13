@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/12 17:29:53 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:20:09 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int	keycatch(int keycode, t_graph *graph);
 int    close_loop(t_graph *graph);
 
 // RAY CASTING
-double  wall_distance(t_graph *graph);
+double  wall_distance(t_graph *graph, double angle);
+void    draw_pixel_column(t_img img, int column, double d);
 
 // IMG
 void    init_img_addr(t_graph *graph, t_img *img, int w, int h);
@@ -80,5 +81,10 @@ void    add_pixel_img(t_img img, int x, int y, unsigned int color);
 
 // POINT
 void    set_point(t_point *p, double x, double y);
+
+// UTILS
+double  rad(double angle);
+int     max(int a, int b);
+int     min(int a, int b);
 
 #endif
