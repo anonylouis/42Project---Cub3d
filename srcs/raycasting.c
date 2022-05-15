@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/13 16:39:21 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/15 18:57:31 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    find_next_border(double *x, double *y, double angle)
         double  x_border;
         double  y_border;
 
-        if (angle == 90 || angle == 180)
+        if (angle == 90 || angle == 270)
         {
                 if (angle == 90)
                         *y = ceil(*y - 1);
@@ -27,12 +27,14 @@ void    find_next_border(double *x, double *y, double angle)
                         *y = floor(*y + 1);
                 return ;
         }
-        else if (angle < 90)
+        else if (angle <= 90)
         {
+                printf("<90 %f et %f\n", *x, *y);
                 y_border = ceil(*y - 1);
                 x_border = floor(*x + 1);
+                printf("border %f et %f\n", x_border, y_border);
         }
-        else if (angle < 180)
+        else if (angle <= 180)
         {
                 y_border = ceil(*y - 1);
                 x_border = ceil(*x - 1);
@@ -47,7 +49,8 @@ void    find_next_border(double *x, double *y, double angle)
                 y_border = floor(*y + 1);
                 x_border = floor(*x + 1);
         }
-        temp = tan(rad(angle)) * (x_border - *x) + *y;
+        temp = tan((-1) *rad(angle)) * (x_border - *x) + *y;
+        printf(" temp = %f\n", temp);
         if (angle <= 180)
         {
                 if (temp >= y_border)
@@ -80,25 +83,25 @@ int     is_a_wall(t_graph *graph, double x, double y, double angle)
 {
         int i;
         int j;
-
-        if (angle <= 90)
+        
+        if (angle > 45 && angle <= 135)
         {
                 i = floor(y - 1);
-                j = floor(x);
+                j = ceil(x - 1);
         }
-        else if (angle <= 180)
+        else if (angle > 135 && angle <= 225)
         {
-                i = floor(y - 1);
-                j = floor(x - 1);
+                i = floor(y + 1);
+                j = ceil(x - 1);
         }
-        else if (angle <= 270)
+        else if (angle > 225 && angle <= 315)
         {
                 i = floor(y);
-                j = floor(x - 1);
+                j = floor(x);
         }
         else
         {
-                i = floor(y);
+                i = ceil(y - 1);
                 j = floor(x);
         }
         printf("check case i = %d , j = %d\n", i, j);
@@ -141,7 +144,7 @@ void    draw_pixel_column(t_img img, int column, double d)
         j = start;
         while (j <= end)
         {
-                add_pixel_img(img, column, j, 0xFF0000);
+                add_pixel_img(img, column, j, 0x79D2A6);
                 j++;
         }
 }

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/13 17:20:09 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/15 18:18:25 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define HEIGHT 700
 
 // FOV = Field Of View 
-# define FOV 90
+# define FOV 180
 
 typedef struct s_img
 {
