@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/15 18:18:25 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/17 12:56:09 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ typedef struct s_game
         double  player_x;
         double  player_y;
         double  angle_vision;
-
+        char    *path_wall_NO;
+        char    *path_wall_SO;
+        char    *path_wall_WE;
+        char    *path_wall_EA;        
 }               t_game;
 
 typedef struct s_graph
@@ -48,6 +51,10 @@ typedef struct s_graph
         void    *win_ptr;
         t_img   img;
         t_game  game;
+        t_img   wall_NO;
+        t_img   wall_SO;
+        t_img   wall_WE;
+        t_img   wall_EA;
 }               t_graph;
 
 typedef struct  s_point
@@ -72,12 +79,13 @@ int	keycatch(int keycode, t_graph *graph);
 int    close_loop(t_graph *graph);
 
 // RAY CASTING
-double  wall_distance(t_graph *graph, double angle);
-void    draw_pixel_column(t_img img, int column, double d);
+double  wall_distance(t_graph *graph, double angle, double *x_wall);
+void    draw_pixel_column(t_img img, int column, double d, double x_wall);
 
 // IMG
 void    init_img_addr(t_graph *graph, t_img *img, int w, int h);
 void    add_pixel_img(t_img img, int x, int y, unsigned int color);
+int    init_textures(t_graph *graph);
 
 // POINT
 void    set_point(t_point *p, double x, double y);

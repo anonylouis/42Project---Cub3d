@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:22:59 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/15 18:58:16 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/17 12:56:23 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void   print_game(t_graph *graph)
         double  angle;
         double fish_eye_correction;
         double  d;
+        double *x_wall;
 
         i = -1;
         printf("angle de base = %f\n", graph->game.angle_vision);
@@ -29,13 +30,13 @@ void   print_game(t_graph *graph)
                         angle +=360;
                 else if (angle > 360)
                         angle -= 360;
-                printf("----------------- check angle %f  -----------------------\n", angle);
+                //printf("----------------- check angle %f  -----------------------\n", angle);
                 fish_eye_correction = ((double) i / (WIDTH - 1) - 0.5) * FOV;
                 //A VERIFIER avec un FOV > 90 !! 
                 while(fish_eye_correction >= 90)
                         fish_eye_correction -= 90;
-                d = wall_distance(graph, angle);// * cos(rad(fish_eye_correction));
-                draw_pixel_column(graph->img, i, d);
+                d = wall_distance(graph, angle, x_wall) * cos(rad(fish_eye_correction));
+                draw_pixel_column(graph->img, i, d, *x_wall);
         }
         /*
         i = -1;

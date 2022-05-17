@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:46:56 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/15 17:57:11 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/17 11:02:45 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,36 @@ void    main_test(t_graph *graph)
 
         graph->game.player_x = 3.5; // milieu de la case;
         graph->game.player_y = 2.5; //milieu de la case;
+
+        graph->game.path_wall_NO = ft_strdup("./xpm/wall_N.xpm");
 }
 
 int main()
 {
         t_graph *graph;
 
-        // parsing part here
-
-        // ray casting part
-
         graph = new_graph();
+        if (!graph)
+                return (1);
+
+        // parsing part here
+        // remplir graph->game
+
+
+        //delete main test after parsing part finished         
         main_test(graph);
-        if (graph)
-                play(graph);
+
+        if (init_textures(graph))
+        {
+                free_graph(graph);
+                return (1);
+        }
+
+        // raycasting part
+
+        play(graph);
+
+        //free
         free_graph(graph);
         return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/15 18:57:31 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/17 13:11:51 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void    find_next_border(double *x, double *y, double angle)
         }
         else if (angle <= 90)
         {
-                printf("<90 %f et %f\n", *x, *y);
+                //printf("<90 %f et %f\n", *x, *y);
                 y_border = ceil(*y - 1);
                 x_border = floor(*x + 1);
-                printf("border %f et %f\n", x_border, y_border);
+                //printf("border %f et %f\n", x_border, y_border);
         }
         else if (angle <= 180)
         {
@@ -50,7 +50,7 @@ void    find_next_border(double *x, double *y, double angle)
                 x_border = floor(*x + 1);
         }
         temp = tan((-1) *rad(angle)) * (x_border - *x) + *y;
-        printf(" temp = %f\n", temp);
+        //printf(" temp = %f\n", temp);
         if (angle <= 180)
         {
                 if (temp >= y_border)
@@ -104,11 +104,11 @@ int     is_a_wall(t_graph *graph, double x, double y, double angle)
                 i = ceil(y - 1);
                 j = floor(x);
         }
-        printf("check case i = %d , j = %d\n", i, j);
+        //printf("check case i = %d , j = %d\n", i, j);
         return (graph->game.map[i][j] == '1');
 }
 
-double  wall_distance(t_graph *graph, double angle)
+double  wall_distance(t_graph *graph, double angle, double *x_wall)
 {
         double  x;
         double  y;
@@ -121,30 +121,46 @@ double  wall_distance(t_graph *graph, double angle)
         while (next || !is_a_wall(graph, x, y, angle))
         {
                 find_next_border(&x, &y, angle);
-                printf("bordure en x = %f , y = %f\n", x, y);
+                //printf("bordure en x = %f , y = %f\n", x, y);
                 if (next)
                         next = 0;
         }
         d = sqrt((graph->game.player_x - x)*(graph->game.player_x - x)
                         + (graph->game.player_y - y) * (graph->game.player_y - y));
+        *x_wall = x;
         return d;
 }
 
 
-void    draw_pixel_column(t_img img, int column, double d)
+void    draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
 {
         double  h;
         int     start;
         int     end;
         int     j;
+        int     pos_img;
+        int     pos_texture;
+        int     x_texture;
+        int     y_texture;
 
+        x_wall = x_wall - floor(x_wall);
         h = HEIGHT / d;
         start = max(0, (int) (HEIGHT / 2 - h / 2));
         end = min(HEIGHT, (int) (HEIGHT / 2 + h / 2));
         j = start;
+        //printf("debut = %i, fin = %i \n,", start, end);
+        x_texture =  x_wall 
         while (j <= end)
         {
-                add_pixel_img(img, column, j, 0x79D2A6);
+                pos_img = j * img.size_line * 4 + column * 4;
+                
+                y_texture = 
+                pos_texture =                 
+
+                graph->img.img_addr[pos_img] = ;
+                graph->img.img_addr[pos_img + 1] = ;
+                graph->img.img_addr[pos_img + 2] = ;
+                graph->img.img_addr[pos_img + 3] = '\0';
                 j++;
         }
 }

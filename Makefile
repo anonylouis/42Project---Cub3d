@@ -17,6 +17,7 @@ SOURCES =	main.c \
 		hook.c \
 		utils.c \
 		raycasting.c \
+		texture.c
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}
