@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/17 12:56:09 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/17 17:44:09 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int    close_loop(t_graph *graph);
 
 // RAY CASTING
 double  wall_distance(t_graph *graph, double angle, double *x_wall);
-void    draw_pixel_column(t_img img, int column, double d, double x_wall);
+void    draw_pixel_column(t_graph *graph, int column, double d, double x_wall);
 
 // IMG
 void    init_img_addr(t_graph *graph, t_img *img, int w, int h);
