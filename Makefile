@@ -1,6 +1,6 @@
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -g
 
 NAME = cub3D
 
@@ -13,6 +13,13 @@ SOURCES =	main.c \
 		point.c \
 		get_next_line.c \
 		get_next_line_utils.c \
+		map.c \
+		parser.c \
+		textures.c\
+		utils1.c\
+		errors.c\
+		file_utils.c\
+		free.c\
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}
