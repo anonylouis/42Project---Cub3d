@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:22:59 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/17 17:45:44 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/18 03:06:10 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ void   print_game(t_graph *graph)
                 //A VERIFIER avec un FOV > 90 !! 
                 while(fish_eye_correction >= 90)
                         fish_eye_correction -= 90;
+				while(fish_eye_correction <= -90)
+                        fish_eye_correction += 90;
+				printf("correction : %f\n", fish_eye_correction);
                 d = wall_distance(graph, angle, &x_wall);
                 printf("DISTANCE TO WALL = %f\n", d);
                 d = d * cos(rad(fish_eye_correction));
                 printf("DISTANCE TO WALL = %f\n", d);
-                draw_pixel_column(graph, i, d, x_wall);
+				printf("x_wall = %f\n", x_wall);
+                draw_pixel_column(graph, WIDTH - 1 - i, d, x_wall);
         }
         /*
         i = -1;

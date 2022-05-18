@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/17 18:00:05 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/18 03:11:43 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,14 @@ double  wall_distance(t_graph *graph, double angle, double *x_wall)
         }
         d = sqrt((graph->game.player_x - x)*(graph->game.player_x - x)
                         + (graph->game.player_y - y) * (graph->game.player_y - y));
-        *x_wall = x;
+		if ((angle >= 45 && angle <= 135))
+        	*x_wall = x;
+		else if (angle >= 135 && angle <= 225)
+			*x_wall = 1 - y;
+		else if (angle > 225 && angle <= 315)
+			*x_wall = 1 - x;
+		else
+			*x_wall = y;
         return d;
 }
 
@@ -147,6 +154,7 @@ void    draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
 
         x_texture = (x_wall - floor(x_wall)) *  graph->wall_NO.size_line;
         h = HEIGHT / d;
+		printf(" hauteur = %f\n",h);
         start = max(0, (int) (HEIGHT / 2 - h / 2));
         end = min(HEIGHT, (int) (HEIGHT / 2 + h / 2));
         j = start;
@@ -159,7 +167,7 @@ void    draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
                 y_texture = (j - (HEIGHT / 2 - h / 2)) / h * graph->wall_NO.number_line;
                 pos_texture = y_texture * 4 * graph->wall_NO.size_line + 4 * x_texture;
 
-                printf("on ecrit au pixel : %i %i \n", x_texture, y_texture);
+                printf("pixel texture : %i %i \n", x_texture, y_texture);
                 printf("on ecrit au pixel : %i %i \n", j, column);
                 graph->img.img_addr[pos_img] = graph->wall_NO.img_addr[pos_texture];
                 graph->img.img_addr[pos_img + 1] = graph->wall_NO.img_addr[pos_texture + 1];
