@@ -6,14 +6,14 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:32:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/11 16:51:58 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:35:49 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void    set_point(t_point *p, double x, double y)
+void set_point(t_point *p, double x, double y)
 {
-        p->x = x;
-        p->y = y;
+	p->x = x;
+	p->y = y;
 }
