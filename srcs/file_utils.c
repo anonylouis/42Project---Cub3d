@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/18 16:46:22 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:54:40 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,50 @@ int count(char **s)
     return c;
 }
 
-t_color is_floor(char **tokens)
+int is_floor(char **tokens, t_game *game)
 {
     char **colors;
-    
+
     if (ft_compare(tokens[0], "F") == 0)
     {
-        colors = ft_split(tokens[1], ',');
-        if (count(colors) == 3 && ft_compare(tokens[0], "F") == 0 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
+        if (!is_empty_color(game->celeing))
         {
-            printf("%s %s %s \n", colors[0], colors[1], colors[2]);
-            t_color c = {.r = ft_atoi(colors[0]), .g = ft_atoi(colors[1]), .b = ft_atoi(colors[2])};
-            printf("floor\n");
-            return c;
+            printf("Duplicate line: %s", tokens[0]);
+            return (0);
+        }
+        colors = ft_split(tokens[1], ',');
+        if (count(colors) == 3 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
+        {
+            game->floor.r = ft_atoi(colors[0]);
+            game->floor.g = ft_atoi(colors[1]);
+            game->floor.b = ft_atoi(colors[2]);
+            return (1);
         }
     }
-    return empty_color();
+    return (0);
 }
 
-t_color is_ceiling(char **tokens)
+int is_ceiling(char **tokens, t_game *game)
 {
     char **colors;
 
     if (ft_compare(tokens[0], "C") == 0)
     {
-        colors = ft_split(tokens[1], ',');
-        if (count(colors) == 3 && ft_compare(tokens[0], "C") == 0 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
+        if (!is_empty_color(game->celeing))
         {
-            t_color c = {.r = ft_atoi(colors[0]), .g = ft_atoi(colors[1]), .b = ft_atoi(colors[2])};
-            printf("ceiling\n");
-            return c;
+            printf("Duplicate line: %s", tokens[0]);
+            return (0);
+        }
+        colors = ft_split(tokens[1], ',');
+        if (count(colors) == 3 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
+        {
+            game->celeing.r = ft_atoi(colors[0]);
+            game->celeing.g = ft_atoi(colors[1]);
+            game->celeing.b = ft_atoi(colors[2]);
+            return 1;
         }
     }
-    return empty_color();
+    return 0;
 }
 
 int copy_to(char **source, char **dest)

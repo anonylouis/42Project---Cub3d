@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/18 14:57:46 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:54:59 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,19 @@ char **get_map(char *file_path);
 char** read_file(int fd);
 char *clean_line(char *line);
 // parse
-int check_textures(char **tokens, t_game *game);
+int check_textures(char *line, t_game *game);
 int check_floor_color(char **tokens, t_game *game);
 int check_ceiling_color(char **tokens, t_game *game);
-int is_no_texture(char **tokens);
-int is_we_texture(char **tokens);
-int is_ea_texture(char **tokens);
-int is_so_texture(char **tokens);
+int is_no_texture(char **tokens, t_game *game);
+int is_we_texture(char **tokens, t_game *game);
+int is_ea_texture(char **tokens, t_game *game);
+int is_so_texture(char **tokens, t_game *game);
 t_game* parse(char* file);
 int count(char** s);
-t_color is_ceiling(char **tokens);
-t_color is_floor(char **tokens);
+int is_ceiling(char **tokens, t_game *game);
+int is_floor(char **tokens, t_game *game);
 t_color empty_color();
-
+int is_empty_color(t_color color);
 int ft_compare(char *s1, char *s2);
 int is_empty_line(char *line);
 int is_int(char *s);
@@ -110,5 +110,10 @@ int get_map_idx(char **map);
 //error
 int print_error(char *msg, int error);
 char *ft_error(char *msg);
+
+//free
+
+void ft_free(void *f);
+void ft_free_all(void **f);
 
 #endif
