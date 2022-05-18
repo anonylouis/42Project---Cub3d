@@ -6,14 +6,16 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/18 03:11:43 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/18 14:53:15 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 # include <stdio.h>
 
-void    find_next_border(double *x, double *y, double angle)
+// return 1 = bordure en x = constante
+// return 2 = bordure en y = constante
+int    find_next_border(double *x, double *y, double angle)
 {
         double  temp;
         double  x_border;
@@ -25,7 +27,7 @@ void    find_next_border(double *x, double *y, double angle)
                         *y = ceil(*y - 1);
                 else
                         *y = floor(*y + 1);
-                return ;
+                return (2);
         }
         else if (angle <= 90)
         {
@@ -57,11 +59,13 @@ void    find_next_border(double *x, double *y, double angle)
                 {
                         *x = x_border;
                         *y = temp;
+                        return (1);
                 }
                 else
                 {
                         *x = (y_border - *y) / (tan((-1) * rad(angle))) + *x;
                         *y = y_border;
+                        return (2);
                 }
         }
         else
@@ -70,11 +74,13 @@ void    find_next_border(double *x, double *y, double angle)
                 {
                         *x = x_border;
                         *y = temp;
+                        return (1);
                 }
                 else
                 {
                         *x = (y_border - *y) / (tan((-1) * rad(angle))) + *x;
                         *y = y_border;
+                        return (2);
                 }
         }
 }
@@ -116,27 +122,28 @@ double  wall_distance(t_graph *graph, double angle, double *x_wall)
         double  y;
         double  d;
         int     next;
+        int     r;
 
         next = 1;
         x =  graph->game.player_x;
         y = graph->game.player_y;
         while (next || !is_a_wall(graph, x, y, angle))
         {
-                find_next_border(&x, &y, angle);
+                r  = find_next_border(&x, &y, angle);
                 printf("bordure en x = %f , y = %f\n", x, y);
                 if (next)
                         next = 0;
         }
         d = sqrt((graph->game.player_x - x)*(graph->game.player_x - x)
                         + (graph->game.player_y - y) * (graph->game.player_y - y));
-		if ((angle >= 45 && angle <= 135))
-        	*x_wall = x;
-		else if (angle >= 135 && angle <= 225)
-			*x_wall = 1 - y;
-		else if (angle > 225 && angle <= 315)
-			*x_wall = 1 - x;
-		else
-			*x_wall = y;
+        if (r == 1 && angle >= 90 && angle <= 270)
+                *x_wall = 1 - y;
+        else if (r == 1)
+                *x_wall = y;
+        else if (r == 2 && angle >= 0 && angle <= 180)
+                *x_wall = x;
+        else
+                *x_wall = 1 - x;
         return d;
 }
 
@@ -167,8 +174,8 @@ void    draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
                 y_texture = (j - (HEIGHT / 2 - h / 2)) / h * graph->wall_NO.number_line;
                 pos_texture = y_texture * 4 * graph->wall_NO.size_line + 4 * x_texture;
 
-                printf("pixel texture : %i %i \n", x_texture, y_texture);
-                printf("on ecrit au pixel : %i %i \n", j, column);
+                //printf("pixel texture : %i %i \n", x_texture, y_texture);
+                //printf("on ecrit au pixel : %i %i \n", j, column);
                 graph->img.img_addr[pos_img] = graph->wall_NO.img_addr[pos_texture];
                 graph->img.img_addr[pos_img + 1] = graph->wall_NO.img_addr[pos_texture + 1];
                 graph->img.img_addr[pos_img + 2] = graph->wall_NO.img_addr[pos_texture + 2];
