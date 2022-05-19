@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/18 16:00:43 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/19 15:35:18 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int find_next_border(double *x, double *y, double angle)
 	}
 	else if (angle <= 90)
 	{
-		printf("<90 x=%f et y=%f\n", *x, *y);
+		//printf("<90 x=%f et y=%f\n", *x, *y);
 		y_border = ceil(*y - 1);
 		x_border = floor(*x + 1);
-		printf("border x=%f et y=%f\n", x_border, y_border);
+		//printf("border x=%f et y=%f\n", x_border, y_border);
 	}
 	else if (angle <= 180)
 	{
@@ -52,7 +52,7 @@ int find_next_border(double *x, double *y, double angle)
 		x_border = floor(*x + 1);
 	}
 	temp = tan((-1) * rad(angle)) * (x_border - *x) + *y;
-	printf(" temp = %f\n", temp);
+	//printf(" temp = %f\n", temp);
 	if (angle <= 180)
 	{
 		if (temp >= y_border)
@@ -112,7 +112,7 @@ int is_a_wall(t_graph *graph, double x, double y, double angle)
 		i = floor(y);
 		j = floor(x);
 	}
-	printf("check case i = %d , j = %d\n", i, j);
+	//printf("check case i = %d , j = %d\n", i, j);
 	return (graph->game.map[i][j] == '1');
 }
 
@@ -130,7 +130,7 @@ double wall_distance(t_graph *graph, double angle, double *x_wall)
 	while (next || !is_a_wall(graph, x, y, angle))
 	{
 		r = find_next_border(&x, &y, angle);
-		printf("bordure en x = %f , y = %f\n", x, y);
+		//printf("bordure en x = %f , y = %f\n", x, y);
 		if (next)
 			next = 0;
 	}
@@ -158,13 +158,13 @@ void draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
 	int x_texture;
 
 	x_texture = (x_wall - floor(x_wall)) * graph->wall_NO.size_line;
-	h = HEIGHT / d;
-	printf(" hauteur = %f\n", h);
+	h = HEIGHT / (d + H_MAX);
+	//printf(" hauteur = %f\n", h);
 	start = max(0, (int)(HEIGHT / 2 - h / 2));
 	end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
 	j = 0;
-	printf("debut = %i, fin = %i \n,", start, end);
-	printf("vrai debut = %f , vraie fin = %f\n", (HEIGHT / 2 - h / 2), (HEIGHT / 2 + h / 2));
+	//printf("debut = %i, fin = %i \n,", start, end);
+	//printf("vrai debut = %f , vraie fin = %f\n", (HEIGHT / 2 - h / 2), (HEIGHT / 2 + h / 2));
 	while (j < start)
 	{
 		add_pixel_img(graph->img, column, j, graph->game.ceiling);

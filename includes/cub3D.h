@@ -6,24 +6,35 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/18 16:13:04 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/19 16:15:43 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
-#include <unistd.h>
-#include <math.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
-#include "../minilibx/mlx.h"
-#include "get_next_line.h"
+# define CUB3D_H
+# include <unistd.h>
+# include <math.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "get_next_line.h"
+# include "keycode.h"
 
-#define WIDTH 2000
-#define HEIGHT 1000
+// SIZE OF SCREEN
+# define WIDTH 2000
+# define HEIGHT 800
+
+// H_MAX OF A WALL
+# define H_MAX HEIGHT/1000000000.0
 
 // FOV = Field Of View
-#define FOV 180
+# define FOV 90
+
+// ROTATION SPEED OF VIEW ANGLE ( IN DEGREES )
+# define DELTA_ANGLE 5
+
+// STEP ON THE MAP
+# define STEP 0.2
 
 typedef struct s_color
 {
@@ -82,10 +93,13 @@ void	free_game(t_game *game);
 
 // GAME
 void	play(t_graph *graph);
+void	print_game(t_graph *graph);
 
 // KEYCATCH
 int		keycatch(int keycode, t_graph *graph);
 int		close_loop(t_graph *graph);
+int		keycatch_angle(int keycode, t_graph *graph);
+int		keycatch_step(int keycode, t_graph *graph);
 
 // RAY CASTING
 double	wall_distance(t_graph *graph, double angle, double *x_wall);
