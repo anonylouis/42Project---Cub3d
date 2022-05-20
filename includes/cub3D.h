@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/18 17:54:59 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:17:46 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_game
         int nb_lines;
         int nb_col;
         char *error_message;
+        int has_errors;
 
         char *texture_no;
         char *texture_we;
@@ -57,6 +58,7 @@ typedef struct s_game
 
         t_color floor;
         t_color celeing;
+        char** raw_map;
         
 } t_game;
 
@@ -113,7 +115,8 @@ char *ft_error(char *msg);
 
 //free
 
-void ft_free(void *f);
-void ft_free_all(void **f);
+void ft_free(char *f);
+void ft_free_all(char **f);
+void free_game(t_game* game);
 
 #endif

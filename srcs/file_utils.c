@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/18 17:54:40 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/19 23:17:59 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int is_floor(char **tokens, t_game *game)
 
     if (ft_compare(tokens[0], "F") == 0)
     {
-        if (!is_empty_color(game->celeing))
+        if (!is_empty_color(game->floor))
         {
-            printf("Duplicate line: %s", tokens[0]);
+            printf("Duplicate line: floor\n");
             return (0);
         }
         colors = ft_split(tokens[1], ',');
@@ -43,8 +43,10 @@ int is_floor(char **tokens, t_game *game)
             game->floor.r = ft_atoi(colors[0]);
             game->floor.g = ft_atoi(colors[1]);
             game->floor.b = ft_atoi(colors[2]);
+            ft_free_all(colors);
             return (1);
         }
+        ft_free_all(colors);
     }
     return (0);
 }
@@ -66,23 +68,26 @@ int is_ceiling(char **tokens, t_game *game)
             game->celeing.r = ft_atoi(colors[0]);
             game->celeing.g = ft_atoi(colors[1]);
             game->celeing.b = ft_atoi(colors[2]);
+            ft_free_all(colors);
             return 1;
         }
+        ft_free_all(colors);
     }
     return 0;
 }
 
 int copy_to(char **source, char **dest)
 {
-    int i = 0;
+    int i;
+    i = 0;
     if (source == NULL)
-        return 0;
+        return (0);
     while (source[i] != NULL)
     {
         dest[i] = source[i];
         i++;
     }
-    return i;
+    return (i);
 }
 
 char **get_map(char *path)
@@ -134,6 +139,8 @@ char **read_file(int fd)
         nb_lines++;
         temp = result;
         result = malloc(sizeof(char *) * (nb_lines + 1));
+        if (result == NULL)
+            return NULL;
         copy_to(temp, result);
         result[nb_lines - 1] = clean_line(line);
         free(temp);

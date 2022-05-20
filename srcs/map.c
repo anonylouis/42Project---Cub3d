@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/17 21:36:24 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/18 22:01:11 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int get_map_idx(char **map)
     while (map[i] != NULL)
     {
         if (map[i][0] == '1')
-        {
             return i;
-        }
         i++;
     }
     return (-1);
@@ -80,9 +78,7 @@ char **extract_map(char **s, int line_idx)
     if (map == NULL)
         return NULL;
     while (s[line_idx] != NULL)
-    {
         map[i++] = s[line_idx++];
-    }
     map[i] = NULL;
     return (map);
 }
