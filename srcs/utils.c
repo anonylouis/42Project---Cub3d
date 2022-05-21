@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:32:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/18 15:35:49 by lcalvie          ###   ########.fr       */
+/*   Created: 2022/05/13 13:23:31 by lcalvie           #+#    #+#             */
+/*   Updated: 2022/05/18 15:35:39 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void set_point(t_point *p, double x, double y)
+double rad(double angle)
 {
-	p->x = x;
-	p->y = y;
+	return (angle * M_PI / 180);
+}
+
+int max(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	else
+		return (b);
+}
+
+int min(int a, int b)
+{
+	if (a <= b)
+		return (a);
+	else
+		return (b);
 }

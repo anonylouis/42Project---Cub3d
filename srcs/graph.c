@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:23:41 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/11 14:48:09 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/17 09:57:26 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_graph *new_graph()
                 return (NULL);
         }
 	graph->win_ptr = mlx_new_window(graph->mlx_ptr, WIDTH, HEIGHT, "CUB'3D");
+	init_img_addr(graph, &(graph->img), WIDTH, HEIGHT);
 	return (graph);
 }
 

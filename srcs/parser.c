@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/19 21:55:05 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/20 23:44:45 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ t_color empty_color()
 {
     t_color t;
 
-    t.b = -1;
-    t.g = -1;
-    t.r = -1;
+    t.blue = -1;
+    t.green = -1;
+    t.red = -1;
     return (t);
 }
 
 int is_empty_color(t_color color)
 {
-    if (color.r == -1 && color.g == -1 && color.b == -1)
+    if (color.red == -1 && color.green == -1 && color.blue == -1)
         return (1);
     return (0);
 }

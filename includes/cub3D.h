@@ -6,81 +6,130 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/19 21:17:46 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/21 11:46:38 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
-#include <unistd.h>
-#include <math.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include "../libft/libft.h"
-#include "../minilibx/mlx.h"
-#include "get_next_line.h"
+# define CUB3D_H
+# include <unistd.h>
+# include <math.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "get_next_line.h"
+# include "keycode.h"
+# include <fcntl.h>
+# include <stdio.h>
 
-#define WIDTH 700
-#define HEIGHT 700
+// SIZE OF SCREEN
+# define WIDTH 2000
+# define HEIGHT 800
+
+// H_MAX OF A WALL
+# define H_MAX HEIGHT/1000000000.0
 
 // FOV = Field Of View
-#define FOV 90
+# define FOV 90
 
-typedef struct s_graph
-{
-        void *mlx_ptr;
-        void *win_ptr;
-} t_graph;
+// ROTATION SPEED OF VIEW ANGLE ( IN DEGREES )
+# define DELTA_ANGLE 5
+
+// STEP ON THE MAP
+# define STEP 0.2
 
 typedef struct s_color
 {
-        int r;
-        int g;
-        int b;
-} t_color;
+	int		red;
+	int		green;
+	int		blue;
+}			t_color;
+
+typedef struct s_img
+{
+	int		size_line;
+	int		number_line;
+	void	*img_ptr;
+	char	*img_addr;
+}			t_img;
 
 typedef struct s_game
 {
-        char **map;
-        int success;
-        int nb_lines;
-        int nb_col;
-        char *error_message;
-        int has_errors;
+	char	**map;
+	double	player_x;
+	double	player_y;
+	double	angle_vision;
+	char	*path_wall_NO;
+	char	*path_wall_SO;
+	char	*path_wall_WE;
+	char	*path_wall_EA;
+	t_color	floor;
+	t_color	ceiling;
+    char** raw_map;
+	int success;
+	int nb_lines;
+	int nb_col;
+	char *error_message;
+	int has_errors;
 
-        char *texture_no;
-        char *texture_we;
-        char *texture_ea;
-        char *texture_so;
+}			t_game;
 
-        t_color floor;
-        t_color celeing;
-        char** raw_map;
-        
-} t_game;
+typedef struct s_graph
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+	t_game	game;
+	t_img	wall_NO;
+	t_img	wall_SO;
+	t_img	wall_WE;
+	t_img	wall_EA;
+}			t_graph;
 
 typedef struct s_point
 {
-        double x;
-        double y;
+	double	x;
+	double	y;
 } t_point;
+
+// GRAPH STRUCT
+t_graph	*new_graph();
+void	free_graph(t_graph *graph);
+
+// GAME STRUCT
+t_game	*new_game();
+void	free_game(t_game *game);
+
+// GAME
+void	play(t_graph *graph);
+void	print_game(t_graph *graph);
+
+// KEYCATCH
+int		keycatch(int keycode, t_graph *graph);
+int		close_loop(t_graph *graph);
+int		keycatch_angle(int keycode, t_graph *graph);
+int		keycatch_step(int keycode, t_graph *graph);
+
+// RAY CASTING
+double	wall_distance(t_graph *graph, double angle, double *x_wall);
+void	draw_pixel_column(t_graph *graph, int column, double d, double x_wall);
+
+// IMG
+void	init_img_addr(t_graph *graph, t_img *img, int w, int h);
+void	add_pixel_img(t_img img, int x, int y, t_color color);
+int		init_textures(t_graph *graph);
+
+// POINT
+void	set_point(t_point *p, double x, double y);
+
+// UTILS
+double	rad(double angle);
+int		max(int a, int b);
+int		min(int a, int b);
 
 // GRAPH STRUCT
 t_graph *new_graph();
 void free_graph(t_graph *graph);
-
-// GAME STRUCT
-t_game *new_game();
-void free_game(t_game *game);
-
-// GAME
-void play(t_graph *graph);
-
-// POINT
-void set_point(t_point *p, double x, double y);
 
 // file
 char **get_map(char *file_path);
@@ -114,7 +163,6 @@ int print_error(char *msg, int error);
 char *ft_error(char *msg);
 
 //free
-
 void ft_free(char *f);
 void ft_free_all(char **f);
 void free_game(t_game* game);

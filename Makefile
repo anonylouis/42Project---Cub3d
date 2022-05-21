@@ -20,6 +20,11 @@ SOURCES =	main.c \
 		errors.c\
 		file_utils.c\
 		free.c\
+		img.c\
+		hook.c\
+		utils.c\
+		raycasting.c\
+		texture.c\
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}
@@ -28,7 +33,8 @@ OBJS = $(addprefix $(OBJS_DIR), $(OBJECTS))
 HEADERS_DIR = ./includes/
 #remplir .h ici
 HEADER_FILES =	cub3D.h \
-		get_next_line.h \
+				get_next_line.h \
+				keycode.h \
 
 
 HDRS = $(addprefix $(HEADERS_DIR), $(HEADER_FILES))
@@ -43,14 +49,14 @@ MINILIBX_AR = libmlx.a
 MINILIBX_DIR = ./minilibx/
 MINILIBX = $(addprefix $(MINILIBX_DIR), $(MINILIBX_AR))
 
-MINILIBX_FLAGS = -L/user/include/../lib -lXext -lX11 -lm 
+MINILIBX_FLAGS = -L/user/include/../lib -lXext -lX11 -lm
 
 all : $(NAME)
 
 $(NAME) :	$(MINILIBX) $(LIBFT) $(OBJS)
 		$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MINILIBX) $(MINILIBX_FLAGS)
 
-clean : 
+clean :
 		$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
 		rm -f $(OBJS) $(DEPENDENCIES)
 		rm -rf $(OBJS_DIR)

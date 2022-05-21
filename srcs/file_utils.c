@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/19 23:17:59 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/21 11:46:47 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int is_floor(char **tokens, t_game *game)
         colors = ft_split(tokens[1], ',');
         if (count(colors) == 3 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
         {
-            game->floor.r = ft_atoi(colors[0]);
-            game->floor.g = ft_atoi(colors[1]);
-            game->floor.b = ft_atoi(colors[2]);
+            game->floor.red = ft_atoi(colors[0]);
+            game->floor.green = ft_atoi(colors[1]);
+            game->floor.blue = ft_atoi(colors[2]);
             ft_free_all(colors);
             return (1);
         }
@@ -57,7 +57,7 @@ int is_ceiling(char **tokens, t_game *game)
 
     if (ft_compare(tokens[0], "C") == 0)
     {
-        if (!is_empty_color(game->celeing))
+        if (!is_empty_color(game->ceiling))
         {
             printf("Duplicate line: %s", tokens[0]);
             return (0);
@@ -65,9 +65,9 @@ int is_ceiling(char **tokens, t_game *game)
         colors = ft_split(tokens[1], ',');
         if (count(colors) == 3 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
         {
-            game->celeing.r = ft_atoi(colors[0]);
-            game->celeing.g = ft_atoi(colors[1]);
-            game->celeing.b = ft_atoi(colors[2]);
+            game->ceiling.red = ft_atoi(colors[0]);
+            game->ceiling.green = ft_atoi(colors[1]);
+            game->ceiling.blue = ft_atoi(colors[2]);
             ft_free_all(colors);
             return 1;
         }
@@ -143,7 +143,7 @@ char **read_file(int fd)
             return NULL;
         copy_to(temp, result);
         result[nb_lines - 1] = clean_line(line);
-        free(temp);
+        //ft_free_all(temp);
     }
     result[nb_lines] = NULL;
     return result;
