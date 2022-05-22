@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/22 20:46:22 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/22 22:15:43 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int is_int(char *s);
 // map
 int is_valid_map(char **s, int start);
 int is_valid_map_char(char c);
-char **extract_map(char **s, int line_idx);
+char **extract_map(char **s, int line_idx, t_game* game);
 int get_map_idx(char **map);
 // error
 int print_error(char *msg, int error);

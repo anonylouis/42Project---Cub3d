@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/22 21:30:02 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/22 23:11:46 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,24 @@ t_check_result error(char *message)
     return result;
 }
 
+int is_orientation(char c)
+{
+    return c == 'W' || c == 'N' || c == 'E' || c == 'S';
+}
+
+int has_orientation(char *s)
+{
+    int i;
+    i = 0;
+    while (s[i] != '\0')
+    {
+        if (is_orientation(s[i]))
+            return (i);
+        i++;
+    }
+    return (-1);
+}
+
 t_check_result check_orientation(char **s, int start)
 {
     int i;
@@ -108,7 +126,7 @@ t_check_result check_orientation(char **s, int start)
         j = 0;
         while (s[i][j] != '\0')
         {
-            if (s[i][j] == 'W' || s[i][j] == 'N' || s[i][j] == 'E' || s[i][j] == 'S')
+            if (is_orientation(s[i][j]))
                 orientation++;
             j++;
         }
@@ -132,23 +150,44 @@ int is_valid_map(char **s, int start)
     result = check_orientation(s, start);
     if (!result.success)
         return print_error(result.message, 0);
-
     return (1);
 }
 
-char **extract_map(char **s, int line_idx)
+void set_angle_vision(t_game *game)
+{
+    if (game->orientation == 'E') // si le perso est un N au depart
+        game->angle_vision = 0;
+    else if (game->orientation == 'N')
+        game->angle_vision = 90;
+    else if (game->orientation == 'W')
+        game->angle_vision = 180;
+    else if (game->orientation == 'S')
+        game->angle_vision = 270;
+}
+
+char **extract_map(char **s, int line_idx, t_game *game)
 {
     char **map;
     int i;
+    int orientation;
 
     i = 0;
+    orientation = 0;
     if (!is_valid_map(s, line_idx))
         return NULL;
     map = malloc(sizeof(char *) * (count(s) - line_idx));
     if (map == NULL)
         return NULL;
     while (s[line_idx] != NULL)
+    {
+        orientation = has_orientation(s[line_idx]);
+        if (orientation != -1)
+        {
+            game->orientation = s[line_idx][orientation];
+            set_angle_vision(game);
+        }
         map[i++] = s[line_idx++];
+    }
     map[i] = NULL;
     return (map);
 }
