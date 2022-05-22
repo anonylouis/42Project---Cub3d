@@ -6,126 +6,135 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/21 11:46:38 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/22 20:46:22 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-# define CUB3D_H
-# include <unistd.h>
-# include <math.h>
-# include <stdlib.h>
-# include "../libft/libft.h"
-# include "../minilibx/mlx.h"
-# include "get_next_line.h"
-# include "keycode.h"
-# include <fcntl.h>
-# include <stdio.h>
+#define CUB3D_H
+#include <unistd.h>
+#include <math.h>
+#include <stdlib.h>
+#include "../libft/libft.h"
+#include "../minilibx/mlx.h"
+#include "get_next_line.h"
+#include "keycode.h"
+#include <fcntl.h>
+#include <stdio.h>
 
 // SIZE OF SCREEN
-# define WIDTH 2000
-# define HEIGHT 800
+#define WIDTH 2000
+#define HEIGHT 800
 
 // H_MAX OF A WALL
-# define H_MAX HEIGHT/1000000000.0
+#define H_MAX HEIGHT / 1000000000.0
 
 // FOV = Field Of View
-# define FOV 90
+#define FOV 90
 
 // ROTATION SPEED OF VIEW ANGLE ( IN DEGREES )
-# define DELTA_ANGLE 5
+#define DELTA_ANGLE 5
 
 // STEP ON THE MAP
-# define STEP 0.2
+#define STEP 0.2
 
 typedef struct s_color
 {
-	int		red;
-	int		green;
-	int		blue;
-}			t_color;
+	int red;
+	int green;
+	int blue;
+} t_color;
 
 typedef struct s_img
 {
-	int		size_line;
-	int		number_line;
-	void	*img_ptr;
-	char	*img_addr;
-}			t_img;
+	int size_line;
+	int number_line;
+	void *img_ptr;
+	char *img_addr;
+} t_img;
 
 typedef struct s_game
 {
-	char	**map;
-	double	player_x;
-	double	player_y;
-	double	angle_vision;
-	char	*path_wall_NO;
-	char	*path_wall_SO;
-	char	*path_wall_WE;
-	char	*path_wall_EA;
-	t_color	floor;
-	t_color	ceiling;
-    char** raw_map;
+	char **map;
+	char orientation;
+	double player_x;
+	double player_y;
+	double angle_vision;
+	char *path_wall_NO;
+	char *path_wall_SO;
+	char *path_wall_WE;
+	char *path_wall_EA;
+	t_color floor;
+	t_color ceiling;
+	char **raw_map;
 	int success;
 	int nb_lines;
 	int nb_col;
 	char *error_message;
 	int has_errors;
 
-}			t_game;
+} t_game;
 
 typedef struct s_graph
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
-	t_game	game;
-	t_img	wall_NO;
-	t_img	wall_SO;
-	t_img	wall_WE;
-	t_img	wall_EA;
-}			t_graph;
+	void *mlx_ptr;
+	void *win_ptr;
+	t_img img;
+	t_game game;
+	t_img wall_NO;
+	t_img wall_SO;
+	t_img wall_WE;
+	t_img wall_EA;
+} t_graph;
 
 typedef struct s_point
 {
-	double	x;
-	double	y;
+	double x;
+	double y;
 } t_point;
 
+typedef struct s_check_result
+{
+	int success;
+	char* message;
+} t_check_result;
+
+
+
 // GRAPH STRUCT
-t_graph	*new_graph();
-void	free_graph(t_graph *graph);
+t_graph *new_graph();
+void free_graph(t_graph *graph);
 
 // GAME STRUCT
-t_game	*new_game();
-void	free_game(t_game *game);
+t_game *new_game();
+void free_game(t_game *game);
 
 // GAME
-void	play(t_graph *graph);
-void	print_game(t_graph *graph);
+void play(t_graph *graph);
+void print_game(t_graph *graph);
 
 // KEYCATCH
-int		keycatch(int keycode, t_graph *graph);
-int		close_loop(t_graph *graph);
-int		keycatch_angle(int keycode, t_graph *graph);
-int		keycatch_step(int keycode, t_graph *graph);
+int keycatch(int keycode, t_graph *graph);
+int close_loop(t_graph *graph);
+int keycatch_angle(int keycode, t_graph *graph);
+int keycatch_step(int keycode, t_graph *graph);
 
 // RAY CASTING
-double	wall_distance(t_graph *graph, double angle, double *x_wall);
-void	draw_pixel_column(t_graph *graph, int column, double d, double x_wall);
+double wall_distance(t_graph *graph, double angle, double *x_wall);
+void draw_pixel_column(t_graph *graph, int column, double d, double x_wall);
 
 // IMG
-void	init_img_addr(t_graph *graph, t_img *img, int w, int h);
-void	add_pixel_img(t_img img, int x, int y, t_color color);
-int		init_textures(t_graph *graph);
+void init_img_addr(t_graph *graph, t_img *img, int w, int h);
+void add_pixel_img(t_img img, int x, int y, t_color color);
+int init_textures(t_graph *graph);
 
 // POINT
-void	set_point(t_point *p, double x, double y);
+void set_point(t_point *p, double x, double y);
 
 // UTILS
-double	rad(double angle);
-int		max(int a, int b);
-int		min(int a, int b);
+double rad(double angle);
+int max(int a, int b);
+int min(int a, int b);
 
 // GRAPH STRUCT
 t_graph *new_graph();
@@ -133,18 +142,18 @@ void free_graph(t_graph *graph);
 
 // file
 char **get_map(char *file_path);
-char** read_file(int fd);
+char **read_file(int fd);
 char *clean_line(char *line);
 // parse
-int check_textures(char *line, t_game *game);
+int check_map_info(char *line, t_game *game);
 int check_floor_color(char **tokens, t_game *game);
 int check_ceiling_color(char **tokens, t_game *game);
 int is_no_texture(char **tokens, t_game *game);
 int is_we_texture(char **tokens, t_game *game);
 int is_ea_texture(char **tokens, t_game *game);
 int is_so_texture(char **tokens, t_game *game);
-t_game* parse(char* file);
-int count(char** s);
+t_game *parse(char *file);
+int count(char **s);
 int is_ceiling(char **tokens, t_game *game);
 int is_floor(char **tokens, t_game *game);
 t_color empty_color();
@@ -153,18 +162,18 @@ int ft_compare(char *s1, char *s2);
 int is_empty_line(char *line);
 int is_int(char *s);
 
-//map
+// map
 int is_valid_map(char **s, int start);
 int is_valid_map_char(char c);
 char **extract_map(char **s, int line_idx);
 int get_map_idx(char **map);
-//error
+// error
 int print_error(char *msg, int error);
 char *ft_error(char *msg);
 
-//free
+// free
 void ft_free(char *f);
 void ft_free_all(char **f);
-void free_game(t_game* game);
+void free_game(t_game *game);
 
 #endif

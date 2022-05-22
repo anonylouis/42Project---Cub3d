@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/20 23:44:45 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/22 20:25:05 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_game *parse(char *file)
     {
         if (line_number < get_map_idx(game->raw_map))
         {
-            if (!check_textures(game->raw_map[line_number], game))
+            if (!check_map_info(game->raw_map[line_number], game))
                 return exit_with_error(game);
         }
         else
@@ -60,7 +60,7 @@ t_game *parse(char *file)
     return (game);
 }
 
-int check_textures(char *line, t_game *game)
+int check_map_info(char *line, t_game *game)
 {
     char **tokens;
 
@@ -80,5 +80,6 @@ int check_textures(char *line, t_game *game)
     else if (is_ceiling(tokens, game))
         return (1);
     ft_free_all(tokens);
+    printf("Error : Invalid line %s", line);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:22:43 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/20 23:44:10 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/22 18:25:21 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_game *new_game()
     game->map = NULL;
     game->success = 0;
     game->nb_lines = 0;
+    game->orientation = 0;
     game->path_wall_EA = NULL;
     game->path_wall_NO = NULL;
     game->path_wall_WE = NULL;
