@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/21 11:46:47 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:21:42 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ int copy_to(char **source, char **dest)
         return (0);
     while (source[i] != NULL)
     {
-        dest[i] = source[i];
+        dest[i] = ft_strdup(source[i]);
+        free(source[i]);
         i++;
     }
+    free(source);
     return (i);
 }
 
@@ -143,9 +145,8 @@ char **read_file(int fd)
             return NULL;
         copy_to(temp, result);
         result[nb_lines - 1] = clean_line(line);
-        //ft_free_all(temp);
+        result[nb_lines] = NULL;
     }
-    result[nb_lines] = NULL;
     return result;
 }
 

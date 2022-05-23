@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:46:56 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/22 23:26:39 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:00:14 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void main_test(t_graph *graph)
 	map[5][6] = 0;
 	map[6] = NULL;
 
-	//graph->game = *parse("./file.cub");
 
 	graph->game.map = map;
 	if (graph->game.map[2][3] == 'E') // si le perso est un N au depart
@@ -110,21 +109,30 @@ void main_test(t_graph *graph)
 	graph->game.ceiling.blue = 0;
 }
 
-int main()
+int main(int argc, char **argv)
 {
 
-
 	t_graph *graph;
+	t_game* game;
 
 	graph = new_graph();
 	if (!graph)
 		return (1);
 
+	if (argc != 2)
+	{
+		printf("Usage : ./cube3D <path_to_map>\n");
+		return (1);
+	}
 	// parsing part here
 	// remplir graph->game
+	game = parse(argv[1]);
+	if (game == NULL)
+		return (1);
+	graph->game = *game;
 
 	// delete main test after parsing part finished
-	main_test(graph);
+	//main_test(graph);
 
 	if (init_textures(graph))
 	{

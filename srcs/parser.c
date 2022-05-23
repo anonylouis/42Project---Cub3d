@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/22 22:15:59 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:28:18 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_game *parse(char *file)
             game->map = extract_map(game->raw_map, get_map_idx(game->raw_map), game);
             if (game->map == NULL)
                 return exit_with_error(game);
+            break;
         }
         line_number++;
     }
