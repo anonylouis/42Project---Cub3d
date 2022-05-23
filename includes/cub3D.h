@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/22 22:15:43 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/23 22:40:33 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 
 // SIZE OF SCREEN
 #define WIDTH 2000
-#define HEIGHT 800
+#define HEIGHT 1300
 
 // H_MAX OF A WALL
-#define H_MAX HEIGHT / 1000000000.0
+#define H_MAX HEIGHT / 10000000000.0
 
 // FOV = Field Of View
 #define FOV 90

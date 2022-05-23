@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/19 15:35:18 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/23 22:12:53 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,8 +158,8 @@ void draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
 	int x_texture;
 
 	x_texture = (x_wall - floor(x_wall)) * graph->wall_NO.size_line;
-	h = HEIGHT / (d + H_MAX);
-	//printf(" hauteur = %f\n", h);
+	h = HEIGHT / ( 2.0 *(d + H_MAX));
+	printf(" hauteur = %f\n", h);
 	start = max(0, (int)(HEIGHT / 2 - h / 2));
 	end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
 	j = 0;
