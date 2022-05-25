@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:04:16 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/16 17:19:57 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/26 00:39:01 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int ft_compare(char *s1, char *s2)
 {
     int len_s1 = ft_strlen(s1);
     int len_s2 = ft_strlen(s2);
+    if(len_s1 != len_s2)
+        return (-1);
     int len;
     if (len_s1 < len_s2)
         len = len_s2;

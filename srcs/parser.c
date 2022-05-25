@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/23 22:28:18 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/26 00:21:35 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_game *parse(char *file)
 
     game = new_game();
     game->raw_map = get_map(file);
+    if (game->raw_map == NULL)
+        return exit_with_error(game);
     while (game->raw_map[line_number] != NULL)
     {
         if (line_number < get_map_idx(game->raw_map))

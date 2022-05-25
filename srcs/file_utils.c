@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/23 22:21:42 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/26 00:47:09 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,32 @@ int copy_to(char **source, char **dest)
     free(source);
     return (i);
 }
+int check_extension(char *path)
+{
+    char **result;
+    int i;
+
+    result = ft_split(path, '.');
+    i = count(result);
+    if (i < 2 || ft_compare("cub", result[1]) != 0)
+    {
+        ft_free_all(result);
+        return (0);
+    }
+    ft_free_all(result);
+    return 1;
+}
 
 char **get_map(char *path)
 {
     int fd;
     char **map;
 
+    if (path == NULL || !check_extension(path))
+    {
+        print_error("Error: file extension must be .cub", 0);
+        return NULL;
+    }
     if ((fd = open(path, O_RDONLY)) == -1)
     {
         printf("cannot open map file\n");
@@ -104,6 +124,8 @@ char **get_map(char *path)
         return NULL;
     }
     map = read_file(fd);
+    if (map == NULL)
+        printf("Invalid map file\n");
     close(fd);
     return map;
 }
