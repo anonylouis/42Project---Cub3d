@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/23 22:40:33 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/26 11:46:01 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 #include <stdio.h>
 
 // SIZE OF SCREEN
-#define WIDTH 2000
-#define HEIGHT 1300
+#define WIDTH 1000
+#define HEIGHT 700
 
 // H_MAX OF A WALL
-#define H_MAX HEIGHT / 10000000000.0
+#define H_MAX HEIGHT / 1000000000.0
 
 // FOV = Field Of View
 #define FOV 90
@@ -77,14 +77,15 @@ typedef struct s_game
 
 typedef struct s_graph
 {
-	void *mlx_ptr;
-	void *win_ptr;
-	t_img img;
-	t_game game;
-	t_img wall_NO;
-	t_img wall_SO;
-	t_img wall_WE;
-	t_img wall_EA;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	double	angle_drawing;
+	t_img	img;
+	t_game	game;
+	t_img	wall_NO;
+	t_img	wall_SO;
+	t_img	wall_WE;
+	t_img	wall_EA;
 } t_graph;
 
 typedef struct s_point
