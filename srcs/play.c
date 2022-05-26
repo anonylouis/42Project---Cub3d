@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:22:59 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/26 11:46:55 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:08:32 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_game(t_graph *graph)
 	double	x_wall;
 
 	i = -1;
-	printf("angle de base = %f\n", graph->game.angle_vision);
+	//printf("angle de base = %f\n", graph->game.angle_vision);
 	while (++i < WIDTH)
 	{
 		angle = graph->game.angle_vision + atan(((double)i / (WIDTH - 1) - 0.5)) * FOV / (2 * atan(0.5));
@@ -30,15 +30,14 @@ void	print_game(t_graph *graph)
 			angle += 360;
 		else if (angle > 360)
 			angle -= 360;
-		printf("----------------- check angle %f  -----------------------\n", angle);
+		//printf("----------------- check angle %f  -----------------------\n", angle);
 		fish_eye_correction = atan((double)i / (WIDTH - 1) - 0.5) * FOV / (2 * atan(0.5));
-		printf("correction : %f\n", fish_eye_correction);
+		//printf("correction : %f\n", fish_eye_correction);
 		d = wall_distance(graph, angle, &x_wall);
-		printf("DISTANCE TO WALL = %f\n", d);
+		//printf("DISTANCE TO WALL = %f\n", d);
 		d = fabs(d * cos(rad(fish_eye_correction)));
-		printf("DISTANCE TO WALL = %f\n", d);
-		printf("x_wall = %f\n", x_wall);
-		graph->angle_drawing = angle;
+		//printf("DISTANCE TO WALL = %f\n", d);
+		//printf("x_wall = %f\n", x_wall);
 		draw_pixel_column(graph, WIDTH - 1 - i, d, x_wall);
 	}
 	mlx_put_image_to_window(graph->mlx_ptr, graph->win_ptr, graph->img.img_ptr, 0, 0);

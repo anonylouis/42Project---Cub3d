@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/26 11:46:01 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:08:23 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_graph
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	double	angle_drawing;
+	int	face;
 	t_img	img;
 	t_game	game;
 	t_img	wall_NO;

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/26 12:21:00 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:04:25 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,10 @@ int is_a_wall(t_graph *graph, double x, double y, double angle)
 	return (graph->game.map[i][j] == '1');
 }
 
+//graph->face == 0 <=> NORTH
+//graph->face == 1 <=> WEST
+//graph->face == 2 <=> SOUTH
+//graph->face == 3 <=> EAST
 double wall_distance(t_graph *graph, double angle, double *x_wall)
 {
 	double x;
@@ -136,13 +140,25 @@ double wall_distance(t_graph *graph, double angle, double *x_wall)
 	}
 	d = sqrt((graph->game.player_x - x) * (graph->game.player_x - x) + (graph->game.player_y - y) * (graph->game.player_y - y));
 	if (r == 1 && angle >= 90 && angle <= 270)
+	{
 		*x_wall = 1 - y;
+		graph->face = 1;
+	}
 	else if (r == 1)
+	{
 		*x_wall = y;
+		graph->face = 3;
+	}
 	else if (r == 2 && angle >= 0 && angle <= 180)
+	{
 		*x_wall = x;
+		graph->face = 0;
+	}
 	else
+	{
 		*x_wall = 1 - x;
+		graph->face = 2;
+	}
 	return d;
 }
 
@@ -153,26 +169,27 @@ void	put_pixel_from_texture(t_graph *graph, int pos_img, double relative_h, doub
 	int	pos_texture;
 	t_img	wall;
 
-	printf("relative h = %f\n", relative_h);
-	printf("angle drawing = %f\n", graph->angle_drawing);
-	if (graph->angle_drawing >= 45 && graph->angle_drawing < 135)
+	//printf("relative h = %f\n", relative_h);
+	//printf("angle drawing = %f\n", graph->angle_drawing);
+	if (graph->face == 0)
 		wall = graph->wall_NO;
-	else if (graph->angle_drawing >= 135 && graph->angle_drawing < 225)
+	else if (graph->face == 1)
 		wall = graph->wall_WE;
-	else if (graph->angle_drawing >= 225 && graph->angle_drawing < 315)
+	else if (graph->face == 2)
 		wall = graph->wall_SO;
 	else
 		wall = graph->wall_EA;
 	x_texture = (x_wall - floor(x_wall)) * wall.size_line;
 	y_texture = relative_h * wall.number_line;
 	pos_texture = y_texture * 4 * wall.size_line + 4 * x_texture;
-	printf("pixel texture : %i %i \n", x_texture, y_texture);
+	//printf("pixel texture : %i %i \n", x_texture, y_texture);
 	graph->img.img_addr[pos_img] = wall.img_addr[pos_texture];
 	graph->img.img_addr[pos_img + 1] = wall.img_addr[pos_texture + 1];
 	graph->img.img_addr[pos_img + 2] = wall.img_addr[pos_texture + 2];
 	graph->img.img_addr[pos_img + 3] = '\0';
-	printf("fin section\n");
+	//printf("fin section\n");
 }
+
 
 void draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
 {
@@ -183,12 +200,12 @@ void draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
 	int pos_img;
 	
 	h = HEIGHT / ( 2.0 *(d + H_MAX));
-	printf(" hauteur = %f\n", h);
+	//printf(" hauteur = %f\n", h);
 	start = max(0, (int)(HEIGHT / 2 - h / 2));
 	end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
 	j = 0;
-	printf("debut = %i, fin = %i \n,", start, end);
-	printf("vrai debut = %f , vraie fin = %f\n", (HEIGHT / 2 - h / 2), (HEIGHT / 2 + h / 2));
+	//printf("debut = %i, fin = %i \n,", start, end);
+	//printf("vrai debut = %f , vraie fin = %f\n", (HEIGHT / 2 - h / 2), (HEIGHT / 2 + h / 2));
 	while (j < start)
 	{
 		add_pixel_img(graph->img, column, j, graph->game.ceiling);
@@ -197,8 +214,8 @@ void draw_pixel_column(t_graph *graph, int column, double d, double x_wall)
 	while (j < end)
 	{
 		pos_img = j * graph->img.size_line * 4 + column * 4;
-		printf("on ecrit au pixel : %i %i \n", j, column);
-		put_pixel_from_texture(graph, pos_img,(j-(HEIGHT/2-h/2))/h, x_wall);
+		//printf("on ecrit au pixel : %i %i \n", j, column);
+		put_pixel_from_texture(graph, pos_img, ((double)j - (int)(HEIGHT / 2 - h / 2)) / h, x_wall);
 		j++;
 	}
 	while (j < HEIGHT)
