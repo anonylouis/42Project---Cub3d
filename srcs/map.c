@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/22 23:11:46 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/26 16:14:37 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int is_valid_map(char **s, int start)
 
 void set_angle_vision(t_game *game)
 {
-    if (game->orientation == 'E') // si le perso est un N au depart
+    if (game->orientation == 'E')
         game->angle_vision = 0;
     else if (game->orientation == 'N')
         game->angle_vision = 90;
@@ -185,6 +185,8 @@ char **extract_map(char **s, int line_idx, t_game *game)
         {
             game->orientation = s[line_idx][orientation];
             set_angle_vision(game);
+            game->player_x = orientation + 0.5;
+	        game->player_y = line_idx + 0.5;
         }
         map[i++] = s[line_idx++];
     }

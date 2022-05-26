@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/26 14:08:23 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:56:00 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 
 // STEP ON THE MAP
 #define STEP 0.2
+
+//IN A WALL
+#define IN_WALL 0.1
 
 typedef struct s_color
 {

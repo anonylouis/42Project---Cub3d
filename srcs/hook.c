@@ -6,13 +6,13 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:42:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/19 16:16:18 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/26 16:10:26 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3D.h>
 
-int		keycatch(int keycode, t_graph *graph)
+int	keycatch(int keycode, t_graph *graph)
 {
 	if (keycode == KEY_ESC)
 		return (close_loop(graph));
@@ -23,13 +23,13 @@ int		keycatch(int keycode, t_graph *graph)
 	return (0);
 }
 
-int		close_loop(t_graph *graph)
+int	close_loop(t_graph *graph)
 {
 	mlx_loop_end(graph->mlx_ptr);
 	return (0);
 }
 
-int		keycatch_angle(int keycode, t_graph *graph)
+int	keycatch_angle(int keycode, t_graph *graph)
 {
 	if (keycode == KEY_RIGHT)
 		graph->game.angle_vision -= DELTA_ANGLE;
@@ -43,8 +43,35 @@ int		keycatch_angle(int keycode, t_graph *graph)
 	return (0);
 }
 
-int		keycatch_step(int keycode, t_graph *graph)
+int	in_a_wall(t_graph *graph)
 {
+	int x;
+	int y;
+
+	y = floor(graph->game.player_y);
+	x = ceil(graph->game.player_x - 1 - IN_WALL);
+	if (graph->game.map[y][x] == '1')
+		return (1);
+	x = floor(graph->game.player_x + IN_WALL);
+	if (graph->game.map[y][x] == '1')
+		return (1);
+	x = floor(graph->game.player_x);
+	y = ceil(graph->game.player_y - IN_WALL - 1);
+	if (graph->game.map[y][x] == '1')
+		return (1);
+	y = floor(graph->game.player_y + IN_WALL);
+	if (graph->game.map[y][x] == '1')
+		return (1);
+	return (0);
+}
+
+int	keycatch_step(int keycode, t_graph *graph)
+{
+	double	save_x;
+	double	save_y;
+
+	save_x = graph->game.player_x;
+	save_y = graph->game.player_y;
 	if (keycode == KEY_W)
 	{
 		graph->game.player_x += STEP * cos(rad(graph->game.angle_vision));
@@ -65,6 +92,12 @@ int		keycatch_step(int keycode, t_graph *graph)
 		graph->game.player_x += STEP * sin(rad(graph->game.angle_vision));
 		graph->game.player_y += STEP * cos(rad(graph->game.angle_vision));
 	}
-	print_game(graph);
+	if (in_a_wall(graph))
+	{
+		graph->game.player_x = save_x;
+		graph->game.player_y = save_y;
+	}
+	else
+		print_game(graph);
 	return (0);
 }
