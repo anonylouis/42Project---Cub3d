@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/28 15:57:54 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/28 19:20:55 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,8 @@ char **extract_map(char **s, int line_idx, t_game *game)
             game->orientation = s[line_idx][orientation];
             set_angle_vision(game);
             game->player_x = orientation + 0.5;
-	        game->player_y = line_idx + 0.5;
+	        game->player_y = i + 0.5;
+			printf("%f %f\n", game->player_x, game->player_y);
         }
         map[i++] = s[line_idx++];
     }
