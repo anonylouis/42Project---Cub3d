@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/26 16:14:37 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/28 15:57:54 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void set_angle_vision(t_game *game)
         game->angle_vision = 90;
     else if (game->orientation == 'W')
         game->angle_vision = 180;
-    else if (game->orientation == 'S')
+    else
         game->angle_vision = 270;
 }
 

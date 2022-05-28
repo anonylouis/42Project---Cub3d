@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/26 00:47:09 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/28 15:13:49 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int copy_to(char **source, char **dest)
     free(source);
     return (i);
 }
+
 int check_extension(char *path)
 {
     char **result;
@@ -98,7 +99,7 @@ int check_extension(char *path)
 
     result = ft_split(path, '.');
     i = count(result);
-    if (i < 2 || ft_compare("cub", result[1]) != 0)
+    if (i < 2 || ft_compare("cub", result[i - 1]) != 0)
     {
         ft_free_all(result);
         return (0);
@@ -117,10 +118,10 @@ char **get_map(char *path)
         print_error("Error: file extension must be .cub", 0);
         return NULL;
     }
-    if ((fd = open(path, O_RDONLY)) == -1)
+	fd = open(path, O_RDONLY);
+    if (fd == -1)
     {
         printf("cannot open map file\n");
-        close(fd);
         return NULL;
     }
     map = read_file(fd);
@@ -153,6 +154,7 @@ char **read_file(int fd)
     char **result = NULL;
     char **temp = NULL;
     int nb_lines = 0;
+
     while (1)
     {
         line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:52:21 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/26 11:23:57 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/28 15:36:42 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int init_texture(t_graph *graph, t_img *img, char *path)
 	int width;
 	int endian;
 
-	printf("path = %s\n", path);
-
 	bits_per_pixel = 4 * (sizeof(char) * 8);
 	img->img_ptr = mlx_xpm_file_to_image(graph->mlx_ptr, path, &(img->size_line), &(img->number_line));
 	if (img->img_ptr == NULL)
+	{
+		printf("Error\nCan't open texture %s\n", path);
 		return (1);
-
+	}
 	width = img->size_line;
 	endian = 0;
 	img->img_addr = mlx_get_data_addr(img->img_ptr, &bits_per_pixel, &width, &endian);
