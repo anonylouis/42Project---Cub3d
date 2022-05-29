@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/28 15:13:49 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/29 23:30:06 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +94,16 @@ int copy_to(char **source, char **dest)
 
 int check_extension(char *path)
 {
-    char **result;
-    int i;
+    int len;
+    char *ext;
+    int result;
+    result = 0;
+    len = ft_strlen(path);
+    ext = ft_substr(path, len - 4, 4);
 
-    result = ft_split(path, '.');
-    i = count(result);
-    if (i < 2 || ft_compare("cub", result[i - 1]) != 0)
-    {
-        ft_free_all(result);
-        return (0);
-    }
-    ft_free_all(result);
-    return 1;
+    result = len > 4 && ft_compare(".cub", ext) == 0;
+    ft_free(ext);
+    return (result);
 }
 
 char **get_map(char *path)
@@ -118,7 +116,7 @@ char **get_map(char *path)
         print_error("Error: file extension must be .cub", 0);
         return NULL;
     }
-	fd = open(path, O_RDONLY);
+    fd = open(path, O_RDONLY);
     if (fd == -1)
     {
         printf("cannot open map file\n");
@@ -160,8 +158,6 @@ char **read_file(int fd)
         line = get_next_line(fd);
         if (line == NULL)
             break;
-        if (!is_valid(line))
-            continue;
         nb_lines++;
         temp = result;
         result = malloc(sizeof(char *) * (nb_lines + 1));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/28 19:20:55 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/29 23:29:02 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,24 @@ t_check_result check_orientation(char **s, int start)
     return success();
 }
 
+int check_empty_lines(char **s, int start)
+{
+    int i;
+    i = start;
+    while (s[i] != NULL)
+    {
+        if (is_empty_line(s[i]))
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 int is_valid_map(char **s, int start)
 {
     t_check_result result;
-
+    if (!check_empty_lines(s, start))
+        return (print_error("map cannot contain empty lines", 0));
     if (!check_walls(s, start))
         return print_error("Error: map must be surrounded by walls", 0);
     if (!check_valid_chars(s, start))
@@ -186,8 +200,8 @@ char **extract_map(char **s, int line_idx, t_game *game)
             game->orientation = s[line_idx][orientation];
             set_angle_vision(game);
             game->player_x = orientation + 0.5;
-	        game->player_y = i + 0.5;
-			printf("%f %f\n", game->player_x, game->player_y);
+            game->player_y = i + 0.5;
+            printf("%f %f\n", game->player_x, game->player_y);
         }
         map[i++] = s[line_idx++];
     }
