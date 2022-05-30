@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:04:16 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/26 00:39:01 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/30 17:52:44 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int get_start_index(char *line)
 int is_white_space(char *s)
 {
     int i;
+
+    i = 0;
     while (s[i] != '\0')
     {
         if (s[i] != ' ')
