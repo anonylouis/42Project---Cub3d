@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/29 23:30:06 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/30 23:37:15 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,24 @@ int count(char **s)
     return c;
 }
 
+int is_color(int color)
+{
+    return color >= 0 && color <= 255;
+}
+
+int check_color(char **colors)
+{
+    if (count(colors) == 3 
+        && is_int(colors[0]) && is_color(ft_atoi(colors[0])) 
+        && is_int(colors[1]) && is_color(ft_atoi(colors[1])) 
+        && is_int(colors[2]) && is_color(ft_atoi(colors[2])))
+    {
+        return (1);
+    }
+
+    return (0);
+}
+
 int is_floor(char **tokens, t_game *game)
 {
     char **colors;
@@ -38,13 +56,19 @@ int is_floor(char **tokens, t_game *game)
             return (0);
         }
         colors = ft_split(tokens[1], ',');
-        if (count(colors) == 3 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
+        if (check_color(colors))
         {
             game->floor.red = ft_atoi(colors[0]);
             game->floor.green = ft_atoi(colors[1]);
             game->floor.blue = ft_atoi(colors[2]);
             ft_free_all(colors);
             return (1);
+        }
+        else
+        {
+            printf("Invalid color\n");
+            ft_free_all(colors);
+            return (0);
         }
         ft_free_all(colors);
     }
@@ -63,13 +87,19 @@ int is_ceiling(char **tokens, t_game *game)
             return (0);
         }
         colors = ft_split(tokens[1], ',');
-        if (count(colors) == 3 && is_int(colors[0]) && is_int(colors[1]) && is_int(colors[2]))
+        if (check_color(colors))
         {
             game->ceiling.red = ft_atoi(colors[0]);
             game->ceiling.green = ft_atoi(colors[1]);
             game->ceiling.blue = ft_atoi(colors[2]);
             ft_free_all(colors);
             return 1;
+        }
+        else
+        {
+            printf("Invalid color\n");
+            ft_free_all(colors);
+            return (0);
         }
         ft_free_all(colors);
     }
