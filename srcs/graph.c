@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:23:41 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/17 09:57:26 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/30 17:44:32 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ void	free_graph(t_graph *graph)
 {
 	if (graph)
 	{
-		//mlx_destroy_image(graph->mlx_ptr, graph->img_ptr);
+		mlx_destroy_image(graph->mlx_ptr, graph->wall_NO.img_ptr);
+		mlx_destroy_image(graph->mlx_ptr, graph->wall_EA.img_ptr);
+		mlx_destroy_image(graph->mlx_ptr, graph->wall_SO.img_ptr);
+		mlx_destroy_image(graph->mlx_ptr, graph->wall_WE.img_ptr);
+		mlx_destroy_image(graph->mlx_ptr, graph->img.img_ptr);
 		mlx_clear_window(graph->mlx_ptr, graph->win_ptr);
 		mlx_destroy_window(graph->mlx_ptr, graph->win_ptr);
 		mlx_destroy_display(graph->mlx_ptr);

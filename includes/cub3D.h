@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/28 14:41:58 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/30 20:05:48 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_graph
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int	face;
+	double	percent_face;
 	t_img	img;
 	t_game	game;
 	t_img	wall_NO;
@@ -124,8 +125,9 @@ int keycatch_angle(int keycode, t_graph *graph);
 int keycatch_step(int keycode, t_graph *graph);
 
 // RAY CASTING
-double wall_distance(t_graph *graph, double angle, double *x_wall);
-void draw_pixel_column(t_graph *graph, int column, double d, double x_wall);
+int	find_next_border(double *x, double *y, double angle);
+double wall_distance(t_graph *graph, double angle);
+void draw_pixel_column(t_graph *graph, int column, double d);
 
 // IMG
 void init_img_addr(t_graph *graph, t_img *img, int w, int h);
@@ -139,6 +141,8 @@ void set_point(t_point *p, double x, double y);
 double rad(double angle);
 int max(int a, int b);
 int min(int a, int b);
+double dmin(double a, double b);
+double	distance(double x1, double y1, double x2, double y2);
 
 // GRAPH STRUCT
 t_graph *new_graph();

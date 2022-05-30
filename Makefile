@@ -1,6 +1,6 @@
 CC = gcc
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -O3
 
 NAME = cub3D
 
@@ -25,6 +25,8 @@ SOURCES =	main.c \
 		utils.c\
 		raycasting.c\
 		texture.c\
+		wall_distance.c\
+		find_next_border.c\
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}

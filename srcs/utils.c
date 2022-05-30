@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 13:23:31 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/18 15:35:39 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/30 20:05:42 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,17 @@ int min(int a, int b)
 		return (a);
 	else
 		return (b);
+}
+
+double dmin(double a, double b)
+{
+	if (a <= b)
+		return (a);
+	else
+		return (b);
+}
+
+double	distance(double x1, double y1, double x2, double y2)
+{
+	return (sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
 }
