@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:42:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/31 15:29:56 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/31 17:33:14 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,62 +65,43 @@ int	in_a_wall(t_graph *graph)
 	return (0);
 }
 
-int	bloque(int keycode, t_graph *graph)
+int	wall_collison_w(t_graph *graph)
 {
-	//double	save_x;
-	//double	save_y;
 	double	S;
 	double	d_wall;
+	int	save_face;
 
-	//save_x = graph->game.player_x;
-	//save_y = graph->game.player_y;
-	if (keycode == KEY_W)
+	save_face = graph->face;
+	if (save_face == 0 || save_face == 2)
 	{
-		if (graph->game.angle_vision <= 90 && graph->game.angle_vision <= 270)
-			d_wall = wall_distance(graph, 180);
+		if (graph->game.angle_vision >= 90 && graph->game.angle_vision <= 270)
+			d_wall = wall_distance(graph, 180.0);
 		else
-			d_wall = wall_distance(graph, 0);
-		if (d_wall <= IN_WALL)
-			return (0);
-		S = dmin(STEP, d_wall - IN_WALL);
-		graph->game.player_x += STEP * cos(rad(graph->game.angle_vision));
-	}
-	else if (keycode == KEY_A)
-	{
-		graph->game.player_y -= STEP * cos(rad(graph->game.angle_vision));
-	}
-	else if (keycode == KEY_S)
-	{
-		graph->game.player_x -= STEP * cos(rad(graph->game.angle_vision));
+			d_wall = wall_distance(graph, 0.0);
 	}
 	else
 	{
-		graph->game.player_x += 0;
-		graph->game.player_y += STEP * cos(rad(graph->game.angle_vision));
+		if (graph->game.angle_vision <= 180)
+			d_wall = wall_distance(graph, 90.0);
+		else
+			d_wall = wall_distance(graph, 270.0);
 	}
-
-	if (keycode == KEY_W)
-		graph->game.player_x += STEP * cos(rad(graph->game.angle_vision));
-	else if (keycode == KEY_A)
-		graph->game.player_y -= STEP * cos(rad(graph->game.angle_vision));
-	else if (keycode == KEY_S)
-		graph->game.player_x -= STEP * cos(rad(graph->game.angle_vision));
+	if (d_wall <= IN_WALL)
+		return (0);
+	S = dmin(STEP, d_wall - IN_WALL);
+	if (save_face == 0 || save_face == 2)
+		graph->game.player_x += S * cos(rad(graph->game.angle_vision));
 	else
-		graph->game.player_y += STEP * cos(rad(graph->game.angle_vision));
-
+		graph->game.player_y -= S * sin(rad(graph->game.angle_vision));
 	print_game(graph);
 	return (0);
 }
 
 int	keycatch_step(int keycode, t_graph *graph)
 {
-	//double	save_x;
-	//double	save_y;
 	double	S;
 	double	d_wall;
 
-	//save_x = graph->game.player_x;
-	//save_y = graph->game.player_y;
 	if (keycode == KEY_W)
 		d_wall = wall_distance(graph, graph->game.angle_vision);
 	else if (keycode == KEY_A)
@@ -129,8 +110,8 @@ int	keycatch_step(int keycode, t_graph *graph)
 		d_wall = wall_distance(graph, fmod(graph->game.angle_vision + 180, 360.0));
 	else
 		d_wall = wall_distance(graph, fmod(graph->game.angle_vision + 270, 360.0));
-	if (d_wall <= IN_WALL)
-		return (bloque(keycode, graph));
+	if (d_wall - IN_WALL <= 0.001)
+		return (keycode == KEY_W && wall_collison_w(graph));
 	S = dmin(STEP, d_wall - IN_WALL);
 	if (keycode == KEY_W)
 	{
@@ -152,12 +133,6 @@ int	keycatch_step(int keycode, t_graph *graph)
 		graph->game.player_x += S * sin(rad(graph->game.angle_vision));
 		graph->game.player_y += S * cos(rad(graph->game.angle_vision));
 	}
-	/*if (in_a_wall(graph))
-	{
-		graph->game.player_x = save_x;
-		graph->game.player_y = save_y;
-	}
-	else*/
 	print_game(graph);
 	return (0);
 }
