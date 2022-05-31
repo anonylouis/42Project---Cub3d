@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:42:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/30 20:25:10 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/31 15:29:56 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	keycatch_angle(int keycode, t_graph *graph)
 	print_game(graph);
 	return (0);
 }
-/*
+
 int	in_a_wall(t_graph *graph)
 {
 	int x;
@@ -64,7 +64,54 @@ int	in_a_wall(t_graph *graph)
 		return (1);
 	return (0);
 }
-*/
+
+int	bloque(int keycode, t_graph *graph)
+{
+	//double	save_x;
+	//double	save_y;
+	double	S;
+	double	d_wall;
+
+	//save_x = graph->game.player_x;
+	//save_y = graph->game.player_y;
+	if (keycode == KEY_W)
+	{
+		if (graph->game.angle_vision <= 90 && graph->game.angle_vision <= 270)
+			d_wall = wall_distance(graph, 180);
+		else
+			d_wall = wall_distance(graph, 0);
+		if (d_wall <= IN_WALL)
+			return (0);
+		S = dmin(STEP, d_wall - IN_WALL);
+		graph->game.player_x += STEP * cos(rad(graph->game.angle_vision));
+	}
+	else if (keycode == KEY_A)
+	{
+		graph->game.player_y -= STEP * cos(rad(graph->game.angle_vision));
+	}
+	else if (keycode == KEY_S)
+	{
+		graph->game.player_x -= STEP * cos(rad(graph->game.angle_vision));
+	}
+	else
+	{
+		graph->game.player_x += 0;
+		graph->game.player_y += STEP * cos(rad(graph->game.angle_vision));
+	}
+
+	if (keycode == KEY_W)
+		graph->game.player_x += STEP * cos(rad(graph->game.angle_vision));
+	else if (keycode == KEY_A)
+		graph->game.player_y -= STEP * cos(rad(graph->game.angle_vision));
+	else if (keycode == KEY_S)
+		graph->game.player_x -= STEP * cos(rad(graph->game.angle_vision));
+	else
+		graph->game.player_y += STEP * cos(rad(graph->game.angle_vision));
+
+	print_game(graph);
+	return (0);
+}
+
 int	keycatch_step(int keycode, t_graph *graph)
 {
 	//double	save_x;
@@ -83,7 +130,7 @@ int	keycatch_step(int keycode, t_graph *graph)
 	else
 		d_wall = wall_distance(graph, fmod(graph->game.angle_vision + 270, 360.0));
 	if (d_wall <= IN_WALL)
-		return (0);
+		return (bloque(keycode, graph));
 	S = dmin(STEP, d_wall - IN_WALL);
 	if (keycode == KEY_W)
 	{
@@ -111,6 +158,27 @@ int	keycatch_step(int keycode, t_graph *graph)
 		graph->game.player_y = save_y;
 	}
 	else*/
+	print_game(graph);
+	return (0);
+}
+
+int	mousemoved(t_graph *graph)
+{
+	int	x;
+	int	y;
+
+	//printf("on recolte position mouse en %d et struct = %p\n", x, graph);
+	mlx_mouse_get_pos(graph->mlx_ptr, graph->win_ptr, &x, &y);
+	if (x < MOVED_LEFT)
+		graph->game.angle_vision = graph->game.angle_vision - ((double) x / (WIDTH - 1) - MOUSE_MOVED_LEFT) * SPEED_ANGLE;
+	else if (x > MOVED_RIGHT)
+		graph->game.angle_vision = graph->game.angle_vision - ((double) x / (WIDTH - 1) - MOUSE_MOVED_RIGHT) * SPEED_ANGLE;
+	else
+		return (0);
+	if (graph->game.angle_vision >= 360)
+		graph->game.angle_vision -= 360;
+	else if (graph->game.angle_vision < 0)
+		graph->game.angle_vision += 360;
 	print_game(graph);
 	return (0);
 }
