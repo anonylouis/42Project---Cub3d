@@ -6,109 +6,17 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/30 23:37:15 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/31 22:49:09 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int count(char **s)
-{
-    int i;
-    int c;
-
-    c = 0;
-    i = 0;
-    while (s[i++] != NULL)
-    {
-        c++;
-    }
-    return c;
-}
-
-int is_color(int color)
-{
-    return color >= 0 && color <= 255;
-}
-
-int check_color(char **colors)
-{
-    if (count(colors) == 3 
-        && is_int(colors[0]) && is_color(ft_atoi(colors[0])) 
-        && is_int(colors[1]) && is_color(ft_atoi(colors[1])) 
-        && is_int(colors[2]) && is_color(ft_atoi(colors[2])))
-    {
-        return (1);
-    }
-
-    return (0);
-}
-
-int is_floor(char **tokens, t_game *game)
-{
-    char **colors;
-
-    if (ft_compare(tokens[0], "F") == 0)
-    {
-        if (!is_empty_color(game->floor))
-        {
-            printf("Duplicate line: floor\n");
-            return (0);
-        }
-        colors = ft_split(tokens[1], ',');
-        if (check_color(colors))
-        {
-            game->floor.red = ft_atoi(colors[0]);
-            game->floor.green = ft_atoi(colors[1]);
-            game->floor.blue = ft_atoi(colors[2]);
-            ft_free_all(colors);
-            return (1);
-        }
-        else
-        {
-            printf("Invalid color\n");
-            ft_free_all(colors);
-            return (0);
-        }
-        ft_free_all(colors);
-    }
-    return (0);
-}
-
-int is_ceiling(char **tokens, t_game *game)
-{
-    char **colors;
-
-    if (ft_compare(tokens[0], "C") == 0)
-    {
-        if (!is_empty_color(game->ceiling))
-        {
-            printf("Duplicate line: %s", tokens[0]);
-            return (0);
-        }
-        colors = ft_split(tokens[1], ',');
-        if (check_color(colors))
-        {
-            game->ceiling.red = ft_atoi(colors[0]);
-            game->ceiling.green = ft_atoi(colors[1]);
-            game->ceiling.blue = ft_atoi(colors[2]);
-            ft_free_all(colors);
-            return 1;
-        }
-        else
-        {
-            printf("Invalid color\n");
-            ft_free_all(colors);
-            return (0);
-        }
-        ft_free_all(colors);
-    }
-    return 0;
-}
 
 int copy_to(char **source, char **dest)
 {
     int i;
+    
     i = 0;
     if (source == NULL)
         return (0);
@@ -127,6 +35,7 @@ int check_extension(char *path)
     int len;
     char *ext;
     int result;
+    
     result = 0;
     len = ft_strlen(path);
     ext = ft_substr(path, len - 4, 4);
@@ -134,29 +43,6 @@ int check_extension(char *path)
     result = len > 4 && ft_compare(".cub", ext) == 0;
     ft_free(ext);
     return (result);
-}
-
-char **get_map(char *path)
-{
-    int fd;
-    char **map;
-
-    if (path == NULL || !check_extension(path))
-    {
-        print_error("Error: file extension must be .cub", 0);
-        return NULL;
-    }
-    fd = open(path, O_RDONLY);
-    if (fd == -1)
-    {
-        printf("cannot open map file\n");
-        return NULL;
-    }
-    map = read_file(fd);
-    if (map == NULL)
-        printf("Invalid map file\n");
-    close(fd);
-    return map;
 }
 
 int is_valid(char *line)

@@ -27,6 +27,10 @@ SOURCES =	main.c \
 		texture.c\
 		wall_distance.c\
 		find_next_border.c\
+		orientation.c\
+		map_utils.c\
+		color.c\
+		utils2.c\
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}

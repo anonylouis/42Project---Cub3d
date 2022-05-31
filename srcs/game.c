@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:22:43 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/26 16:12:18 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/31 14:35:42 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ t_game *new_game()
     if (!game)
         return NULL;
     game->map = NULL;
-    game->success = 0;
-    game->nb_lines = 0;
     game->orientation = 0;
     game->path_wall_EA = NULL;
     game->path_wall_NO = NULL;

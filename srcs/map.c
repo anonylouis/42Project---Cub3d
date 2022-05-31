@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/29 23:29:02 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/31 22:43:08 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,128 +30,6 @@ int is_valid_map_char(char c)
     return c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ';
 }
 
-int check_walls(char **s, int start)
-{
-    int i;
-    int j;
-    int len;
-
-    i = start;
-    j = 0;
-    while (s[i] != NULL)
-    {
-        j = 0;
-        while (s[i][j] != '\0')
-        {
-            if (i == start || i == count(s) - 1)
-            {
-                if (s[i][j] != '1' && s[i][j] != ' ')
-                    return (0);
-            }
-            j++;
-        }
-        len = ft_strlen(s[i]);
-        if (s[i][0] != '1' || s[i][len - 1] != '1')
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
-int check_valid_chars(char **s, int start)
-{
-    int i;
-    int j;
-
-    i = start;
-    j = 0;
-    while (s[i] != NULL)
-    {
-        j = 0;
-        while (s[i][j] != '\0')
-        {
-            if (!is_valid_map_char(s[i][j]))
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (1);
-}
-
-t_check_result success()
-{
-    t_check_result result;
-    result.success = 1;
-    return result;
-}
-
-t_check_result error(char *message)
-{
-    t_check_result result;
-    result.success = 0;
-    result.message = message;
-    return result;
-}
-
-int is_orientation(char c)
-{
-    return c == 'W' || c == 'N' || c == 'E' || c == 'S';
-}
-
-int has_orientation(char *s)
-{
-    int i;
-    i = 0;
-    while (s[i] != '\0')
-    {
-        if (is_orientation(s[i]))
-            return (i);
-        i++;
-    }
-    return (-1);
-}
-
-t_check_result check_orientation(char **s, int start)
-{
-    int i;
-    int j;
-    int orientation;
-
-    i = start;
-    j = 0;
-    orientation = 0;
-    while (s[i] != NULL)
-    {
-        j = 0;
-        while (s[i][j] != '\0')
-        {
-            if (is_orientation(s[i][j]))
-                orientation++;
-            j++;
-        }
-        i++;
-    }
-    if (orientation == 0)
-        return error("Error : map must have one orientation");
-    if (orientation > 1)
-        return error("Error : map must have only one orientation");
-    return success();
-}
-
-int check_empty_lines(char **s, int start)
-{
-    int i;
-    i = start;
-    while (s[i] != NULL)
-    {
-        if (is_empty_line(s[i]))
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
 int is_valid_map(char **s, int start)
 {
     t_check_result result;
@@ -167,18 +45,6 @@ int is_valid_map(char **s, int start)
     return (1);
 }
 
-void set_angle_vision(t_game *game)
-{
-    if (game->orientation == 'E')
-        game->angle_vision = 0;
-    else if (game->orientation == 'N')
-        game->angle_vision = 90;
-    else if (game->orientation == 'W')
-        game->angle_vision = 180;
-    else
-        game->angle_vision = 270;
-}
-
 char **extract_map(char **s, int line_idx, t_game *game)
 {
     char **map;
@@ -188,7 +54,7 @@ char **extract_map(char **s, int line_idx, t_game *game)
     i = 0;
     orientation = 0;
     if (!is_valid_map(s, line_idx))
-        return NULL;
+        return (NULL);
     map = malloc(sizeof(char *) * (count(s) - line_idx));
     if (map == NULL)
         return NULL;
@@ -205,6 +71,30 @@ char **extract_map(char **s, int line_idx, t_game *game)
         }
         map[i++] = s[line_idx++];
     }
-    map[i] = NULL;
+    map[i] = (NULL);
     return (map);
+}
+
+int check_map_info(char *line, t_game *game)
+{
+    char **tokens;
+
+    tokens = ft_split(line, ' ');
+    if (count(tokens) < 2)
+        return 0;
+    if (is_ea_texture(tokens, game))
+        return (1);
+    else if (is_so_texture(tokens, game))
+        return (1);
+    else if (is_we_texture(tokens, game))
+        return (1);
+    else if (is_no_texture(tokens, game))
+        return (1);
+    else if (is_floor(tokens, game))
+        return (1);
+    else if (is_ceiling(tokens, game))
+        return (1);
+    ft_free_all(tokens);
+    printf("Error : Invalid line %s", line);
+    return (0);
 }

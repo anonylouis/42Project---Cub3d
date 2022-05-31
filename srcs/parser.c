@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/29 23:24:55 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/05/31 22:43:03 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,6 @@ t_color empty_color()
     return (t);
 }
 
-int is_empty_color(t_color color)
-{
-    if (color.red == -1 && color.green == -1 && color.blue == -1)
-        return (1);
-    return (0);
-}
-
-t_game *exit_with_error(t_game *game)
-{
-    free_game(game);
-    return (NULL);
-}
 
 t_game *parse(char *file)
 {
@@ -68,26 +56,4 @@ t_game *parse(char *file)
     return (game);
 }
 
-int check_map_info(char *line, t_game *game)
-{
-    char **tokens;
 
-    tokens = ft_split(line, ' ');
-    if (count(tokens) < 2)
-        return 0;
-    if (is_ea_texture(tokens, game))
-        return (1);
-    else if (is_so_texture(tokens, game))
-        return (1);
-    else if (is_we_texture(tokens, game))
-        return (1);
-    else if (is_no_texture(tokens, game))
-        return (1);
-    else if (is_floor(tokens, game))
-        return (1);
-    else if (is_ceiling(tokens, game))
-        return (1);
-    ft_free_all(tokens);
-    printf("Error : Invalid line %s", line);
-    return (0);
-}

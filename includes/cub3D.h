@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/30 20:05:48 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/31 23:16:35 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,6 @@ typedef struct s_game
 	t_color floor;
 	t_color ceiling;
 	char **raw_map;
-	int success;
-	int nb_lines;
-	int nb_col;
-	char *error_message;
-	int has_errors;
 
 } t_game;
 
@@ -153,6 +148,9 @@ char **get_map(char *file_path);
 char **read_file(int fd);
 char *clean_line(char *line);
 // parse
+int check_walls(char **s, int start);
+int check_valid_chars(char **s, int start);
+int has_orientation(char *s);
 int check_map_info(char *line, t_game *game);
 int check_floor_color(char **tokens, t_game *game);
 int check_ceiling_color(char **tokens, t_game *game);
@@ -183,5 +181,13 @@ char *ft_error(char *msg);
 void ft_free(char *f);
 void ft_free_all(char **f);
 void free_game(t_game *game);
+t_check_result check_orientation(char **s, int start);
+void set_angle_vision(t_game *game);
+int check_empty_lines(char **s, int start);
+t_game *exit_with_error(t_game *game);
+int check_extension(char *path);
+int file_exists(char *path);
+int validate_game(t_game *game);
+int file_exists(char *path);
 
 #endif

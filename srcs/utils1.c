@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:04:16 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/30 17:52:44 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/05/31 22:48:45 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,18 @@ int is_int(char *s)
         i++;
     }
     return 1;
+}
+
+int count(char **s)
+{
+    int i;
+    int c;
+
+    c = 0;
+    i = 0;
+    while (s[i++] != NULL)
+    {
+        c++;
+    }
+    return c;
 }
