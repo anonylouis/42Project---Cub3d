@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/31 23:16:35 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/01 10:02:37 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,20 @@
 #define WIDTH 1000
 #define HEIGHT 700
 
+// MOVEMENT MOUSE
+#define MOUSE_MOVED_LEFT 0.4
+#define MOUSE_MOVED_RIGHT 0.6
+#define MOVED_LEFT WIDTH * MOUSE_MOVED_LEFT
+#define MOVED_RIGHT WIDTH * MOUSE_MOVED_RIGHT
+#define SPEED_ANGLE 3.6
+
 // H_MAX OF A WALL
 #define H_MAX HEIGHT / 1000000000.0
 
 // FOV = Field Of View
 #define FOV 90
 
-// ROTATION SPEED OF VIEW ANGLE ( IN DEGREES )
+// ROTATION SPEED OF VIEW ANGLE ( IN DEGREES ) - ARROW
 #define DELTA_ANGLE 5
 
 // STEP ON THE MAP
@@ -113,11 +120,12 @@ void free_game(t_game *game);
 void play(t_graph *graph);
 void print_game(t_graph *graph);
 
-// KEYCATCH
+// HOOK
 int keycatch(int keycode, t_graph *graph);
 int close_loop(t_graph *graph);
 int keycatch_angle(int keycode, t_graph *graph);
 int keycatch_step(int keycode, t_graph *graph);
+int	mousemoved(t_graph *graph);
 
 // RAY CASTING
 int	find_next_border(double *x, double *y, double angle);
@@ -147,6 +155,7 @@ void free_graph(t_graph *graph);
 char **get_map(char *file_path);
 char **read_file(int fd);
 char *clean_line(char *line);
+
 // parse
 int check_walls(char **s, int start);
 int check_valid_chars(char **s, int start);
@@ -173,6 +182,7 @@ int is_valid_map(char **s, int start);
 int is_valid_map_char(char c);
 char **extract_map(char **s, int line_idx, t_game* game);
 int get_map_idx(char **map);
+
 // error
 int print_error(char *msg, int error);
 char *ft_error(char *msg);
