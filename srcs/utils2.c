@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:04:50 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/31 23:05:02 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:55:35 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int validate_game(t_game *game)
 		return print_error("west wall path not found\n", 0);
 	if (!file_exists(game->path_wall_NO))
 		return print_error("north wall path not found\n", 0);
-	if (count(game->map) <= 0)
+	game->nb_line_map = count(game->map);
+	if (game->nb_line_map <= 0)
 		return print_error("missing map\n", 0);
 	return (1);
 }

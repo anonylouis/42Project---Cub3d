@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/01 10:02:37 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:52:52 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,18 @@
 //IN A WALL
 #define IN_WALL 0.05
 
+//MINIMAP
+#define MINIMAP_SIZE 200
+#define MINIMAP_N_CASE 9
+
+#define MINIMAP_X WIDTH * 3/4
+#define MINIMAP_Y 10
+
+#define MINIMAP_CONTOUR 3
+
+#define MINIMAP_COLOR_CONTOUR 0x000000
+#define MINIMAP_COLOR_WALL 0x663300
+
 typedef struct s_color
 {
 	int red;
@@ -76,8 +88,10 @@ typedef struct s_game
 	char *path_wall_EA;
 	t_color floor;
 	t_color ceiling;
+	t_color minimap_contour;
+	t_color minimap_wall;
 	char **raw_map;
-
+	int	nb_line_map;
 } t_game;
 
 typedef struct s_graph
