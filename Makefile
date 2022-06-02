@@ -31,6 +31,7 @@ SOURCES =	main.c \
 		map_utils.c\
 		color.c\
 		utils2.c\
+		minimap.c\
 
 OBJS_DIR = ./objs/
 OBJECTS = ${SOURCES:.c=.o}
@@ -39,8 +40,8 @@ OBJS = $(addprefix $(OBJS_DIR), $(OBJECTS))
 HEADERS_DIR = ./includes/
 #remplir .h ici
 HEADER_FILES =	cub3D.h \
-				get_next_line.h \
-				keycode.h \
+		get_next_line.h \
+		keycode.h \
 
 
 HDRS = $(addprefix $(HEADERS_DIR), $(HEADER_FILES))

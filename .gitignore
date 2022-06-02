@@ -1,1 +1,3 @@
 objs/*.o
+objs/*.d
+.vscode/*

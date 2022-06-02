@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:22:59 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/31 14:22:48 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:17:21 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ void	print_game(t_graph *graph)
 		d = fabs(d * cos(rad(fish_eye_correction)));
 		draw_pixel_column(graph, WIDTH - 1 - i, d);
 	}
+	print_minimap(graph);
 	mlx_put_image_to_window(graph->mlx_ptr, graph->win_ptr, graph->img.img_ptr, 0, 0);
 }
 
 void	play(t_graph *graph)
 {
-	printf("structure = %p\n", graph);
+	init_color_minimap(graph);
 	mlx_hook(graph->win_ptr, 33, 1L << 17, close_loop, graph);
 	mlx_hook(graph->win_ptr, 2, 1L << 0, keycatch, graph);
 	mlx_loop_hook(graph->mlx_ptr, mousemoved, graph);

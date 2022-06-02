@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:22:43 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/31 14:35:42 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/01 16:54:54 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_game *new_game()
     game->floor = empty_color();
     game->ceiling = empty_color();
     game->raw_map = NULL;
+    game->nb_line_map = -1;
     return game;
 }
 

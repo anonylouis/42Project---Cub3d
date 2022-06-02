@@ -1,2 +1,0 @@
-objs/utils1.o: srcs/utils1.c includes/cub3D.h includes/../libft/libft.h \
- includes/../minilibx/mlx.h includes/get_next_line.h includes/keycode.h
