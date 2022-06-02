@@ -6,35 +6,62 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:42:20 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/01 21:07:36 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:49:01 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int check_spaces(char **s, int start, int *i)
+int check_wall_line(char *s)
+{
+    int i;
+
+    i = 0;
+    while (s[i] != '\0')
+    {
+        if (s[i] != '1' && s[i] != ' ')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+int check_content_map(char *s, char *last_s)
+{
+    int len_s;
+    int last_len;
+    int i;
+
+    last_len = ft_strlen(last_s);
+    len_s = ft_strlen(s);
+    if (last_len < len_s)
+    {
+        i = len_s - last_len;
+        while (i > 0)
+        {
+            if (s[len_s - 1] != '1')
+                return (0);
+            i--;
+            len_s--;
+        }
+    }
+    return (1);
+}
+
+int check_spaces(char **s, int *i)
 {
     int j;
 
     j = 0;
     while (s[*i][j] != '\0')
     {
-        if (*i == start || *i == count(s) - 1)
+        if (s[*i][j] == ' ')
         {
-            if (s[*i][j] != '1' && s[*i][j] != ' ')
+            if ((s[*i + 1][j] != ' ' && s[*i + 1][j] != '1') 
+            || (s[*i - 1][j] != '1' && s[*i - 1][j] != ' ') 
+            || (ft_strlen(s[*i]) - 1 > j && ((s[*i][j + 1] != '1' 
+            && s[*i][j + 1] != ' ') || (s[*i][j - 1] != '1' && s[*i][j - 1] != ' '))))
                 return (0);
-        }
-        else
-        {
-            if (s[*i][j] == ' ')
-            {
-                if ((s[*i + 1][j] != ' ' && s[*i + 1][j] != '1') 
-                || (s[*i - 1][j] != '1' && s[*i - 1][j] != ' ') 
-                || (ft_strlen(s[*i]) - 1 > j && ((s[*i][j + 1] != '1' 
-                && s[*i][j + 1] != ' ') 
-                || (s[*i][j - 1] != '1' && s[*i][j - 1] != ' '))))
-                    return (0);
-            }
         }
         j++;
     }
@@ -49,10 +76,20 @@ int check_walls(char **s, int start)
     i = start;
     while (s[i] != NULL)
     {
-        len = ft_strlen(s[i]);
-        if (!check_spaces(s, start, &i))
-            return (0);
-        if ((s[i][0] != '1' && s[i][0] != ' ') || (s[i][len - 1] != ' ' && s[i][len - 1] != '1'))
+        len = ft_strlen(s[i] - 1);
+        if (i == start || i == count(s) - 1)
+        {
+            if (!check_wall_line(s[i]))
+                return (0);
+        }
+        else
+        {
+            if (!check_content_map(s[i], s[i - 1]))
+                return (0);
+            if (!check_spaces(s, &i))
+                return (0);
+        }
+        if ((s[i][0] != '1' && s[i][0] != ' ') || (s[i][len] != ' ' && s[i][len] != '1'))
             return (0);
         i++;
     }
@@ -100,7 +137,7 @@ char **get_map(char *path)
 
     if (path == NULL || !check_extension(path))
     {
-        print_error("Error: file extension must be .cub", 0);
+        print_error("file extension must be .cub", 0);
         return NULL;
     }
     fd = open(path, O_RDONLY);

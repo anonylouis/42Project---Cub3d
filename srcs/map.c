@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/31 22:43:08 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:47:16 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int is_valid_map(char **s, int start)
     if (!check_empty_lines(s, start))
         return (print_error("map cannot contain empty lines", 0));
     if (!check_walls(s, start))
-        return print_error("Error: map must be surrounded by walls", 0);
+        return print_error("map must be surrounded by walls", 0);
     if (!check_valid_chars(s, start))
-        return print_error("Error: invalid map char", 0);
+        return print_error("invalid map char", 0);
     result = check_orientation(s, start);
     if (!result.success)
         return print_error(result.message, 0);
