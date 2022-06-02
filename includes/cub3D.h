@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/01 16:52:52 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/02 13:27:45 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 
 #define MINIMAP_COLOR_CONTOUR 0x000000
 #define MINIMAP_COLOR_WALL 0x663300
+#define MINIMAP_COLOR_FLOOR 0xFFFF00
+#define MINIMAP_COLOR_PLAYER 0xFF0000
 
 typedef struct s_color
 {
@@ -90,6 +92,8 @@ typedef struct s_game
 	t_color ceiling;
 	t_color minimap_contour;
 	t_color minimap_wall;
+	t_color minimap_floor;
+	t_color minimap_player;
 	char **raw_map;
 	int	nb_line_map;
 } t_game;
@@ -150,6 +154,10 @@ void draw_pixel_column(t_graph *graph, int column, double d);
 void init_img_addr(t_graph *graph, t_img *img, int w, int h);
 void add_pixel_img(t_img img, int x, int y, t_color color);
 int init_textures(t_graph *graph);
+
+// MINIMAP
+void    init_color_minimap(t_graph *graph);
+void    print_minimap(t_graph *graph);
 
 // POINT
 void set_point(t_point *p, double x, double y);
