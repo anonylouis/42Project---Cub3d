@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/02 20:28:34 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:36:36 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ int max(int a, int b);
 int min(int a, int b);
 double dmin(double a, double b);
 double	distance(double x1, double y1, double x2, double y2);
+void	correct_angle(double *angle);
 
 // GRAPH STRUCT
 t_graph *new_graph();

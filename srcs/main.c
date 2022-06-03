@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:46:56 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/31 23:04:30 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/03 14:43:03 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int main(int argc, char **argv)
 {
-
 	t_graph *graph;
 	t_game *game;
 
