@@ -1,0 +1,16 @@
+NO ./xpm/test_wall_north.xpm
+SO ./xpm/test_wall_south.xpm
+WE ./xpm/test_wall_west.xpm
+EA ./xpm/test_wall_east.xpm
+
+F 220,100,0
+C 135,206,250
+
+1111
+111111111111
+1000S0000011
+10110100011
+11111 111111
+11111 111111
+11111 11111
+11
