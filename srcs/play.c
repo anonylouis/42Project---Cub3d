@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:22:59 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/03 14:32:06 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/03 15:16:12 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	play(t_graph *graph)
 {
 	mlx_hook(graph->win_ptr, 33, 1L << 17, close_loop, graph);
 	mlx_hook(graph->win_ptr, 2, 1L << 0, keycatch, graph);
-	mlx_loop_hook(graph->mlx_ptr, mousemoved, graph);
 	print_game(graph);
 	mlx_loop(graph->mlx_ptr);
 }

@@ -6,13 +6,13 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:23:41 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/31 14:53:24 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/03 14:53:16 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_graph *new_graph()
+t_graph	*new_graph(void)
 {
 	t_graph	*graph;
 
@@ -20,11 +20,11 @@ t_graph *new_graph()
 	if (graph == NULL)
 		return (NULL);
 	graph->mlx_ptr = mlx_init();
-        if (graph->mlx_ptr == NULL)
-        {
-                free(graph);
-                return (NULL);
-        }
+	if (graph->mlx_ptr == NULL)
+	{
+		free(graph);
+		return (NULL);
+	}
 	graph->win_ptr = mlx_new_window(graph->mlx_ptr, WIDTH, HEIGHT, "CUB'3D");
 	init_img_addr(graph, &(graph->img), WIDTH, HEIGHT);
 	return (graph);

@@ -31,11 +31,13 @@ SOURCES_COMMON =	main.c \
 			map_utils.c\
 			color.c\
 			utils2.c\
+			keycatch_step.c\
 
 SOURCES_MANDATORY = play.c\
 
 SOURCES_BONUS = bonus_play.c\
-		minimap.c\
+		bonus_mousemoved.c\
+		bonus_minimap.c\
 
 OBJS_DIR = ./objs/
 
@@ -73,7 +75,9 @@ all : $(NAME)
 $(NAME) :	$(MINILIBX) $(LIBFT) $(OBJS_COMMON) $(OBJS_MANDATORY)
 		$(CC) $(FLAGS) -o $(NAME) $(OBJS_COMMON) $(OBJS_MANDATORY) $(LIBFT) $(MINILIBX) $(MINILIBX_FLAGS)
 
-bonus :		$(MINILIBX) $(LIBFT) $(OBJS_COMMON) $(OBJS_BONUS)
+bonus : $(NAME_BONUS)
+
+$(NAME_BONUS) :		$(MINILIBX) $(LIBFT) $(OBJS_COMMON) $(OBJS_BONUS)
 		$(CC) $(FLAGS) -o $(NAME_BONUS) $(OBJS_COMMON) $(OBJS_BONUS) $(LIBFT) $(MINILIBX) $(MINILIBX_FLAGS)
 
 clean :
