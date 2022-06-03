@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/02 13:27:45 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/02 20:28:34 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,6 @@ int get_map_idx(char **map);
 
 // error
 int print_error(char *msg, int error);
-char *ft_error(char *msg);
 
 // free
 void ft_free(char *f);

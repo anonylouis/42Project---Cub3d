@@ -1,3 +1,4 @@
 objs/*.o
 objs/*.d
 .vscode/*
+cub3D

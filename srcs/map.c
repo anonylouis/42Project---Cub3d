@@ -6,19 +6,35 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/02 16:47:16 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/03 10:36:23 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <string.h>
 
+int is_beg_map(char *s)
+{
+    int i;
+
+    i = 0;
+    while (s[i] != '\0')
+    {
+        if (s[i] != '1' && s[i] != ' ')
+            return (0);
+        i++;
+    }
+    if (is_empty_line(s))
+        return (0);
+    return (1);
+}
+
 int get_map_idx(char **map)
 {
     int i = 0;
     while (map[i] != NULL)
     {
-        if (map[i][0] == '1')
+        if (is_beg_map(map[i]))
             return i;
         i++;
     }

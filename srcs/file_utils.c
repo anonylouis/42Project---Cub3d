@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/31 22:49:09 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/03 11:15:47 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int check_extension(char *path)
     result = 0;
     len = ft_strlen(path);
     ext = ft_substr(path, len - 4, 4);
-
     result = len > 4 && ft_compare(".cub", ext) == 0;
     ft_free(ext);
     return (result);
@@ -47,16 +46,17 @@ int check_extension(char *path)
 
 int is_valid(char *line)
 {
-    return !is_empty_line(line);
+    return (!is_empty_line(line));
 }
 
 char *clean_line(char *line)
 {
     char *temp;
     char *temp2;
-    temp = ft_strtrim(line, " ");
-    temp2 = ft_substr(temp, 0, ft_strlen(temp) - 1);
 
+    //temp = ft_strtrim(line, " ");
+    temp = ft_strdup(line);
+    temp2 = ft_substr(temp, 0, ft_strlen(temp) - 1);
     free(line);
     free(temp);
     return temp2;
@@ -65,10 +65,13 @@ char *clean_line(char *line)
 char **read_file(int fd)
 {
     char *line;
-    char **result = NULL;
-    char **temp = NULL;
-    int nb_lines = 0;
-
+    char **result;
+    char **temp;
+    int nb_lines;
+    
+    result = NULL;
+    temp = NULL;
+    nb_lines = 0;
     while (1)
     {
         line = get_next_line(fd);
@@ -83,7 +86,7 @@ char **read_file(int fd)
         result[nb_lines - 1] = clean_line(line);
         result[nb_lines] = NULL;
     }
-    return result;
+    return (result);
 }
 
 int is_empty_line(char *line)

@@ -6,13 +6,13 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:42:20 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/02 16:49:01 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/03 17:22:04 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int check_wall_line(char *s)
+int check_wall_line(char *s, char *next)
 {
     int i;
 
@@ -20,6 +20,10 @@ int check_wall_line(char *s)
     while (s[i] != '\0')
     {
         if (s[i] != '1' && s[i] != ' ')
+            return (0);
+        if (next == NULL)
+            break;
+        if (s[i] == ' ' && next[i] != '1')
             return (0);
         i++;
     }
@@ -60,7 +64,8 @@ int check_spaces(char **s, int *i)
             if ((s[*i + 1][j] != ' ' && s[*i + 1][j] != '1') 
             || (s[*i - 1][j] != '1' && s[*i - 1][j] != ' ') 
             || (ft_strlen(s[*i]) - 1 > j && ((s[*i][j + 1] != '1' 
-            && s[*i][j + 1] != ' ') || (s[*i][j - 1] != '1' && s[*i][j - 1] != ' '))))
+            && s[*i][j + 1] != ' ') || (s[*i][j - 1] != '1' 
+            && s[*i][j - 1] != ' '))))
                 return (0);
         }
         j++;
@@ -79,7 +84,7 @@ int check_walls(char **s, int start)
         len = ft_strlen(s[i] - 1);
         if (i == start || i == count(s) - 1)
         {
-            if (!check_wall_line(s[i]))
+            if (!check_wall_line(s[i], s[i + 1]))
                 return (0);
         }
         else
