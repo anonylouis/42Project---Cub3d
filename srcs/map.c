@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/04 22:06:49 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/04 23:06:36 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int is_valid_map_char(char c)
 int is_valid_map(char **s, int start)
 {
     t_check_result result;
+    if(s == NULL || start == -1)
+        return (print_error("missing map description", 0));
     if (!check_empty_lines(s, start))
         return (print_error("map cannot contain empty lines", 0));
     if (!check_valid_chars(s, start))
