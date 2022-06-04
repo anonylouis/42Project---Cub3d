@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/03 10:36:23 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/04 21:41:35 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 int is_beg_map(char *s)
 {
     int i;
-
+    if (s == NULL)
+        return (0);
     i = 0;
     while (s[i] != '\0')
     {

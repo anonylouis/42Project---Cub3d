@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:42:20 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/03 17:22:04 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/04 21:45:48 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,20 @@ int check_spaces(char **s, int *i)
     {
         if (s[*i][j] == ' ')
         {
-            if ((s[*i + 1][j] != ' ' && s[*i + 1][j] != '1') 
-            || (s[*i - 1][j] != '1' && s[*i - 1][j] != ' ') 
-            || (ft_strlen(s[*i]) - 1 > j && ((s[*i][j + 1] != '1' 
+            if (ft_strlen(s[*i]) - 1 > j && ((s[*i][j + 1] != '1' 
             && s[*i][j + 1] != ' ') || (s[*i][j - 1] != '1' 
-            && s[*i][j - 1] != ' '))))
+            && s[*i][j - 1] != ' ')))
                 return (0);
+            if (ft_strlen(s[*i]) <= ft_strlen(s[*i + 1]))
+            {
+                if (s[*i + 1][j] != ' ' && s[*i + 1][j] != '1')
+                    return (0);
+            }
+            if (ft_strlen(s[*i]) <= ft_strlen(s[*i - 1]))
+            {
+                if (s[*i - 1][j] != '1' && s[*i - 1][j] != ' ')
+                    return (0);
+            }
         }
         j++;
     }

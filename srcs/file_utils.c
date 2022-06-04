@@ -6,17 +6,16 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/03 11:15:47 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/04 21:09:44 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-
 int copy_to(char **source, char **dest)
 {
     int i;
-    
+
     i = 0;
     if (source == NULL)
         return (0);
@@ -35,7 +34,7 @@ int check_extension(char *path)
     int len;
     char *ext;
     int result;
-    
+
     result = 0;
     len = ft_strlen(path);
     ext = ft_substr(path, len - 4, 4);
@@ -48,19 +47,40 @@ int is_valid(char *line)
 {
     return (!is_empty_line(line));
 }
+char *ft_strtrim_end(char *s)
+{
+    int i;
+    char *s1;
+    if (s == NULL)
+        return (NULL);
+
+    i = ft_strlen(s);
+
+    while (s[i - 1] == ' ')
+        i--;
+
+    s1 = ft_substr(s, 0, i);
+    return (s1);
+}
 
 char *clean_line(char *line)
 {
     char *temp;
-    char *temp2;
+    char* temp2;
 
-    //temp = ft_strtrim(line, " ");
-    temp = ft_strdup(line);
-    temp2 = ft_substr(temp, 0, ft_strlen(temp) - 1);
-    free(line);
+    temp = NULL;
+    if (line[ft_strlen(line) - 1] == '\n')
+        temp = ft_substr(line, 0, ft_strlen(line) - 1);
+    else
+        temp = ft_substr(line, 0, ft_strlen(line));
+    
+    temp2 = ft_strtrim_end(temp);
     free(temp);
-    return temp2;
+    free(line);
+    return (temp2);
 }
+
+
 
 char **read_file(int fd)
 {
@@ -68,7 +88,7 @@ char **read_file(int fd)
     char **result;
     char **temp;
     int nb_lines;
-    
+
     result = NULL;
     temp = NULL;
     nb_lines = 0;
