@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/04 21:57:30 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/04 22:06:49 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ int check_map_info(char *line, t_game *game)
 
     tokens = ft_split(line, ' ');
     if (count(tokens) < 2)
-        return 0;
+    {
+        printf("Error : Invalid line %s\n", line);
+        return (0);
+    }
     if (is_ea_texture(tokens, game))
         return (1);
     else if (is_so_texture(tokens, game))
@@ -112,6 +115,6 @@ int check_map_info(char *line, t_game *game)
     else if (is_ceiling(tokens, game))
         return (1);
     ft_free_all(tokens);
-    printf("Error : Invalid line %s", line);
+    printf("Error : Invalid line %s\n", line);
     return (0);
 }
