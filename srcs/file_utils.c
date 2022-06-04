@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/04 21:09:44 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/04 21:55:05 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,19 @@ char *ft_strtrim_end(char *s)
 char *clean_line(char *line)
 {
     char *temp;
-    char* temp2;
+    char *temp2;
 
     temp = NULL;
     if (line[ft_strlen(line) - 1] == '\n')
         temp = ft_substr(line, 0, ft_strlen(line) - 1);
     else
         temp = ft_substr(line, 0, ft_strlen(line));
-    
+
     temp2 = ft_strtrim_end(temp);
     free(temp);
     free(line);
     return (temp2);
 }
-
-
 
 char **read_file(int fd)
 {
@@ -112,16 +110,14 @@ char **read_file(int fd)
 int is_empty_line(char *line)
 {
     int i;
-    int length;
-
+    if (line == NULL)
+        return (1);
     i = 0;
-    length = 0;
     while (line[i] != '\0')
     {
-        length++;
+        if (line[i] != ' ' && ft_isprint(line[i]))
+            return (0);
         i++;
     }
-    if (length <= 1)
-        return (1);
-    return (0);
+    return (1);
 }
