@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/05 18:14:59 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 23:39:25 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,10 @@ t_color empty_color()
     return (t);
 }
 
-t_game *parse(char *file)
+int get_map_info(t_game *game, int idx_map)
 {
-    int line_number = 0;
-    t_game *game;
-    int idx_map;
-
-    game = new_game();
-    game->raw_map = get_map(file);
-    if (game->raw_map == NULL)
-        return exit_with_error(game);
-    idx_map = get_map_idx(game->raw_map);
+    int line_number;
+    line_number = 0;
     while (game->raw_map[line_number] != NULL)
     {
         if (line_number < idx_map)
@@ -43,16 +36,29 @@ t_game *parse(char *file)
                 continue;
             }
             if (!check_map_info(game->raw_map[line_number], game))
-                return exit_with_error(game);
+                return (0);
         }
         else
-        {
-            game->map = extract_map(game->raw_map, idx_map, game);
-            if (game->map == NULL)
-                return (exit_with_error(game));
             break;
-        }
         line_number++;
     }
+    return (1);
+}
+
+t_game *parse(char *file)
+{
+    t_game *game;
+    int idx_map;
+
+    game = new_game();
+    game->raw_map = get_map(file);
+    if (game->raw_map == NULL)
+        return exit_with_error(game);
+    idx_map = get_map_idx(game->raw_map);
+    if (!get_map_info(game, idx_map))
+        return (exit_with_error(game));
+    game->map = extract_map(game->raw_map, idx_map, game);
+    if (game->map == NULL)
+        return (exit_with_error(game));
     return (game);
 }
