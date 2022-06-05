@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:42:20 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/04 21:45:48 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 17:09:51 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int check_wall_line(char *s, char *next)
             return (0);
         if (next == NULL)
             break;
-        if (s[i] == ' ' && next[i] != '1')
+        if (s[i] == ' ' && (next[i] != '1' && next[i] != ' '))
             return (0);
         i++;
     }
@@ -55,22 +55,24 @@ int check_content_map(char *s, char *last_s)
 int check_spaces(char **s, int *i)
 {
     int j;
+    int len_s;
 
     j = 0;
+    len_s = ft_strlen(s[*i]);
     while (s[*i][j] != '\0')
     {
         if (s[*i][j] == ' ')
         {
-            if (ft_strlen(s[*i]) - 1 > j && ((s[*i][j + 1] != '1' 
-            && s[*i][j + 1] != ' ') || (s[*i][j - 1] != '1' 
-            && s[*i][j - 1] != ' ')))
+            if (j < len_s - 1 && j > 0 && ((s[*i][j + 1] != '1' 
+            && s[*i][j + 1] != ' ') 
+            || (s[*i][j - 1] != '1' && s[*i][j - 1] != ' ')))
                 return (0);
-            if (ft_strlen(s[*i]) <= ft_strlen(s[*i + 1]))
+            if (len_s <= ft_strlen(s[*i + 1]) && j > 0 && j < len_s - 1)
             {
                 if (s[*i + 1][j] != ' ' && s[*i + 1][j] != '1')
                     return (0);
             }
-            if (ft_strlen(s[*i]) <= ft_strlen(s[*i - 1]))
+            if (len_s <= ft_strlen(s[*i - 1]) && j > 0 && j < len_s - 1)
             {
                 if (s[*i - 1][j] != '1' && s[*i - 1][j] != ' ')
                     return (0);

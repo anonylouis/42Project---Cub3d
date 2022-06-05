@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/31 22:43:03 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 11:17:15 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ t_color empty_color()
     return (t);
 }
 
-
 t_game *parse(char *file)
 {
     int line_number = 0;
     t_game *game;
+    int idx_map;
 
     game = new_game();
     game->raw_map = get_map(file);
     if (game->raw_map == NULL)
         return exit_with_error(game);
+    idx_map = get_map_idx(game->raw_map);
     while (game->raw_map[line_number] != NULL)
     {
-        if (line_number < get_map_idx(game->raw_map))
+        if (line_number < idx_map)
         {
             if (is_empty_line(game->raw_map[line_number]))
             {
@@ -46,7 +47,7 @@ t_game *parse(char *file)
         }
         else
         {
-            game->map = extract_map(game->raw_map, get_map_idx(game->raw_map), game);
+            game->map = extract_map(game->raw_map, idx_map, game);
             if (game->map == NULL)
                 return exit_with_error(game);
             break;
@@ -55,5 +56,3 @@ t_game *parse(char *file)
     }
     return (game);
 }
-
-
