@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:02:31 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/31 14:37:20 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 21:52:30 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int is_no_texture(char **tokens, t_game *game)
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }
-        game->path_wall_NO = tokens[1];
+        game->path_wall_NO = ft_strdup(tokens[1]);
         return (1);
     }
     return (0);
@@ -36,7 +36,7 @@ int is_we_texture(char **tokens, t_game *game)
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }
-        game->path_wall_WE = tokens[1];
+        game->path_wall_WE = ft_strdup(tokens[1]);
         return (1);
     }
     return (0);
@@ -51,7 +51,7 @@ int is_ea_texture(char **tokens, t_game *game)
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }
-        game->path_wall_EA = tokens[1];
+        game->path_wall_EA = ft_strdup(tokens[1]);
         return (1);
     }
     return (0);
@@ -66,7 +66,7 @@ int is_so_texture(char **tokens, t_game *game)
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }
-        game->path_wall_SO = tokens[1];
+        game->path_wall_SO = ft_strdup(tokens[1]);
         return (1);
     }
     return (0);

@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:42:20 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/05 17:09:51 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 22:35:38 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int check_walls(char **s, int start)
     i = start;
     while (s[i] != NULL)
     {
-        len = ft_strlen(s[i] - 1);
+        len = ft_strlen(s[i]) - 1;
         if (i == start || i == count(s) - 1)
         {
             if (!check_wall_line(s[i], s[i + 1]))

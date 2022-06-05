@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:04:16 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/04 22:58:48 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 22:03:51 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,26 @@ int is_white_space(char *s)
 
 int ft_compare(char *s1, char *s2)
 {
-    int len_s1 = ft_strlen(s1);
-    int len_s2 = ft_strlen(s2);
+    int len_s1;
+    int len_s2;
+    int i;
+    len_s1 = 0;
+    len_s2 = 0;
+    i = 0;
+    if (s1 == NULL || s2 == NULL)
+        return (-1);
+    len_s1 = ft_strlen(s1);
+    len_s2 = ft_strlen(s2);
     if (len_s1 != len_s2)
         return (-1);
-    int len;
-    if (len_s1 < len_s2)
-        len = len_s2;
-    len = len_s1;
 
-    int r = (ft_strncmp(s1, s2, len));
-    return r;
+    while (s1[i] != '\0')
+    {
+        if (s1[i] != s2[i])
+            return (-1);
+        i++;
+    }
+    return (0);
 }
 
 int is_int(char *s)
@@ -70,15 +79,11 @@ int is_int(char *s)
 int count(char **s)
 {
     int i;
-    int c;
 
-    c = 0;
     i = 0;
     if (s == NULL)
         return (0);
-    while (s[i++] != NULL)
-    {
-        c++;
-    }
-    return c;
+    while (s[i] != NULL)
+        i++;
+    return (i);
 }

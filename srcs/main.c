@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:46:56 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/03 14:43:03 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/05 22:35:52 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	play(graph);
-
 	free_graph(graph);
+	free_game(game);
 	return (0);
 }

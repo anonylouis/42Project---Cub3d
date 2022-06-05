@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/05 11:55:06 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 22:07:24 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ char **extract_map(char **s, int line_idx, t_game *game)
     orientation = 0;
     if (!is_valid_map(s, line_idx))
         return (NULL);
-    map = malloc(sizeof(char *) * (count(s) - line_idx));
+    map = malloc(sizeof(char *) * ((count(s) - line_idx) + 1));
     if (map == NULL)
-        return NULL;
+        return (NULL);
     while (s[line_idx] != NULL)
     {
         orientation = has_orientation(s[line_idx]);
@@ -88,10 +88,16 @@ char **extract_map(char **s, int line_idx, t_game *game)
             game->player_y = i + 0.5;
             printf("%f %f\n", game->player_x, game->player_y);
         }
-        map[i++] = s[line_idx++];
+        map[i++] = ft_strdup(s[line_idx++]);
     }
     map[i] = (NULL);
     return (map);
+}
+
+int exit_check_map_info(int ret, char **tokens)
+{
+    ft_free_all(tokens);
+    return ret;
 }
 
 int check_map_info(char *line, t_game *game)
@@ -102,21 +108,20 @@ int check_map_info(char *line, t_game *game)
     if (count(tokens) < 2)
     {
         printf("Error : Invalid line %s\n", line);
-        return (0);
+        return (exit_check_map_info(0, tokens));
     }
     if (is_ea_texture(tokens, game))
-        return (1);
+        return exit_check_map_info(1, tokens);
     else if (is_so_texture(tokens, game))
-        return (1);
+        return exit_check_map_info(1, tokens);
     else if (is_we_texture(tokens, game))
-        return (1);
+        return exit_check_map_info(1, tokens);
     else if (is_no_texture(tokens, game))
-        return (1);
+        return (exit_check_map_info(1, tokens));
     else if (is_floor(tokens, game))
-        return (1);
+        return (exit_check_map_info(1, tokens));
     else if (is_ceiling(tokens, game))
-        return (1);
-    ft_free_all(tokens);
+        return (exit_check_map_info(1, tokens));
     printf("Error : Invalid line %s\n", line);
-    return (0);
+    return (exit_check_map_info(0, tokens));
 }

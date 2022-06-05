@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:22:43 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/01 16:54:54 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/05 18:26:48 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void free_game(t_game *game)
     {
         ft_free_all(game->map);
         ft_free_all(game->raw_map);
+        ft_free(game->path_wall_EA);
+        ft_free(game->path_wall_NO);
+        ft_free(game->path_wall_WE);
+        ft_free(game->path_wall_SO);
         free(game);
+        game = NULL;
     }
 }

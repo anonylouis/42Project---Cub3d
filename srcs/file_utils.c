@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:06:30 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/04 21:55:05 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/05 22:21:42 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ int copy_to(char **source, char **dest)
     while (source[i] != NULL)
     {
         dest[i] = ft_strdup(source[i]);
-        free(source[i]);
+        ft_free(source[i]);
         i++;
     }
     free(source);
+    source = NULL;
     return (i);
 }
 
@@ -55,6 +56,8 @@ char *ft_strtrim_end(char *s)
         return (NULL);
 
     i = ft_strlen(s);
+    if (i <= 0)
+        return (ft_strdup(s));
 
     while (s[i - 1] == ' ')
         i--;
@@ -67,16 +70,17 @@ char *clean_line(char *line)
 {
     char *temp;
     char *temp2;
+    int len;
 
+    len = ft_strlen(line);
     temp = NULL;
     if (line[ft_strlen(line) - 1] == '\n')
-        temp = ft_substr(line, 0, ft_strlen(line) - 1);
+        temp = ft_substr(line, 0, len - 1);
     else
-        temp = ft_substr(line, 0, ft_strlen(line));
+        temp = ft_substr(line, 0, len);
 
     temp2 = ft_strtrim_end(temp);
-    free(temp);
-    free(line);
+    ft_free(temp);
     return (temp2);
 }
 
@@ -102,6 +106,7 @@ char **read_file(int fd)
             return NULL;
         copy_to(temp, result);
         result[nb_lines - 1] = clean_line(line);
+        ft_free(line);
         result[nb_lines] = NULL;
     }
     return (result);
