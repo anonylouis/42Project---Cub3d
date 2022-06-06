@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/03 17:36:36 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 13:01:05 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,8 @@ void ft_free(char *f);
 void ft_free_all(char **f);
 void free_game(t_game *game);
 t_check_result check_orientation(char **s, int start);
+t_check_result error(char *message);
+t_check_result success();
 void set_angle_vision(t_game *game);
 int check_empty_lines(char **s, int start);
 t_game *exit_with_error(t_game *game);
