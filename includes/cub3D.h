@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/06 13:01:05 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:52:57 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_game
 	t_color minimap_player;
 	char **raw_map;
 	int	nb_line_map;
+	int has_parse_error;
 } t_game;
 
 typedef struct s_graph

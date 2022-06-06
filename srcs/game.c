@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 15:22:43 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/05 18:26:48 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:53:16 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_game *new_game()
     game->ceiling = empty_color();
     game->raw_map = NULL;
     game->nb_line_map = -1;
+    game->has_parse_error = 0;
     return game;
 }
 

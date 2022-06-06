@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:02:31 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/05 21:52:30 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:54:51 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int is_no_texture(char **tokens, t_game *game)
     {
         if (game->path_wall_NO != NULL)
         {
+            game->has_parse_error = 1;
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }
@@ -33,6 +34,7 @@ int is_we_texture(char **tokens, t_game *game)
     {
         if (game->path_wall_WE != NULL)
         {
+            game->has_parse_error = 1;
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }
@@ -48,6 +50,7 @@ int is_ea_texture(char **tokens, t_game *game)
     {
         if (game->path_wall_EA != NULL)
         {
+            game->has_parse_error = 1;
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }
@@ -63,6 +66,7 @@ int is_so_texture(char **tokens, t_game *game)
     {
         if (game->path_wall_SO != NULL)
         {
+            game->has_parse_error = 1;
             printf("Duplicate line: %s: %s", tokens[0], tokens[1]);
             return (0);
         }

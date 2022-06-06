@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 15:54:05 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/06 12:51:58 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 21:53:33 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int check_map_info(char *line, t_game *game)
         return (exit_check_map_info(1, tokens));
     else if (is_ceiling(tokens, game))
         return (exit_check_map_info(1, tokens));
-    else 
+    else if(!game->has_parse_error) 
         printf("Error : Invalid line %s\n", line);
     return (exit_check_map_info(0, tokens));
 }
