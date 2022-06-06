@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 22:39:52 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/03 11:58:05 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 11:53:23 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int is_floor(char **tokens, t_game *game)
     {
         if (!is_empty_color(game->floor))
         {
-            printf("Error: Duplicate line: %s \n", tokens[0]);
+            printf("Error: Duplicate line: %s %s \n", tokens[0], tokens[1]);
             return (0);
         }
         colors = ft_split(tokens[1], ',');
@@ -70,7 +70,7 @@ int is_ceiling(char **tokens, t_game *game)
     {
         if (!is_empty_color(game->ceiling))
         {
-            printf("Error: Duplicate line: %s \n", tokens[0]);
+            printf("Error: Duplicate line: %s %s \n", tokens[0], tokens[1]);
             return (0);
         }
         colors = ft_split(tokens[1], ',');

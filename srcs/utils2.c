@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 23:04:50 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/03 11:47:29 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:01:31 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,34 @@
 
 int file_exists(char *path)
 {
-	int fd = open(path, O_RDONLY);
+	int fd;
+	
+	if (path == NULL)
+		return (0);
+	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	close(fd);
 	return (1);
+}
+
+int check_extension(char *path)
+{
+    int len;
+    char *ext;
+    int result;
+
+    result = 0;
+    len = ft_strlen(path);
+    ext = ft_substr(path, len - 4, 4);
+    result = len > 4 && ft_compare(".cub", ext) == 0;
+    ft_free(ext);
+    return (result);
+}
+
+int is_valid(char *line)
+{
+    return (!is_empty_line(line));
 }
 
 int validate_game(t_game *game)

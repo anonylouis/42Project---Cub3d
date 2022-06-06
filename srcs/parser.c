@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/05 23:39:25 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:51:30 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_color empty_color()
 int get_map_info(t_game *game, int idx_map)
 {
     int line_number;
+
     line_number = 0;
     while (game->raw_map[line_number] != NULL)
     {
@@ -61,4 +62,52 @@ t_game *parse(char *file)
     if (game->map == NULL)
         return (exit_with_error(game));
     return (game);
+}
+
+int is_valid_map(char **s, int start)
+{
+    t_check_result result;
+
+    if (s == NULL || start == -1)
+        return (print_error("missing map description", 0));
+    if (!check_empty_lines(s, start))
+        return (print_error("map cannot contain empty lines", 0));
+    if (!check_valid_chars(s, start))
+        return print_error("invalid map char", 0);
+    if (!check_walls(s, start))
+        return print_error("map must be surrounded by walls", 0);
+    result = check_orientation(s, start);
+    if (!result.success)
+        return print_error(result.message, 0);
+    return (1);
+}
+
+char **extract_map(char **s, int line_idx, t_game *game)
+{
+    char **map;
+    int i;
+    int orientation;
+
+    i = 0;
+    orientation = 0;
+    if (!is_valid_map(s, line_idx))
+        return (NULL);
+    map = malloc(sizeof(char *) * ((count(s) - line_idx) + 1));
+    if (map == NULL)
+        return (NULL);
+    while (s[line_idx] != NULL)
+    {
+        orientation = has_orientation(s[line_idx]);
+        if (orientation != -1)
+        {
+            game->orientation = s[line_idx][orientation];
+            set_angle_vision(game);
+            game->player_x = orientation + 0.5;
+            game->player_y = i + 0.5;
+            printf("%f %f\n", game->player_x, game->player_y);
+        }
+        map[i++] = ft_strdup(s[line_idx++]);
+    }
+    map[i] = (NULL);
+    return (map);
 }

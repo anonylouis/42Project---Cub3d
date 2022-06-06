@@ -6,28 +6,11 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:43:59 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/05/31 15:50:23 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:52:28 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-t_check_result success()
-{
-    t_check_result result;
-    
-    result.success = 1;
-    return result;
-}
-
-t_check_result error(char *message)
-{
-    t_check_result result;
-
-    result.success = 0;
-    result.message = message;
-    return result;
-}
 
 int is_orientation(char c)
 {
