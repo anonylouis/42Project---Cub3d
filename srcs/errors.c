@@ -12,31 +12,31 @@
 
 #include "cub3D.h"
 
-int print_error(char *msg, int error)
+int	print_error(char *msg, int error)
 {
-    printf("Error: %s\n", msg);
-    return (error);
+	printf("Error: %s\n", msg);
+	return (error);
 }
 
-t_game *exit_with_error(t_game *game)
+t_game	*exit_with_error(t_game *game)
 {
-    free_game(game);
-    return (NULL);
+	free_game(game);
+	return (NULL);
 }
 
-t_check_result success()
+t_check_result	success(void)
 {
-    t_check_result result;
+	t_check_result	result;
 
-    result.success = 1;
-    return result;
+	result.success = 1;
+	return (result);
 }
 
-t_check_result error(char *message)
+t_check_result	error(char *message)
 {
-    t_check_result result;
+	t_check_result	result;
 
-    result.success = 0;
-    result.message = message;
-    return result;
+	result.success = 0;
+	result.message = message;
+	return (result);
 }
