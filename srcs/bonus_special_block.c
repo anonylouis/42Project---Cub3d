@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:45:17 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:59:46 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ int	init_special_blocks(t_graph *graph)
 	int	j;
 
 	i = -1;
-	while(graph->game.map[++i] != NULL)
+	while (graph->game.map[++i] != NULL)
 	{
 		j = -1;
-		while(graph->game.map[i][++j])
+		while (graph->game.map[i][++j])
 		{
 			/*if (graph->game.map[i][j] == 'B')
 			{
@@ -79,9 +79,10 @@ int	init_special_blocks(t_graph *graph)
 			}*/
 			if (graph->game.map[i][j] == 'D')
 			{
-				if (!special_block_add_back(&(graph->door), new_special_block(i, j, 1.0)))
-					return (0);
-				printf("porte en [%d][%d]\n",i, j);
+				if (!special_block_add_back(&(graph->door),
+					new_special_block(i, j, 1.0)))
+						return (0);
+				printf("porte en [%d][%d]\n", i, j);
 			}
 		}
 	}

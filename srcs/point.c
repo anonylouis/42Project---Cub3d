@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-void set_point(t_point *p, double x, double y)
+void	set_point(t_point *p, double x, double y)
 {
 	p->x = x;
 	p->y = y;

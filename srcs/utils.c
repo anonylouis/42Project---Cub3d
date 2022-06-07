@@ -12,12 +12,12 @@
 
 #include "cub3D.h"
 
-double rad(double angle)
+double	rad(double angle)
 {
 	return (angle * M_PI / 180);
 }
 
-int max(int a, int b)
+int	max(int a, int b)
 {
 	if (a >= b)
 		return (a);
@@ -25,7 +25,7 @@ int max(int a, int b)
 		return (b);
 }
 
-int min(int a, int b)
+int	min(int a, int b)
 {
 	if (a <= b)
 		return (a);
@@ -33,7 +33,7 @@ int min(int a, int b)
 		return (b);
 }
 
-double dmin(double a, double b)
+double	dmin(double a, double b)
 {
 	if (a <= b)
 		return (a);
@@ -48,8 +48,8 @@ double	distance(double x1, double y1, double x2, double y2)
 
 void	correct_angle(double *angle)
 {
-	while(*angle < 0)
+	while (*angle < 0)
 		*angle += 360.0;
-	while(*angle >= 360.0)
+	while (*angle >= 360.0)
 		*angle -= 360;
 }
