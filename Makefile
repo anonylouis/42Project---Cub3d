@@ -10,7 +10,6 @@ SRCS_DIR = ./srcs/
 SOURCES_COMMON =	point.c \
 			get_next_line.c \
 			get_next_line_utils.c \
-			parser.c \
 			textures.c\
 			utils1.c\
 			errors.c\
@@ -30,6 +29,7 @@ SOURCES_COMMON =	point.c \
 SOURCES_MANDATORY =	play.c\
 			main.c\
 			graph.c\
+			parser.c \
 			map.c\
 			wall_distance.c\
 			game.c \
@@ -51,6 +51,7 @@ SOURCES_BONUS =		bonus_play.c\
 			bonus_door2.c\
 			bonus_keycatch_step.c\
 			bonus_collision.c\
+			bonus_parser.c\
 
 OBJS_DIR = ./objs/
 

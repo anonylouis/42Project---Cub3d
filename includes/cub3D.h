@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:40:15 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 22:15:45 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ int	change_door_status(t_graph *graph);
 int	update_door(t_graph *graph);
 t_special_block	*find_door(t_graph *graph, int i, int j);
 double	collision(t_graph *graph, double angle);
+t_special_block	*new_special_block(int pt_y, int pt_x, double pc);
 
 // POINT
 void set_point(t_point *p, double x, double y);

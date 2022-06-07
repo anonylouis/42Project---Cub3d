@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   bonus_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/07 23:24:08 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:33:39 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,27 @@ void set_orientation(char* line,int index, t_game* game)
 	}
 }
 
+
+int set_special_block(char* row,int row_index, t_game* game)
+{
+	int i;
+
+	i = 0;
+	if(row == NULL)
+		return (0);
+	while (row[i] != '\0')
+	{
+		if(row[i] == 'B')
+		{
+			if(!special_block_add_back(&game->boost,new_special_block(row_index,i,0.0)))
+				return(0);
+			row[i] = '1';
+		}
+		i++;
+	}
+	return (1);
+}
+
 char	**extract_map(char **s, int line_idx, t_game *game)
 {
 	char	**map;
@@ -112,6 +133,7 @@ char	**extract_map(char **s, int line_idx, t_game *game)
 	{
 		set_orientation(s[line_idx], i, game);
 		map[i] = ft_strdup(s[line_idx++]);
+		set_special_block(s[line_idx], i, game);
 		i++;
 	}
 	map[i] = (NULL);
