@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:25:58 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:08:22 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:24:01 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,6 @@ static int	is_a_wall(t_graph *graph, double x, double y, double angle)
 		j = floor(x);
 	}
 	return (graph->game.map[i][j] == '1');
-}
-
-static t_special_block	*find_door(t_graph *graph, int i, int j)
-{
-	t_special_block	*temp;
-
-	if (graph->last_hit_door == 1)
-	{
-		temp = graph->hit_door;
-		while(temp->next != NULL)
-			temp = temp->next;
-		return (temp);
-	}
-	temp = graph->door;
-	while (temp != NULL)
-	{
-		if (temp->x == j && temp->y == i)
-			return (temp);
-		temp = temp->next;
-	}
-	return (NULL);
 }
 
 static void	add_door_and_distance(t_graph *graph, double x, double y, t_special_block *door_found)

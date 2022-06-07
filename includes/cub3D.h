@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:50:03 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:40:15 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@
 // DOOR
 
 #define TEXTURE_DOOR_PATH "./xpm/jail2.xpm"
+#define SPEED_DOOR_OPENING 0.01
+#define TRIGGER_DOOR 0.5
 
 typedef struct s_color
 {
@@ -91,6 +93,7 @@ typedef struct s_special_block
 	double percent;
 	double distance;
 	int	face;
+	int	open_close;
 } t_special_block;
 
 typedef struct s_game
@@ -188,6 +191,9 @@ void	draw_doors(t_graph *graph, int column, double fish_eye_correction);
 t_special_block	*copy_special_block(t_special_block *copy);
 void	sort_special_block(t_special_block *lst);
 int	change_door_status(t_graph *graph);
+int	update_door(t_graph *graph);
+t_special_block	*find_door(t_graph *graph, int i, int j);
+double	collision(t_graph *graph, double angle);
 
 // POINT
 void set_point(t_point *p, double x, double y);

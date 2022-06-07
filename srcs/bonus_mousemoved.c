@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:14:55 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/03 15:19:12 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:16:33 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int	mousemoved(t_graph *graph)
 		graph->game.angle_vision = graph->game.angle_vision
 			- ((double) x / (WIDTH - 1) - MOUSE_MOVED_RIGHT) * SPEED_ANGLE;
 	else
+	{
+		if (update_door(graph))
+			print_game(graph);
 		return (0);
-	if (graph->game.angle_vision >= 360)
-		graph->game.angle_vision -= 360;
-	else if (graph->game.angle_vision < 0)
-		graph->game.angle_vision += 360;
+	}
+	update_door(graph);
+	correct_angle(&(graph->game.angle_vision));
 	print_game(graph);
 	return (0);
 }

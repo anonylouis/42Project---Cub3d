@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:45:24 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:56:52 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:02:42 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,27 +99,13 @@ void	draw_doors(t_graph *graph, int column, double fish_eye_correction)
 		end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
 		j = end;
 		percent_end = start + (end - start) * (1.0 - temp->percent);
-		if (1)
+		while (--j >= percent_end)
 		{
-			while (--j >= percent_end)
-			{
-				relative_x = relative_x_door(temp);
-				//printf("relative_x = %f\n", relative_x);
-				pos_img = j * graph->img.size_line * 4 + column * 4;
-				put_pixel_from_texture_door(graph, pos_img,
-					2.0 - temp->percent - ((double)j - (int)(HEIGHT / 2 - h / 2)) / h, relative_x);
-			}
-		}
-		else
-		{
-			while(--j >= start)
-			{
-				relative_x = relative_x_door(temp);
-				//printf("relative_x = %f\n", relative_x);
-				pos_img = j * graph->img.size_line * 4 + column * 4;
-				put_pixel_from_texture_door(graph, pos_img,
-					((double)j - (int)(HEIGHT / 2 - h / 2)) / h, relative_x);
-			}
+			relative_x = relative_x_door(temp);
+			//printf("relative_x = %f\n", relative_x);
+			pos_img = j * graph->img.size_line * 4 + column * 4;
+			put_pixel_from_texture_door(graph, pos_img,
+				2.0 - temp->percent - ((double)j - (int)(HEIGHT / 2 - h / 2)) / h, relative_x);
 		}
 		temp = temp->next;
 	}

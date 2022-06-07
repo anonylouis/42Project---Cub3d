@@ -25,7 +25,6 @@ SOURCES_COMMON =	point.c \
 			map_utils.c\
 			color.c\
 			utils2.c\
-			keycatch_step.c\
 			map_utils2.c\
 
 SOURCES_MANDATORY =	play.c\
@@ -35,6 +34,7 @@ SOURCES_MANDATORY =	play.c\
 			wall_distance.c\
 			game.c \
 			hook.c\
+			keycatch_step.c\
 
 SOURCES_BONUS =		bonus_play.c\
 			bonus_mousemoved.c\
@@ -48,6 +48,9 @@ SOURCES_BONUS =		bonus_play.c\
 			bonus_door.c\
 			bonus_lst_sort.c\
 			bonus_hook.c\
+			bonus_door2.c\
+			bonus_keycatch_step.c\
+			bonus_collision.c\
 
 OBJS_DIR = ./objs/
 

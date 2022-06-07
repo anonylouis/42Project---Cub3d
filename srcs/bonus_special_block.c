@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:59:46 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:24:15 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_special_block	*new_special_block(int pt_y, int pt_x, double pc)
 	new->percent = pc;
 	new->distance = 0.0;
 	new->next = 0;
+	new->open_close = 1;
 	return (new);
 }
 
@@ -87,4 +88,25 @@ int	init_special_blocks(t_graph *graph)
 		}
 	}
 	return (1);
+}
+
+t_special_block	*find_door(t_graph *graph, int i, int j)
+{
+	t_special_block	*temp;
+
+	if (graph->last_hit_door == 1)
+	{
+		temp = graph->hit_door;
+		while(temp->next != NULL)
+			temp = temp->next;
+		return (temp);
+	}
+	temp = graph->door;
+	while (temp != NULL)
+	{
+		if (temp->x == j && temp->y == i)
+			return (temp);
+		temp = temp->next;
+	}
+	return (NULL);
 }
