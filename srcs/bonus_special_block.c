@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 12:44:37 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 14:05:44 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_special_block	*new_special_block(int pt_y, int pt_x, double pc)
 	return (new);
 }
 
-int	specal_block_add_back(t_special_block **begin_list, t_special_block *new)
+int	special_block_add_back(t_special_block **begin_list, t_special_block *new)
 {
 	t_special_block	*tt;
 
@@ -55,15 +55,15 @@ int	init_special_blocks(t_graph *graph)
 		j = -1;
 		while(graph->game.map[i][++j])
 		{
-			if (graph->game.map[i][j] == 'B')
+			/*if (graph->game.map[i][j] == 'B')
 			{
 				if (!specal_block_add_back(&(graph->boost), new_special_block(i, j, 0.0)))
 					return (0);
 				printf("boost en [%d][%d]\n",i, j);
-			}
+			}*/
 			if (graph->game.map[i][j] == 'D')
 			{
-				if (!specal_block_add_back(&(graph->door), new_special_block(i, j, 100.0)))
+				if (!special_block_add_back(&(graph->door), new_special_block(i, j, 100.0)))
 					return (0);
 				printf("porte en [%d][%d]\n",i, j);
 			}

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 12:52:12 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 14:05:54 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@
 #define MINIMAP_COLOR_FLOOR 0xFFFF00
 #define MINIMAP_COLOR_PLAYER 0xFF0000
 
+// DOOR
+
+#define DOOR_COLOR 0xFF0000
+
 typedef struct s_color
 {
 	int red;
@@ -105,6 +109,8 @@ typedef struct s_game
 	char **raw_map;
 	int	nb_line_map;
 	int has_parse_error;
+	t_special_block *boost;
+	t_color door;
 } t_game;
 
 typedef struct s_graph
@@ -121,7 +127,7 @@ typedef struct s_graph
 	t_img	wall_WE;
 	t_img	wall_EA;
 	t_special_block *door;
-	t_special_block *boost;
+	
 } t_graph;
 
 typedef struct s_point
@@ -170,9 +176,10 @@ void    init_color_minimap(t_graph *graph);
 void    print_minimap(t_graph *graph);
 
 // BOOST && DOOR
-int	specal_block_add_back(t_special_block **begin_list, t_special_block *new);
+int	special_block_add_back(t_special_block **begin_list, t_special_block *new);
 int	init_special_blocks(t_graph *graph);
-
+void	init_color_door(t_graph *graph);
+void	draw_doors(t_graph *graph, int column);
 
 // POINT
 void set_point(t_point *p, double x, double y);

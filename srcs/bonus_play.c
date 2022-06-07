@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:31:45 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/03 14:32:18 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 14:04:56 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print_game(t_graph *graph)
 		d = wall_distance(graph, angle);
 		d = fabs(d * cos(rad(fish_eye_correction)));
 		draw_pixel_column(graph, WIDTH - 1 - i, d);
+		draw_doors(graph, WIDTH - 1 - i);
 	}
 	print_minimap(graph);
 	mlx_put_image_to_window
@@ -40,6 +41,7 @@ void	print_game(t_graph *graph)
 void	play(t_graph *graph)
 {
 	init_color_minimap(graph);
+	init_color_door(graph);
 	mlx_hook(graph->win_ptr, 33, 1L << 17, close_loop, graph);
 	mlx_hook(graph->win_ptr, 2, 1L << 0, keycatch, graph);
 	mlx_loop_hook(graph->mlx_ptr, mousemoved, graph);

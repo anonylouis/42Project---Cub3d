@@ -7,8 +7,7 @@ NAME_BONUS = cub3D_bonus
 
 SRCS_DIR = ./srcs/
 #remplir .c ici
-SOURCES_COMMON =	game.c \
-			point.c \
+SOURCES_COMMON =	point.c \
 			get_next_line.c \
 			get_next_line_utils.c \
 			parser.c \
@@ -35,6 +34,7 @@ SOURCES_MANDATORY =	play.c\
 			graph.c\
 			map.c\
 			wall_distance.c\
+			game.c \
 
 SOURCES_BONUS =		bonus_play.c\
 			bonus_mousemoved.c\
@@ -44,6 +44,8 @@ SOURCES_BONUS =		bonus_play.c\
 			bonus_special_block.c\
 			bonus_map.c\
 			bonus_wall_distance.c\
+			bonus_game.c\
+			bonus_door.c\
 
 OBJS_DIR = ./objs/
 

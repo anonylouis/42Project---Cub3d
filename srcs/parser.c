@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/06 12:51:30 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/07 13:30:39 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ char **extract_map(char **s, int line_idx, t_game *game)
             set_angle_vision(game);
             game->player_x = orientation + 0.5;
             game->player_y = i + 0.5;
-            printf("%f %f\n", game->player_x, game->player_y);
         }
         map[i++] = ft_strdup(s[line_idx++]);
     }
