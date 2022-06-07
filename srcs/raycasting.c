@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/30 17:51:55 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 12:49:56 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,9 @@ void	draw_pixel_column(t_graph *graph, int column, double d)
 		add_pixel_img(graph->img, column, j, graph->game.floor);
 		j++;
 	}
+}
+
+void	draw_doors(t_graph *graph, int column)
+{
+
 }

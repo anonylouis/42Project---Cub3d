@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bonus_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 15:46:56 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 11:09:58 by lcalvie          ###   ########.fr       */
+/*   Created: 2022/06/07 11:10:17 by lcalvie           #+#    #+#             */
+/*   Updated: 2022/06/07 11:28:07 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	main(int argc, char **argv)
 		return (1);
 	graph->game = *game;
 	if (init_textures(graph))
+		return (exit_game(graph, game, 1));
+	if (!init_special_blocks(graph))
 		return (exit_game(graph, game, 1));
 	play(graph);
 	return (exit_game(graph, game, 0));

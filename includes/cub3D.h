@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/06 21:52:57 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/07 12:40:56 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ typedef struct s_img
 	char *img_addr;
 } t_img;
 
+typedef struct s_special_block
+{
+	struct s_special_block *next;
+	int x;
+	int y;
+	double percent;
+} t_special_block;
+
 typedef struct s_game
 {
 	char **map;
@@ -104,6 +112,7 @@ typedef struct s_graph
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int	face;
+	t_special_block	*hit_door;
 	double	percent_face;
 	t_img	img;
 	t_game	game;
@@ -111,6 +120,8 @@ typedef struct s_graph
 	t_img	wall_SO;
 	t_img	wall_WE;
 	t_img	wall_EA;
+	t_special_block *door;
+	t_special_block *boost;
 } t_graph;
 
 typedef struct s_point
@@ -124,8 +135,6 @@ typedef struct s_check_result
 	int success;
 	char* message;
 } t_check_result;
-
-
 
 // GRAPH STRUCT
 t_graph *new_graph();
@@ -159,6 +168,11 @@ int init_textures(t_graph *graph);
 // MINIMAP
 void    init_color_minimap(t_graph *graph);
 void    print_minimap(t_graph *graph);
+
+// BOOST && DOOR
+int	specal_block_add_back(t_special_block **begin_list, t_special_block *new);
+int	init_special_blocks(t_graph *graph);
+
 
 // POINT
 void set_point(t_point *p, double x, double y);

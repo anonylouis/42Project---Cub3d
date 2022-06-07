@@ -7,13 +7,10 @@ NAME_BONUS = cub3D_bonus
 
 SRCS_DIR = ./srcs/
 #remplir .c ici
-SOURCES_COMMON =	main.c \
-			game.c \
-			graph.c \
+SOURCES_COMMON =	game.c \
 			point.c \
 			get_next_line.c \
 			get_next_line_utils.c \
-			map.c \
 			parser.c \
 			textures.c\
 			utils1.c\
@@ -25,19 +22,28 @@ SOURCES_COMMON =	main.c \
 			utils.c\
 			raycasting.c\
 			texture.c\
-			wall_distance.c\
 			find_next_border.c\
 			orientation.c\
 			map_utils.c\
 			color.c\
 			utils2.c\
 			keycatch_step.c\
+			map_utils2.c\
 
-SOURCES_MANDATORY = play.c\
+SOURCES_MANDATORY =	play.c\
+			main.c\
+			graph.c\
+			map.c\
+			wall_distance.c\
 
-SOURCES_BONUS = bonus_play.c\
-		bonus_mousemoved.c\
-		bonus_minimap.c\
+SOURCES_BONUS =		bonus_play.c\
+			bonus_mousemoved.c\
+			bonus_minimap.c\
+			bonus_main.c\
+			bonus_graph.c\
+			bonus_special_block.c\
+			bonus_map.c\
+			bonus_wall_distance.c\
 
 OBJS_DIR = ./objs/
 
@@ -89,6 +95,7 @@ fclean :	clean
 		$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory
 		$(MAKE) -C $(MINILIBX_DIR) clean --no-print-directory
 		rm -f $(NAME)
+		rm -f $(NAME_BONUS)
 
 re :	fclean all
 
