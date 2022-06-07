@@ -13,14 +13,15 @@
 #include "cub3D.h"
 #include <stdio.h>
 
-static int init_texture(t_graph *graph, t_img *img, char *path)
+static int	init_texture(t_graph *graph, t_img *img, char *path)
 {
-	int bits_per_pixel;
-	int width;
-	int endian;
+	int	bits_per_pixel;
+	int	width;
+	int	endian;
 
 	bits_per_pixel = 4 * (sizeof(char) * 8);
-	img->img_ptr = mlx_xpm_file_to_image(graph->mlx_ptr, path, &(img->size_line), &(img->number_line));
+	img->img_ptr = mlx_xpm_file_to_image(graph->mlx_ptr, path,
+			&(img->size_line), &(img->number_line));
 	if (img->img_ptr == NULL)
 	{
 		printf("Error\nCan't open texture %s\n", path);
@@ -28,7 +29,8 @@ static int init_texture(t_graph *graph, t_img *img, char *path)
 	}
 	width = img->size_line;
 	endian = 0;
-	img->img_addr = mlx_get_data_addr(img->img_ptr, &bits_per_pixel, &width, &endian);
+	img->img_addr = mlx_get_data_addr(img->img_ptr, &bits_per_pixel,
+			&width, &endian);
 	if (img->img_addr == NULL)
 		return (1);
 	/*printf("x * y  = %i x %i\n",img->number_line, img->size_line);
@@ -43,7 +45,7 @@ static int init_texture(t_graph *graph, t_img *img, char *path)
 	return (0);
 }
 
-int init_textures(t_graph *graph)
+int	init_textures(t_graph *graph)
 {
 	if (init_texture(graph, &(graph->wall_NO), graph->game.path_wall_NO))
 		return (1);

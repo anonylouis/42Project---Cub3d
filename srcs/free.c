@@ -12,26 +12,28 @@
 
 #include "cub3D.h"
 
-void ft_free(char *f)
+void	ft_free(char *f)
 {
-    if (f != NULL)
-    {
-        free(f);
-        f = NULL;
-    }
+	if (f != NULL)
+	{
+		free(f);
+		f = NULL;
+	}
 }
 
-void ft_free_all(char **f)
+void	ft_free_all(char **f)
 {
-    if (f != NULL)
-    {
-        int i = 0;
-        while (f[i] != NULL)
-        {
-            ft_free(f[i]);
-            i++;
-        }
-        free(f);
-        f = NULL;
-    }
+	int	i;
+
+	if (f != NULL)
+	{
+		i = 0;
+		while (f[i] != NULL)
+		{
+			ft_free(f[i]);
+			i++;
+		}
+		free(f);
+		f = NULL;
+	}
 }

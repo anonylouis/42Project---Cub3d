@@ -50,10 +50,10 @@ int	init_special_blocks(t_graph *graph)
 	int	j;
 
 	i = -1;
-	while(graph->game.map[++i] != NULL)
+	while (graph->game.map[++i] != NULL)
 	{
 		j = -1;
-		while(graph->game.map[i][++j])
+		while (graph->game.map[i][++j])
 		{
 			/*if (graph->game.map[i][j] == 'B')
 			{
@@ -63,9 +63,10 @@ int	init_special_blocks(t_graph *graph)
 			}*/
 			if (graph->game.map[i][j] == 'D')
 			{
-				if (!special_block_add_back(&(graph->door), new_special_block(i, j, 100.0)))
-					return (0);
-				printf("porte en [%d][%d]\n",i, j);
+				if (!special_block_add_back(&(graph->door),
+					new_special_block(i, j, 100.0)))
+						return (0);
+				printf("porte en [%d][%d]\n", i, j);
 			}
 		}
 	}
