@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 14:52:10 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/06 14:52:43 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/07 11:29:52 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,11 @@ char **get_map(char *path)
         printf("Invalid map file\n");
     close(fd);
     return map;
+}
+
+int is_wall(char c)
+{
+    if (c == '1' || c == ' ')
+        return (1);
+    return (0);
 }
