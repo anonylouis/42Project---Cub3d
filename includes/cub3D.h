@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 12:40:56 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 12:52:12 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,7 @@ int is_valid_map(char **s, int start);
 int is_valid_map_char(char c);
 char **extract_map(char **s, int line_idx, t_game* game);
 int get_map_idx(char **map);
+int is_wall(char c);
 
 // error
 int print_error(char *msg, int error);
