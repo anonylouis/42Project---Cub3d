@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 14:05:54 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:50:03 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 
 // DOOR
 
-#define DOOR_COLOR 0xFF0000
+#define TEXTURE_DOOR_PATH "./xpm/jail2.xpm"
 
 typedef struct s_color
 {
@@ -86,7 +86,11 @@ typedef struct s_special_block
 	struct s_special_block *next;
 	int x;
 	int y;
+	double	intersection_x;
+	double	intersection_y;
 	double percent;
+	double distance;
+	int	face;
 } t_special_block;
 
 typedef struct s_game
@@ -110,7 +114,6 @@ typedef struct s_game
 	int	nb_line_map;
 	int has_parse_error;
 	t_special_block *boost;
-	t_color door;
 } t_game;
 
 typedef struct s_graph
@@ -118,6 +121,7 @@ typedef struct s_graph
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int	face;
+	int	last_hit_door;
 	t_special_block	*hit_door;
 	double	percent_face;
 	t_img	img;
@@ -126,6 +130,7 @@ typedef struct s_graph
 	t_img	wall_SO;
 	t_img	wall_WE;
 	t_img	wall_EA;
+	t_img	texture_door;
 	t_special_block *door;
 	
 } t_graph;
@@ -176,10 +181,13 @@ void    init_color_minimap(t_graph *graph);
 void    print_minimap(t_graph *graph);
 
 // BOOST && DOOR
-int	special_block_add_back(t_special_block **begin_list, t_special_block *new);
+int	special_block_add_back(t_special_block **begin_list, t_special_block *new_list);
 int	init_special_blocks(t_graph *graph);
-void	init_color_door(t_graph *graph);
-void	draw_doors(t_graph *graph, int column);
+int	init_texture_door(t_graph *graph);
+void	draw_doors(t_graph *graph, int column, double fish_eye_correction);
+t_special_block	*copy_special_block(t_special_block *copy);
+void	sort_special_block(t_special_block *lst);
+int	change_door_status(t_graph *graph);
 
 // POINT
 void set_point(t_point *p, double x, double y);

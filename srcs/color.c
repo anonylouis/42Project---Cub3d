@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 22:39:52 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/06 22:00:51 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:07:12 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	s_color(int color)
+int	is_color(int color)
 {
 	return (color >= 0 && color <= 255);
 }
@@ -63,7 +63,7 @@ int	is_floor(char **tokens, t_game *game)
 	return (0);
 }
 
-int	s_ceiling(char **tokens, t_game *game)
+int	is_ceiling(char **tokens, t_game *game)
 {
 	char	**colors;
 

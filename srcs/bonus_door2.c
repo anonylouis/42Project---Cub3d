@@ -1,29 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keycode.h                                          :+:      :+:    :+:   */
+/*   bonus_door2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/19 15:04:52 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:54:01 by lcalvie          ###   ########.fr       */
+/*   Created: 2022/06/07 19:58:13 by lcalvie           #+#    #+#             */
+/*   Updated: 2022/06/07 19:58:24 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYCODE_H
-# define KEYCODE_H
+#include "cub3D.h"
 
-# define KEY_ESC 65307
-
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_UP 65362
-# define KEY_DOWN 65364
-
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_E 101
-
-#endif

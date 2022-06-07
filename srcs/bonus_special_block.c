@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 14:05:44 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/07 19:45:17 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ t_special_block	*new_special_block(int pt_y, int pt_x, double pc)
 	new->x = pt_x;
 	new->y = pt_y;
 	new->percent = pc;
+	new->distance = 0.0;
+	new->next = 0;
+	return (new);
+}
+
+t_special_block	*copy_special_block(t_special_block *copy)
+{
+	t_special_block	*new;
+
+	new = malloc(sizeof(*new));
+	if (!new)
+		return (0);
+	new->x = copy->x;
+	new->y = copy->y;
+	new->percent = copy->percent;
+	new->distance = copy->distance;
 	new->next = 0;
 	return (new);
 }
@@ -63,7 +79,7 @@ int	init_special_blocks(t_graph *graph)
 			}*/
 			if (graph->game.map[i][j] == 'D')
 			{
-				if (!special_block_add_back(&(graph->door), new_special_block(i, j, 100.0)))
+				if (!special_block_add_back(&(graph->door), new_special_block(i, j, 1.0)))
 					return (0);
 				printf("porte en [%d][%d]\n",i, j);
 			}

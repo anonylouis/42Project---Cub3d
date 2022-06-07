@@ -17,7 +17,6 @@ SOURCES_COMMON =	point.c \
 			file_utils.c\
 			free.c\
 			img.c\
-			hook.c\
 			utils.c\
 			raycasting.c\
 			texture.c\
@@ -35,6 +34,7 @@ SOURCES_MANDATORY =	play.c\
 			map.c\
 			wall_distance.c\
 			game.c \
+			hook.c\
 
 SOURCES_BONUS =		bonus_play.c\
 			bonus_mousemoved.c\
@@ -46,6 +46,8 @@ SOURCES_BONUS =		bonus_play.c\
 			bonus_wall_distance.c\
 			bonus_game.c\
 			bonus_door.c\
+			bonus_lst_sort.c\
+			bonus_hook.c\
 
 OBJS_DIR = ./objs/
 
