@@ -6,24 +6,11 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 12:22:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 15:05:17 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 16:14:52 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	init_textures_boost(t_graph *graph)
-{
-	if (init_texture(graph, &(graph->boost1), FRAME1))
-		return (1);
-	if (init_texture(graph, &(graph->boost2), FRAME2))
-		return (1);
-	if (init_texture(graph, &(graph->boost3), FRAME3))
-		return (1);
-	if (init_texture(graph, &(graph->boost4), FRAME4))
-		return (1);
-	return (0);
-}
 
 void	update_boost(t_graph *graph)
 {

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:58:13 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:17:56 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 16:35:25 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	update_door(t_graph *graph)
 {
-	t_special_block *temp;
+	t_special_block	*temp;
 
 	temp = graph->door;
 	while (temp != NULL)

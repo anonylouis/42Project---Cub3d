@@ -6,36 +6,14 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:45:24 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:02:42 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 16:47:57 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	init_texture_door(t_graph *graph)
-{
-	int bits_per_pixel;
-	int width;
-	int endian;
-	t_img *img;
-
-	img = &(graph->texture_door);
-	bits_per_pixel = 4 * (sizeof(char) * 8);
-	img->img_ptr = mlx_xpm_file_to_image(graph->mlx_ptr, TEXTURE_DOOR_PATH, &(img->size_line), &(img->number_line));
-	if (img->img_ptr == NULL)
-	{
-		printf("Error\nCan't open texture %s\n", TEXTURE_DOOR_PATH);
-		return (1);
-	}
-	width = img->size_line;
-	endian = 0;
-	img->img_addr = mlx_get_data_addr(img->img_ptr, &bits_per_pixel, &width, &endian);
-	if (img->img_addr == NULL)
-		return (1);
-	return (0);
-}
-
-static void	put_pixel_from_texture_door(t_graph *graph, int pos_img, double relative_h, double relative_x)
+static void	put_pixel_from_texture_door(t_graph *graph,
+			int pos_img, double relative_h, double relative_x)
 {
 	int		x_texture;
 	int		y_texture;
@@ -48,18 +26,19 @@ static void	put_pixel_from_texture_door(t_graph *graph, int pos_img, double rela
 	x_texture = relative_x * texture_door.size_line;
 	y_texture = relative_h * texture_door.number_line;
 	pos_texture = y_texture * 4 * texture_door.size_line + 4 * x_texture;
-	if (texture_door.img_addr[pos_texture] == 0 && texture_door.img_addr[pos_texture + 1] == 0 && texture_door.img_addr[pos_texture + 2] == -1)
+	if (texture_door.img_addr[pos_texture] == 0
+		&& texture_door.img_addr[pos_texture + 1] == 0
+		&& texture_door.img_addr[pos_texture + 2] == -1)
 		return ;
 	graph->img.img_addr[pos_img] = texture_door.img_addr[pos_texture];
-	//printf("%d %d %d\n", texture_door.img_addr[pos_texture], texture_door.img_addr[pos_texture + 1], texture_door.img_addr[pos_texture + 2]);
 	graph->img.img_addr[pos_img + 1] = texture_door.img_addr[pos_texture + 1];
 	graph->img.img_addr[pos_img + 2] = texture_door.img_addr[pos_texture + 2];
 	graph->img.img_addr[pos_img + 3] = '\0';
 }
 
-static double relative_x_door(t_special_block *lst_max)
+static double	relative_x_door(t_special_block *lst_max)
 {
-	double relative_x;
+	double	relative_x;
 
 	if (lst_max->face == 0)
 		relative_x = lst_max->intersection_x;
@@ -72,40 +51,45 @@ static double relative_x_door(t_special_block *lst_max)
 	return (relative_x - floor(relative_x));
 }
 
+static	double	find_end_start(t_special_block	*temp, int *start, int *end,
+			double fish_eye_correction)
+{
+	double			d;
+	double			h;
+
+	d = temp->distance;
+	d = fabs(d * cos(rad(fish_eye_correction)));
+	h = (HEIGHT / (2.0 *(d + H_MAX)));
+	*start = max(0, (int)(HEIGHT / 2 - h / 2));
+	*end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
+	*start = *start + (*end - *start) * (1.0 - temp->percent);
+	return (h);
+}
+
 void	draw_doors(t_graph *graph, int column, double fish_eye_correction)
 {
-	double d;
-	double h;
-	t_special_block *temp;
-	int		start;
-	int		end;
-	int		j;
-	int		pos_img;
-	double	relative_x;
-	int		percent_end;
+	t_special_block	*temp;
+	int				start;
+	int				end;
+	int				j;
+	double			h;
 
 	if (graph->hit_door == NULL)
 		return ;
+	sort_special_block(graph->hit_door);
 	temp = graph->hit_door;
-	sort_special_block(temp);
 	while (temp)
 	{
-		if (temp->percent == 0.0)
-			return ;
-		d = temp->distance;
-		d = fabs(d * cos(rad(fish_eye_correction)));
-		h = (HEIGHT / (2.0 *(d + H_MAX)));
-		start = max(0, (int)(HEIGHT / 2 - h / 2));
-		end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
-		j = end;
-		percent_end = start + (end - start) * (1.0 - temp->percent);
-		while (--j >= percent_end)
+		if (temp->percent != 0.0)
 		{
-			relative_x = relative_x_door(temp);
-			//printf("relative_x = %f\n", relative_x);
-			pos_img = j * graph->img.size_line * 4 + column * 4;
-			put_pixel_from_texture_door(graph, pos_img,
-				2.0 - temp->percent - ((double)j - (int)(HEIGHT / 2 - h / 2)) / h, relative_x);
+			h = find_end_start(temp, &start, &end, fish_eye_correction);
+			j = end;
+			while (--j >= start)
+				put_pixel_from_texture_door(graph,
+					j * graph->img.size_line * 4 + column * 4,
+					2.0 - temp->percent - ((double)j
+						- (int)(HEIGHT / 2 - h / 2)) / h,
+					relative_x_door(temp));
 		}
 		temp = temp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 11:10:17 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 12:53:27 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 16:14:38 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	main(int argc, char **argv)
 	if (init_textures(graph))
 		return (exit_game(graph, game, 1));
 	if (!init_special_blocks(graph))
-		return (exit_game(graph, game, 1));
-	if (init_texture_door(graph) || init_textures_boost(graph))
 		return (exit_game(graph, game, 1));
 	play(graph);
 	return (exit_game(graph, game, 0));

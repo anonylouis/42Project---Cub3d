@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   bonus_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 09:52:21 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 16:12:41 by lcalvie          ###   ########.fr       */
+/*   Created: 2022/06/08 16:12:55 by lcalvie           #+#    #+#             */
+/*   Updated: 2022/06/08 16:15:10 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,16 @@ int	init_textures(t_graph *graph)
 		return (1);
 	if (init_texture(graph, &(graph->wall_EA), graph->game.path_wall_EA))
 		return (1);
+	if (init_texture(graph, &(graph->texture_door), TEXTURE_DOOR_PATH))
+		return (1);
+	if (init_texture(graph, &(graph->boost1), FRAME1))
+		return (1);
+	if (init_texture(graph, &(graph->boost2), FRAME2))
+		return (1);
+	if (init_texture(graph, &(graph->boost3), FRAME3))
+		return (1);
+	if (init_texture(graph, &(graph->boost4), FRAME4))
+		return (1);
 	return (0);
 }
+

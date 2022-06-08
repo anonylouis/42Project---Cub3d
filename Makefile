@@ -17,7 +17,6 @@ SOURCES_COMMON =	point.c \
 			free.c\
 			img.c\
 			utils.c\
-			texture.c\
 			find_next_border.c\
 			orientation.c\
 			map_utils.c\
@@ -35,6 +34,7 @@ SOURCES_MANDATORY =	play.c\
 			keycatch_step.c\
 			map_utils2.c\
 			raycasting.c\
+			texture.c\
 
 SOURCES_BONUS =		bonus_play.c\
 			bonus_mousemoved.c\
@@ -56,6 +56,7 @@ SOURCES_BONUS =		bonus_play.c\
 			bonus_boost.c\
 			bonus_raycasting.c\
 			bonus_parser2.c\
+			bonus_texture.c\
 
 OBJS_DIR = ./objs/
 
