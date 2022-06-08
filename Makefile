@@ -52,6 +52,7 @@ SOURCES_BONUS =		bonus_play.c\
 			bonus_keycatch_step.c\
 			bonus_collision.c\
 			bonus_parser.c\
+			bonus_parser2.c\
 
 OBJS_DIR = ./objs/
 
