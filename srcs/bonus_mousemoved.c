@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:14:55 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:16:33 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 13:19:02 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	mousemoved(t_graph *graph)
 	int	x;
 	int	y;
 
+	update_boost(graph);
 	mlx_mouse_get_pos(graph->mlx_ptr, graph->win_ptr, &x, &y);
 	if (x < MOVED_LEFT)
 		graph->game.angle_vision = graph->game.angle_vision

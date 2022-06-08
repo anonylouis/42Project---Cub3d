@@ -6,14 +6,14 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 09:52:21 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/05/28 15:36:42 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 12:55:42 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <stdio.h>
 
-static int	init_texture(t_graph *graph, t_img *img, char *path)
+int	init_texture(t_graph *graph, t_img *img, char *path)
 {
 	int	bits_per_pixel;
 	int	width;

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:47:22 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:44:22 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 13:34:29 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	keycatch(int keycode, t_graph *graph)
 		return (keycatch_step(keycode, graph));
 	else if (keycode == KEY_E)
 		return (change_door_status(graph));
+	else if (keycode == KEY_R)
+		return (take_boost(graph));
 	return (0);
 }
 

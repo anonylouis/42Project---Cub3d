@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 15:04:52 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:54:01 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 13:28:49 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_E 101
+# define KEY_R 114
 
 #endif

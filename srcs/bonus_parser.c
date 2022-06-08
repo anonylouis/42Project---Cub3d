@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/07 23:33:39 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/08 12:19:36 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_game	*parse(char *file)
 	return (game);
 }
 
-int	is_valid_map(char **s, int start)
+int	is_valid_map_bonus(char **s, int start, t_game *game)
 {
 	t_check_result	result;
 
@@ -72,7 +72,7 @@ int	is_valid_map(char **s, int start)
 		return (print_error("missing map description", 0));
 	if (!check_empty_lines(s, start))
 		return (print_error("map cannot contain empty lines", 0));
-	if (!check_valid_chars(s, start))
+	if (!check_valid_chars_bonus(s, start, game))
 		return (print_error("invalid map char", 0));
 	if (!check_walls(s, start))
 		return (print_error("map must be surrounded by walls", 0));
@@ -97,34 +97,13 @@ void set_orientation(char* line,int index, t_game* game)
 	}
 }
 
-
-int set_special_block(char* row,int row_index, t_game* game)
-{
-	int i;
-
-	i = 0;
-	if(row == NULL)
-		return (0);
-	while (row[i] != '\0')
-	{
-		if(row[i] == 'B')
-		{
-			if(!special_block_add_back(&game->boost,new_special_block(row_index,i,0.0)))
-				return(0);
-			row[i] = '1';
-		}
-		i++;
-	}
-	return (1);
-}
-
 char	**extract_map(char **s, int line_idx, t_game *game)
 {
 	char	**map;
 	int		i;
 
 	i = 0;
-	if (!is_valid_map(s, line_idx))
+	if (!is_valid_map_bonus(s, line_idx, game))
 		return (NULL);
 	map = malloc(sizeof(char *) * ((count(s) - line_idx) + 1));
 	if (map == NULL)
@@ -133,7 +112,6 @@ char	**extract_map(char **s, int line_idx, t_game *game)
 	{
 		set_orientation(s[line_idx], i, game);
 		map[i] = ft_strdup(s[line_idx++]);
-		set_special_block(s[line_idx], i, game);
 		i++;
 	}
 	map[i] = (NULL);

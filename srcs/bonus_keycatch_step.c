@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:27:00 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:27:28 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 13:38:58 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	keycatch_step(int keycode, t_graph *graph)
 				fmod(graph->game.angle_vision + 270, 360.0));
 	if (d_wall - IN_WALL <= 0.001)
 		return (keycode == KEY_W && wall_collison_w(graph));
-	step = dmin(STEP, d_wall - IN_WALL);
+	step = dmin(STEP * graph->is_boost, d_wall - IN_WALL);
 	make_step(keycode, graph, step);
 	print_game(graph);
 	return (0);

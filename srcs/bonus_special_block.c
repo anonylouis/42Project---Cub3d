@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:24:15 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 13:02:26 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,11 @@ int	init_special_blocks(t_graph *graph)
 		j = -1;
 		while (graph->game.map[i][++j])
 		{
-			/*if (graph->game.map[i][j] == 'B')
-			{
-				if (!specal_block_add_back(&(graph->boost), new_special_block(i, j, 0.0)))
-					return (0);
-				printf("boost en [%d][%d]\n",i, j);
-			}*/
 			if (graph->game.map[i][j] == 'D')
 			{
 				if (!special_block_add_back(&(graph->door),
 					new_special_block(i, j, 1.0)))
 						return (0);
-				printf("porte en [%d][%d]\n", i, j);
 			}
 		}
 	}
@@ -102,6 +95,20 @@ t_special_block	*find_door(t_graph *graph, int i, int j)
 		return (temp);
 	}
 	temp = graph->door;
+	while (temp != NULL)
+	{
+		if (temp->x == j && temp->y == i)
+			return (temp);
+		temp = temp->next;
+	}
+	return (NULL);
+}
+
+t_special_block	*find_boost(t_graph *graph, int i, int j)
+{
+	t_special_block	*temp;
+
+	temp = graph->game.boost;
 	while (temp != NULL)
 	{
 		if (temp->x == j && temp->y == i)

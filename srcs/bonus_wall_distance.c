@@ -6,11 +6,31 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:25:58 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:24:01 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 13:08:36 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+static int	check_boost(t_graph *graph, int i, int j)
+{
+	t_special_block	*boost;
+
+	if (graph->game.map[i][j] != '1')
+		return (0);
+	boost = find_boost(graph,i ,j);
+	if (boost == NULL)
+		return (1);
+	else if (boost->percent == 1.0)
+		graph->hit_boost = 4;
+	else if (boost->percent <= 0.33)
+		graph->hit_boost = 1;
+	else if (boost->percent <= 0.66)
+		graph->hit_boost = 2;
+	else
+		graph->hit_boost = 3;
+	return (1);
+}
 
 static int	is_a_wall(t_graph *graph, double x, double y, double angle)
 {
@@ -37,7 +57,7 @@ static int	is_a_wall(t_graph *graph, double x, double y, double angle)
 		i = floor(y);
 		j = floor(x);
 	}
-	return (graph->game.map[i][j] == '1');
+	return (check_boost(graph, i ,j));
 }
 
 static void	add_door_and_distance(t_graph *graph, double x, double y, t_special_block *door_found)
@@ -93,6 +113,7 @@ double	wall_distance(t_graph *graph, double angle)
 	graph->face = -1;
 	graph->hit_door = NULL;
 	graph->last_hit_door = 0;
+	graph->hit_boost = 0;
 	while (graph->face == -1 || !is_a_wall(graph, x, y, angle))
 	{
 		graph->face = find_next_border(&x, &y, angle);

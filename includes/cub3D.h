@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 22:15:45 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:11:56 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #define MOUSE_MOVED_RIGHT 0.6
 #define MOVED_LEFT WIDTH * MOUSE_MOVED_LEFT
 #define MOVED_RIGHT WIDTH * MOUSE_MOVED_RIGHT
-#define SPEED_ANGLE 3.6
+#define SPEED_ANGLE 4.0
 
 // H_MAX OF A WALL
 #define H_MAX HEIGHT / 1000000000.0
@@ -67,6 +67,14 @@
 #define TEXTURE_DOOR_PATH "./xpm/jail2.xpm"
 #define SPEED_DOOR_OPENING 0.01
 #define TRIGGER_DOOR 0.5
+
+//BOOST
+#define FRAME1 "./xpm/battery1.xpm"
+#define FRAME2 "./xpm/battery2.xpm"
+#define FRAME3 "./xpm/battery3.xpm"
+#define FRAME4 "./xpm/battery4.xpm"
+#define SPEED_CHARGE_BOOST 0.005
+#define TRIGGER_BOOST 0.1
 
 typedef struct s_color
 {
@@ -135,7 +143,12 @@ typedef struct s_graph
 	t_img	wall_EA;
 	t_img	texture_door;
 	t_special_block *door;
-	
+	t_img	boost1;
+	t_img	boost2;
+	t_img	boost3;
+	t_img	boost4;
+	int	hit_boost;
+	double	is_boost;
 } t_graph;
 
 typedef struct s_point
@@ -178,6 +191,7 @@ void draw_pixel_column(t_graph *graph, int column, double d);
 void init_img_addr(t_graph *graph, t_img *img, int w, int h);
 void add_pixel_img(t_img img, int x, int y, t_color color);
 int init_textures(t_graph *graph);
+int	init_texture(t_graph *graph, t_img *img, char *path);
 
 // MINIMAP
 void    init_color_minimap(t_graph *graph);
@@ -195,6 +209,10 @@ int	update_door(t_graph *graph);
 t_special_block	*find_door(t_graph *graph, int i, int j);
 double	collision(t_graph *graph, double angle);
 t_special_block	*new_special_block(int pt_y, int pt_x, double pc);
+int	init_textures_boost(t_graph *graph);
+t_special_block	*find_boost(t_graph *graph, int i, int j);
+void	update_boost(t_graph *graph);
+int	take_boost(t_graph *graph);
 
 // POINT
 void set_point(t_point *p, double x, double y);
@@ -219,6 +237,7 @@ char *clean_line(char *line);
 // parse
 int check_walls(char **s, int start);
 int check_valid_chars(char **s, int start);
+int check_valid_chars_bonus(char **s, int start, t_game *game);
 int has_orientation(char *s);
 int check_map_info(char *line, t_game *game);
 int check_floor_color(char **tokens, t_game *game);
@@ -239,6 +258,7 @@ int is_int(char *s);
 
 // map
 int is_valid_map(char **s, int start);
+int is_valid_map_bonus(char **s, int start, t_game *game);
 int is_valid_map_char(char c);
 char **extract_map(char **s, int line_idx, t_game* game);
 int get_map_idx(char **map);
