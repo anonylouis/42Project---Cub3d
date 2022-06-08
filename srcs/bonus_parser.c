@@ -6,21 +6,11 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:30:04 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/07 23:33:39 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/08 11:26:31 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-t_color	empty_color(void)
-{
-	t_color	t;
-
-	t.blue = -1;
-	t.green = -1;
-	t.red = -1;
-	return (t);
-}
 
 int	get_map_info(t_game *game, int idx_map)
 {
@@ -82,35 +72,20 @@ int	is_valid_map(char **s, int start)
 	return (1);
 }
 
-void set_orientation(char* line,int index, t_game* game)
+int	set_special_block(char *row, int row_index, t_game *game)
 {
-	int		orientation_index;
-
-	orientation_index = 0;
-	orientation_index = has_orientation(line);
-	if (orientation_index != -1)
-	{
-		game->orientation = line[orientation_index];
-		set_angle_vision(game);
-		game->player_x = orientation_index + 0.5;
-		game->player_y = index + 0.5;
-	}
-}
-
-
-int set_special_block(char* row,int row_index, t_game* game)
-{
-	int i;
+	int	i;
 
 	i = 0;
-	if(row == NULL)
+	if (row == NULL)
 		return (0);
 	while (row[i] != '\0')
 	{
-		if(row[i] == 'B')
+		if (row[i] == 'B')
 		{
-			if(!special_block_add_back(&game->boost,new_special_block(row_index,i,0.0)))
-				return(0);
+			if (!special_block_add_back
+				(&game->boost, new_special_block(row_index, i, 0.0)))
+				return (0);
 			row[i] = '1';
 		}
 		i++;

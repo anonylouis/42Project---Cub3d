@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_special_block.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:24:15 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 11:37:54 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,11 @@ int	init_special_blocks(t_graph *graph)
 		j = -1;
 		while (graph->game.map[i][++j])
 		{
-			/*if (graph->game.map[i][j] == 'B')
-			{
-				if (!specal_block_add_back(&(graph->boost), new_special_block(i, j, 0.0)))
-					return (0);
-				printf("boost en [%d][%d]\n",i, j);
-			}*/
 			if (graph->game.map[i][j] == 'D')
 			{
-				if (!special_block_add_back(&(graph->door),
-					new_special_block(i, j, 1.0)))
-						return (0);
+				if (!special_block_add_back
+					(&(graph->door), new_special_block(i, j, 1.0)))
+					return (0);
 				printf("porte en [%d][%d]\n", i, j);
 			}
 		}
@@ -97,7 +91,7 @@ t_special_block	*find_door(t_graph *graph, int i, int j)
 	if (graph->last_hit_door == 1)
 	{
 		temp = graph->hit_door;
-		while(temp->next != NULL)
+		while (temp->next != NULL)
 			temp = temp->next;
 		return (temp);
 	}
