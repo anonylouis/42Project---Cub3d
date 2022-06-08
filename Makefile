@@ -55,6 +55,7 @@ SOURCES_BONUS =		bonus_play.c\
 			bonus_map_utils2.c\
 			bonus_boost.c\
 			bonus_raycasting.c\
+			bonus_parser2.c\
 
 OBJS_DIR = ./objs/
 

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 15:52:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 15:11:56 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 15:16:56 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ t_special_block	*find_boost(t_graph *graph, int i, int j);
 void	update_boost(t_graph *graph);
 int	take_boost(t_graph *graph);
 
+
 // POINT
 void set_point(t_point *p, double x, double y);
 
@@ -255,7 +256,7 @@ int is_empty_color(t_color color);
 int ft_compare(char *s1, char *s2);
 int is_empty_line(char *line);
 int is_int(char *s);
-
+void	set_orientation(char *line, int index, t_game *game);
 // map
 int is_valid_map(char **s, int start);
 int is_valid_map_bonus(char **s, int start, t_game *game);
@@ -267,7 +268,6 @@ int is_wall(char c);
 // error
 int print_error(char *msg, int error);
 
-// free
 void ft_free(char *f);
 void ft_free_all(char **f);
 void free_game(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 13:02:26 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/08 15:15:22 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_special_block	*find_door(t_graph *graph, int i, int j)
 	if (graph->last_hit_door == 1)
 	{
 		temp = graph->hit_door;
-		while(temp->next != NULL)
+		while (temp->next != NULL)
 			temp = temp->next;
 		return (temp);
 	}

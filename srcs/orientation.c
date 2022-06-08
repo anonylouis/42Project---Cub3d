@@ -6,7 +6,7 @@
 /*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:43:59 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/06 12:52:28 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/08 11:40:53 by mrahmani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,19 @@ t_check_result	check_orientation(char **s, int start)
 	if (orientation > 1)
 		return (error("Error : map must have only one orientation"));
 	return (success());
+}
+
+void	set_orientation(char *line, int index, t_game *game)
+{
+	int		orientation_index;
+
+	orientation_index = 0;
+	orientation_index = has_orientation(line);
+	if (orientation_index != -1)
+	{
+		game->orientation = line[orientation_index];
+		set_angle_vision(game);
+		game->player_x = orientation_index + 0.5;
+		game->player_y = index + 0.5;
+	}
 }
