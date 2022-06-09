@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:21:24 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 20:29:08 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 13:30:30 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_door_close(t_graph *graph, int i, int j)
 {
-	t_special_block *temp;
+	t_special_block	*temp;
 
 	temp = find_door(graph, i, j);
 	if (temp == NULL)

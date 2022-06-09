@@ -6,25 +6,12 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:14:30 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 19:43:27 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 14:06:07 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-/*
-static int	size_special_block(t_special_block *lst)
-{
-	int	i;
 
-	i = 0;
-	while (lst != NULL)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
-}
-*/
 static void	ft_int_swap(int *a, int *b)
 {
 	int	temp;
@@ -56,11 +43,11 @@ static void	swap_special_block(t_special_block *a, t_special_block *b)
 
 void	sort_special_block(t_special_block *lst)
 {
-	t_special_block *temp1;
-	t_special_block *temp2;
+	t_special_block	*temp1;
+	t_special_block	*temp2;
 
 	temp1 = lst;
-	while(temp1 != NULL)
+	while (temp1 != NULL)
 	{
 		temp2 = temp1->next;
 		while (temp2 != NULL)

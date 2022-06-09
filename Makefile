@@ -7,56 +7,56 @@ NAME_BONUS = cub3D_bonus
 
 SRCS_DIR = ./srcs/
 #remplir .c ici
-SOURCES_COMMON =	point.c \
-			get_next_line.c \
-			get_next_line_utils.c \
-			textures.c\
-			utils1.c\
-			errors.c\
-			file_utils.c\
-			free.c\
-			img.c\
-			utils.c\
-			find_next_border.c\
-			orientation.c\
-			map_utils.c\
-			color.c\
-			utils2.c\
+SOURCES_COMMON = get_next_line.c \
+				get_next_line_utils.c \
+				textures.c\
+				utils1.c\
+				errors.c\
+				file_utils.c\
+				free.c\
+				img.c\
+				utils.c\
+				find_next_border.c\
+				orientation.c\
+				map_utils.c\
+				color.c\
+				utils2.c\
 
 SOURCES_MANDATORY =	play.c\
-			main.c\
-			graph.c\
-			parser.c \
-			map.c\
-			wall_distance.c\
-			game.c \
-			hook.c\
-			keycatch_step.c\
-			map_utils2.c\
-			raycasting.c\
-			texture.c\
+					main.c\
+					graph.c\
+					parser.c \
+					map.c\
+					wall_distance.c\
+					game.c \
+					hook.c\
+					keycatch_step.c\
+					map_utils2.c\
+					raycasting.c\
+					texture.c\
 
-SOURCES_BONUS =		bonus_play.c\
-			bonus_mousemoved.c\
-			bonus_minimap.c\
-			bonus_main.c\
-			bonus_graph.c\
-			bonus_special_block.c\
-			bonus_map.c\
-			bonus_wall_distance.c\
-			bonus_game.c\
-			bonus_door.c\
-			bonus_lst_sort.c\
-			bonus_hook.c\
-			bonus_door2.c\
-			bonus_keycatch_step.c\
-			bonus_collision.c\
-			bonus_parser.c\
-			bonus_map_utils2.c\
-			bonus_boost.c\
-			bonus_raycasting.c\
-			bonus_parser2.c\
-			bonus_texture.c\
+SOURCES_BONUS =	bonus_play.c\
+				bonus_mousemoved.c\
+				bonus_minimap.c\
+				bonus_main.c\
+				bonus_graph.c\
+				bonus_special_block.c\
+				bonus_special_block2.c\
+				bonus_map.c\
+				bonus_wall_distance.c\
+				bonus_game.c\
+				bonus_door.c\
+				bonus_lst_sort.c\
+				bonus_hook.c\
+				bonus_door2.c\
+				bonus_keycatch_step.c\
+				bonus_collision.c\
+				bonus_parser.c\
+				bonus_map_utils2.c\
+				bonus_boost.c\
+				bonus_raycasting.c\
+				bonus_parser2.c\
+				bonus_texture.c\
 
 OBJS_DIR = ./objs/
 

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 17:19:20 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/07 13:47:28 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:36:05 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void	put_pixel_from_texture(t_graph *graph, int pos_img, double relative_h)
 	t_img	wall;
 
 	if (graph->face == 0)
-		wall = graph->wall_NO;
+		wall = graph->wall_no;
 	else if (graph->face == 1)
-		wall = graph->wall_WE;
+		wall = graph->wall_we;
 	else if (graph->face == 2)
-		wall = graph->wall_SO;
+		wall = graph->wall_so;
 	else
-		wall = graph->wall_EA;
+		wall = graph->wall_ea;
 	x_texture = (graph->percent_face - floor(graph->percent_face))
 		* wall.size_line;
 	y_texture = relative_h * wall.number_line;
@@ -46,7 +46,7 @@ void	draw_pixel_column(t_graph *graph, int column, double d)
 	int		j;
 	int		pos_img;
 
-	h = HEIGHT / (2.0 *(d + H_MAX));
+	h = HEIGHT / (2.0 *(d + (HEIGHT / H_MAX)));
 	start = max(0, (int)(HEIGHT / 2 - h / 2));
 	end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
 	j = -1;

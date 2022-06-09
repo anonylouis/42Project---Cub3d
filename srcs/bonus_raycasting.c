@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 13:08:53 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 13:12:46 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:36:05 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static t_img	set_texture(t_graph *graph)
 {
-	if (graph->hit_boost == 0) 
+	if (graph->hit_boost == 0)
 	{
 		if (graph->face == 0)
-			return(graph->wall_NO);
+			return (graph->wall_no);
 		else if (graph->face == 1)
-			return(graph->wall_WE);
+			return (graph->wall_we);
 		else if (graph->face == 2)
-			return(graph->wall_SO);
+			return (graph->wall_so);
 		else
-			return(graph->wall_EA);
+			return (graph->wall_ea);
 	}
 	else
 	{
@@ -64,7 +64,7 @@ void	draw_pixel_column(t_graph *graph, int column, double d)
 	int		j;
 	int		pos_img;
 
-	h = HEIGHT / (2.0 *(d + H_MAX));
+	h = HEIGHT / (2.0 *(d + (HEIGHT / H_MAX)));
 	start = max(0, (int)(HEIGHT / 2 - h / 2));
 	end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
 	j = -1;

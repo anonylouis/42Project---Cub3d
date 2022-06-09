@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:31:45 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 11:16:52 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/09 15:33:47 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_game	*new_game(void)
 		return (NULL);
 	game->map = NULL;
 	game->orientation = 0;
-	game->path_wall_EA = NULL;
-	game->path_wall_NO = NULL;
-	game->path_wall_WE = NULL;
-	game->path_wall_SO = NULL;
+	game->path_wall_ea = NULL;
+	game->path_wall_no = NULL;
+	game->path_wall_we = NULL;
+	game->path_wall_so = NULL;
 	game->floor = empty_color();
 	game->ceiling = empty_color();
 	game->raw_map = NULL;
@@ -40,10 +40,11 @@ void	free_game(t_game *game)
 	{
 		ft_free_all(game->map);
 		ft_free_all(game->raw_map);
-		ft_free(game->path_wall_EA);
-		ft_free(game->path_wall_NO);
-		ft_free(game->path_wall_WE);
-		ft_free(game->path_wall_SO);
+		ft_free(game->path_wall_ea);
+		ft_free(game->path_wall_no);
+		ft_free(game->path_wall_we);
+		ft_free(game->path_wall_so);
+		special_block_clear(&game->boost);
 		free(game);
 		game = NULL;
 	}

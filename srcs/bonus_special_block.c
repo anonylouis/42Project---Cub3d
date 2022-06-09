@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 10:35:28 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 15:15:22 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 14:54:08 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	init_special_blocks(t_graph *graph)
 			if (graph->game.map[i][j] == 'D')
 			{
 				if (!special_block_add_back(&(graph->door),
-					new_special_block(i, j, 1.0)))
-						return (0);
+						new_special_block(i, j, 1.0)))
+					return (0);
 			}
 		}
 	}
@@ -95,20 +95,6 @@ t_special_block	*find_door(t_graph *graph, int i, int j)
 		return (temp);
 	}
 	temp = graph->door;
-	while (temp != NULL)
-	{
-		if (temp->x == j && temp->y == i)
-			return (temp);
-		temp = temp->next;
-	}
-	return (NULL);
-}
-
-t_special_block	*find_boost(t_graph *graph, int i, int j)
-{
-	t_special_block	*temp;
-
-	temp = graph->game.boost;
 	while (temp != NULL)
 	{
 		if (temp->x == j && temp->y == i)

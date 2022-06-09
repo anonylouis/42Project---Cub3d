@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:47:47 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/03 15:44:10 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 13:46:07 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static	void	add_pixel_floor_wall(t_graph *graph, int i, int j)
 			* MINIMAP_N_CASE + graph->game.player_y);
 	if (y_minimap < 0 || y_minimap >= graph->game.nb_line_map
 		|| x_minimap >= ft_strlen(graph->game.map[y_minimap])
+		|| x_minimap < 0
 		|| graph->game.map[y_minimap][x_minimap] != '1')
 		add_pixel_img(graph->img,
 			MINIMAP_X + i, MINIMAP_Y + j, graph->game.minimap_floor);

@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:45:24 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 16:47:57 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:19:56 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static	double	find_end_start(t_special_block	*temp, int *start, int *end,
 
 	d = temp->distance;
 	d = fabs(d * cos(rad(fish_eye_correction)));
-	h = (HEIGHT / (2.0 *(d + H_MAX)));
+	h = (HEIGHT / (2.0 *(d + (HEIGHT / H_MAX))));
 	*start = max(0, (int)(HEIGHT / 2 - h / 2));
 	*end = min(HEIGHT, (int)(HEIGHT / 2 + h / 2));
 	*start = *start + (*end - *start) * (1.0 - temp->percent);

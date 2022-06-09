@@ -1,47 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   bonus_special_block2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 13:23:31 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/09 15:07:46 by lcalvie          ###   ########.fr       */
+/*   Created: 2022/06/09 14:54:12 by lcalvie           #+#    #+#             */
+/*   Updated: 2022/06/09 14:59:15 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-double	rad(double angle)
+t_special_block	*find_boost(t_graph *graph, int i, int j)
 {
-	return (angle * M_PI / 180);
+	t_special_block	*temp;
+
+	temp = graph->game.boost;
+	while (temp != NULL)
+	{
+		if (temp->x == j && temp->y == i)
+			return (temp);
+		temp = temp->next;
+	}
+	return (NULL);
 }
 
-int	max(int a, int b)
+void	special_block_clear(t_special_block **begin_list)
 {
-	if (a >= b)
-		return (a);
-	else
-		return (b);
-}
+	t_special_block	*t;
+	t_special_block	*lst;
 
-int	min(int a, int b)
-{
-	if (a <= b)
-		return (a);
-	else
-		return (b);
-}
-
-double	dmin(double a, double b)
-{
-	if (a <= b)
-		return (a);
-	else
-		return (b);
-}
-
-double	distance(double x1, double y1, double x2, double y2)
-{
-	return (sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+	lst = *begin_list;
+	while (lst)
+	{
+		t = lst->next;
+		free(lst);
+		lst = t;
+	}
+	*begin_list = 0;
 }

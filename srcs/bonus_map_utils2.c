@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 12:05:48 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 13:22:54 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 14:07:21 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	check_valid_chars_bonus(char **s, int start, t_game *game)
 		{
 			if (!is_valid_map_char(s[i][j]))
 				return (0);
-			if(s[i][j] == 'B')
+			if (s[i][j] == 'B')
 			{
-				if (!special_block_add_back(&game->boost, new_special_block(i - start, j, 0.0)))
-					return(0);
+				if (!special_block_add_back(&game->boost,
+						new_special_block(i - start, j, 0.0)))
+					return (0);
 				s[i][j] = '1';
-				printf("boost en [%d][%d]\n", i-start, j);
 			}
 			j++;
 		}

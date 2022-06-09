@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 12:25:58 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/08 13:08:36 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/09 15:05:25 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_boost(t_graph *graph, int i, int j)
 
 	if (graph->game.map[i][j] != '1')
 		return (0);
-	boost = find_boost(graph,i ,j);
+	boost = find_boost(graph, i, j);
 	if (boost == NULL)
 		return (1);
 	else if (boost->percent == 1.0)
@@ -57,23 +57,25 @@ static int	is_a_wall(t_graph *graph, double x, double y, double angle)
 		i = floor(y);
 		j = floor(x);
 	}
-	return (check_boost(graph, i ,j));
+	return (check_boost(graph, i, j));
 }
 
-static void	add_door_and_distance(t_graph *graph, double x, double y, t_special_block *door_found)
+static void	add_door_and_distance(t_graph *graph, double x,
+			double y, t_special_block *door_found)
 {
 	if (door_found == NULL )
 		return ;
 	door_found->next = NULL;
 	door_found->intersection_x = x;
 	door_found->intersection_y = y;
-	door_found->distance = distance(graph->game.player_x, graph->game.player_y, x, y);
+	door_found->distance = distance(graph->game.player_x,
+			graph->game.player_y, x, y);
 	door_found->face = graph->face;
 	special_block_add_back(&(graph->hit_door), door_found);
 	graph->last_hit_door = 1 - graph->last_hit_door;
 }
 
-static void	add_doors(t_graph *graph, double x, double y, double angle)
+static void	add_doors(t_graph *g, double x, double y, double angle)
 {
 	int	i;
 	int	j;
@@ -98,8 +100,8 @@ static void	add_doors(t_graph *graph, double x, double y, double angle)
 		i = floor(y);
 		j = floor(x);
 	}
-	if (graph->last_hit_door == 1 || graph->game.map[i][j] == 'D')
-		add_door_and_distance(graph, x, y, copy_special_block(find_door(graph, i, j)));
+	if (g->last_hit_door == 1 || g->game.map[i][j] == 'D')
+		add_door_and_distance(g, x, y, copy_special_block(find_door(g, i, j)));
 }
 
 double	wall_distance(t_graph *graph, double angle)
@@ -111,7 +113,7 @@ double	wall_distance(t_graph *graph, double angle)
 	x = graph->game.player_x;
 	y = graph->game.player_y;
 	graph->face = -1;
-	graph->hit_door = NULL;
+	special_block_clear(&(graph->hit_door));
 	graph->last_hit_door = 0;
 	graph->hit_boost = 0;
 	while (graph->face == -1 || !is_a_wall(graph, x, y, angle))
