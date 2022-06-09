@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrahmani <mrahmani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 15:42:20 by mrahmani          #+#    #+#             */
-/*   Updated: 2022/06/07 11:29:37 by mrahmani         ###   ########.fr       */
+/*   Updated: 2022/06/09 17:09:23 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_valid_line(char *s, int len1, int len2)
 	i = len1 - len2;
 	while (i > 0)
 	{
-		if (s[len1 - 1] != '1')
+		if (s[len1 - 1] != '1' && s[len1 - 1] != ' ')
 			return (0);
 		i--;
 		len1--;
