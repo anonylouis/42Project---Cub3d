@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 16:12:55 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/09 15:36:05 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/13 12:17:14 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,22 @@ int	init_texture(t_graph *graph, t_img *img, char *path)
 	return (0);
 }
 
+void	set_null_textures(t_graph *graph)
+{
+	graph->wall_no.img_ptr = NULL;
+	graph->wall_so.img_ptr = NULL;
+	graph->wall_we.img_ptr = NULL;
+	graph->wall_ea.img_ptr = NULL;
+	graph->texture_door.img_ptr = NULL;
+	graph->boost1.img_ptr = NULL;
+	graph->boost2.img_ptr = NULL;
+	graph->boost3.img_ptr = NULL;
+	graph->boost4.img_ptr = NULL;
+}
+
 int	init_textures(t_graph *graph)
 {
+	set_null_textures(graph);
 	if (init_texture(graph, &(graph->wall_no), graph->game.path_wall_no))
 		return (1);
 	if (init_texture(graph, &(graph->wall_so), graph->game.path_wall_so))

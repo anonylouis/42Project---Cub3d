@@ -6,7 +6,7 @@
 /*   By: lcalvie <lcalvie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 11:05:15 by lcalvie           #+#    #+#             */
-/*   Updated: 2022/06/09 15:36:05 by lcalvie          ###   ########.fr       */
+/*   Updated: 2022/06/13 12:17:05 by lcalvie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,26 @@ t_graph	*new_graph(void)
 	return (graph);
 }
 
+void	safe_destroy_image(void *mlx_ptr, void *img_ptr)
+{
+	if (img_ptr != NULL)
+		mlx_destroy_image(mlx_ptr, img_ptr);
+}
+
 void	free_graph(t_graph *graph)
 {
 	if (graph)
 	{
-		mlx_destroy_image(graph->mlx_ptr, graph->texture_door.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->boost1.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->boost2.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->boost3.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->boost4.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->wall_no.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->wall_ea.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->wall_so.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->wall_we.img_ptr);
-		mlx_destroy_image(graph->mlx_ptr, graph->img.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->texture_door.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->boost1.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->boost2.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->boost3.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->boost4.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->wall_no.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->wall_ea.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->wall_so.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->wall_we.img_ptr);
+		safe_destroy_image(graph->mlx_ptr, graph->img.img_ptr);
 		mlx_clear_window(graph->mlx_ptr, graph->win_ptr);
 		mlx_destroy_window(graph->mlx_ptr, graph->win_ptr);
 		mlx_destroy_display(graph->mlx_ptr);
