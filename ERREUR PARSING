@@ -1,6 +1,0 @@
-1 -- Si jamais y a pas de map ca segfault
-
-map : wrong_maps/no_map.cub
-
-2 -- J ai pas fait beaucoup de test mais essaye de voir
-pourquoi good_maps/file2.cub et good_maps/file3.cub passent pas
